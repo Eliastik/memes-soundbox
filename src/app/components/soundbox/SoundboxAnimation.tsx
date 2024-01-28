@@ -10,7 +10,7 @@ const SoundboxAnimation = () => {
         <>
             {currentSound && (
                 <div className={errorPlayingAudio ? "tooltip tooltip-open tooltip-top" : ""} data-tip={t("soundbox.clickHere")}>
-                    <div className="p-2">
+                    <div className="p-1 md:p-2">
                         <img
                             src={currentAnimationURL}
                             alt={currentSound.name || ""}

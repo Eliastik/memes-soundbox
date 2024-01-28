@@ -20,7 +20,7 @@ const SoundboxAudioEditor = () => {
                     <div className="flex flex-row gap-x-2 justify-center md:justify-items-end">
                         <input type="checkbox" className="toggle" id="compatibilityMode" checked={isCompatibilityModeEnabled} onChange={(e) => toggleCompatibilityMode(e.target.checked)} />
                     </div>
-                    <div className="flex items-center gap-x-4">
+                    <div className="flex items-center gap-x-2 md:gap-x-4 text-sm">
                         <label htmlFor="compatibilityMode">{t("appSettings.compatibilityMode")}</label>
                         <div className="tooltip tooltip-top tooltip-compatibility-mode md:tooltip-compatibility-mode-md" data-tip={t("appSettings.compatibilityModeInfos")}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -29,7 +29,7 @@ const SoundboxAudioEditor = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-row md:gap-x-3 gap-x-1 sticky bottom-2 max-w-full flex-wrap justify-center gap-y-1">
+                <div className="flex flex-row md:gap-x-3 gap-x-1 sticky bottom-2 max-w-full flex-wrap justify-center gap-y-1 btn-group">
                     <AudioEditorActionButtons onSettingsValidated={() => playSound(currentSound)}></AudioEditorActionButtons>
                     <button className="btn btn-secondary opacity-80" onClick={() => downloadSound()}>{t("soundbox.downloadAudio")}</button>
                 </div>

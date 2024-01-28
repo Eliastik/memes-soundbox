@@ -13,8 +13,8 @@ const SoundboxMain = () => {
     return (
         <>
             <AudioEditorNotifications></AudioEditorNotifications>
-            <div className="flex flex-grow items-center flex-col md:gap-4 gap-2 pt-20 justify-center overflow-hidden md:overflow-visible">
-                <div className="flex flex-col items-center md:gap-4 gap-2 md:h-auto w-full">
+            <div className="flex flex-grow items-center flex-col md:gap-4 gap-1 pt-20 justify-center overflow-hidden md:overflow-visible">
+                <div className="flex flex-col items-center md:gap-4 gap-1 md:h-auto w-full">
                     <SoundboxChoice></SoundboxChoice>
                     <SoundboxAnimation></SoundboxAnimation>
                     {!editingSound && <SoundboxButtons></SoundboxButtons>}

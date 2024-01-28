@@ -1,0 +1,59 @@
+{
+    "translation": {
+        "appSettings": {
+            "title": "Paramètres de l'application",
+            "colorTheme": "Thème de couleurs :",
+            "colorThemeAuto": "Thème de l'appareil",
+            "colorThemeLight": "Thème clair",
+            "colorThemeDark": "Thème sombre",
+            "language": "Langue :",
+            "compatibilityMode": "Mode de compatibilité/rendu direct :",
+            "compatibilityModeInfos": "Ce mode est activé automatiquement en cas de problème de compatibilité détecté. Activez-le si l'application ne produit aucun son. Ce mode permet également de modifier en temps réel les sons par rendu direct, mais la sauvegarde des sons modifiés prendra plus de temps à cause de contraintes techniques."
+        },
+        "languages": {
+            "fr": "Français",
+            "en": "English"
+        },
+        "dialogs": {
+            "pleaseWait": "Merci de patienter quelques instants",
+            "gettingConfig": "Récupération de la configuration de l'application…",
+            "loadingApp": {
+                "title": "Chargement de l'application"
+            },
+            "loadingOneImage": {
+                "title": "Chargement de données"
+            },
+            "configLoadingError": {
+                "title": "Erreur lors du chargement de la configuration",
+                "info": "Une erreur est survenue lors du chargement de la configuration de la boîte à son. Cette configuration est nécessaire pour que l'application puisse fonctionner. Vérifiez votre connexion Internet, puis réessayez.",
+                "retry": "Réessayer"
+            },
+            "loadingError": {
+                "title": "Erreur lors du chargement",
+                "info": "Une erreur est survenue lors du chargement de certaines données de l'application. Vérifiez votre connexion Internet. Vous pouvez utiliser l'application, mais vous risquez de rencontrer des problèmes."
+            }
+        },
+        "soundbox": {
+            "editSound": "Modifier la voix",
+            "sound": "Son :",
+            "downloadAudio": "Télécharger l'audio",
+            "clickHere": "Cliquez sur l'animation pour jouer le son !"
+        },
+        "appInfos": {
+            "title": "Informations sur l'application",
+            "infos": "{{appName}} TODO",
+            "appVersion": "Version de l'application :",
+            "versionDate": "Date de version :",
+            "license": "Licence :",
+            "websites": "Site web officiel/code source :",
+            "updateAvailable": "Une mise à jour est disponible vers la version {{version}} en date du {{versionDate}}.",
+            "moreInfos": "Plus d'infos",
+            "upToDate": "À jour"
+        },
+        "close": "Fermer",
+        "ok": "OK",
+        "cancel": "Annuler",
+        "validate": "Valider",
+        "reset": "Réinitialiser"
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "translation": {
+        "appSettings": {
+            "title": "App settings",
+            "colorTheme": "Color theme:",
+            "colorThemeAuto": "Device theme",
+            "colorThemeLight": "Light theme",
+            "colorThemeDark": "Dark theme",
+            "language": "Language:",
+            "compatibilityMode": "Compatibility mode/direct rendering:",
+            "compatibilityModeInfos": "This mode is automatically enabled when a compatibility issue is detected. Enable it if the application is not producing any sound. This mode also allows real-time modification of sounds, but saving the modified sounds will take longer due to technical constraints."
+        },
+        "audioPlayer": {
+            "save": "Save audio"
+        },
+        "languages": {
+            "fr": "Français",
+            "en": "English"
+        },
+        "dialogs": {
+            "pleaseWait": "Please wait a few moments",
+            "gettingConfig": "Getting app config…",
+            "loadingApp": {
+                "title": "Loading app"
+            },
+            "loadingOneImage": {
+                "title": "Loading data"
+            },
+            "configLoadingError": {
+                "title": "Error loading configuration",
+                "info": "An error occurred while loading the soundbox configuration. This configuration is necessary for the application to work. Check your Internet connection, then try again.",
+                "retry": "Retry"
+            },
+            "loadingError": {
+                "title": "Loading error",
+                "info": "An error has occurred while loading some data from the application. Check your Internet connection. You can still use the application, but you may encounter problems."
+            }
+        },
+        "soundbox": {
+            "editSound": "Edit voice",
+             "sound": "Sound:",
+             "downloadAudio": "Download audio",
+             "clickHere": "Click on the animation to play the sound!"
+        },
+        "appInfos": {
+            "title": "Application informations",
+            "infos": "{{appName}} TODO",
+            "appVersion": "Application version:",
+            "versionDate": "Version date:",
+            "license": "License:",
+            "websites": "Official website/Source code:",
+            "updateAvailable": "An update is available to the version {{version}} dated {{versionDate}}.",
+            "moreInfos": "More infos",
+            "upToDate": "Up to date"
+        },
+        "close": "Close",
+        "ok": "OK",
+        "cancel": "Cancel",
+        "validate": "Validate",
+        "reset": "Reset"
+    }
+}

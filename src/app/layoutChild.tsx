@@ -28,7 +28,7 @@ const LayoutChild = ({
                 <SoundboxProvider>
                     <html data-theme={currentTheme ? currentTheme : Constants.THEMES.DARK} className="h-full" lang={currentLanguageValue}>
                         <head>
-                            <link rel="manifest" href={Constants.SERVICE_WORKER_SCOPE + "/manifest.json"} />
+                            <link rel="manifest" href={Constants.MANIFEST_URI.replace(Constants.MEME_NAME_PLACEHOLDER, "risitas")} />
                             <meta name="theme-color" content={currentTheme == Constants.THEMES.LIGHT ? "#61A6FA" : "#3884FF"} />
                         </head>
                         <body className={`${inter.className} h-full flex flex-col overflow-x-hidden`}>

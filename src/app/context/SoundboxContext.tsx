@@ -31,7 +31,7 @@ const getFilterService = () => {
 };
 
 export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
-    const { loadAudioPrincipalBuffer, downloadAudio, validateSettings } = useAudioEditor();
+    const { loadAudioPrincipalBuffer, downloadAudio } = useAudioEditor();
     const { playAudioBufferDirect } = useAudioPlayer();
     const { isCompatibilityModeEnabled } = useApplicationConfig();
 

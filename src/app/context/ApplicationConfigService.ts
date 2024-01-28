@@ -1,4 +1,4 @@
-import { GenericConfigService, Constants as LibConstants } from "@eliastik/simple-sound-studio-lib";
+import { GenericConfigService } from "@eliastik/simple-sound-studio-lib";
 import Constants from "../model/Constants";
 import { UpdateData } from "../model/UpdateData";
 import semver from "semver";
@@ -50,30 +50,6 @@ export default class ApplicationConfigService extends GenericConfigService {
         }
 
         return setting.split("-")[0];
-    }
-
-    public hasAlreadyUsedApp() {
-        return this.getConfig(Constants.PREFERENCES_KEYS.ALREADY_USED) == "true";
-    }
-
-    public setAlreadyUsedApp() {
-        this.setConfig(Constants.PREFERENCES_KEYS.ALREADY_USED, "true");
-    }
-
-    public enableAudioWorklet(enable: boolean) {
-        this.setConfig(LibConstants.PREFERENCES_KEYS.ENABLE_AUDIO_WORKLET, enable ? "true" : "false");
-    }
-
-    public enableSoundtouchAudioWorklet(enable: boolean) {
-        this.setConfig(LibConstants.PREFERENCES_KEYS.ENABLE_SOUNDTOUCH_AUDIO_WORKLET, enable ? "true" : "false");
-    }
-
-    public setBufferSize(value: number) {
-        this.setConfig(LibConstants.PREFERENCES_KEYS.BUFFER_SIZE, "" + value);
-    }
-
-    public setSampleRate(value: number) {
-        this.setConfig(LibConstants.PREFERENCES_KEYS.SAMPLE_RATE, "" + value);
     }
 
     /** Get current theme from OS (dark/light) */

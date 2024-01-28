@@ -2,40 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.range.range-player::-webkit-slider-runnable-track {
-    height: 100%;
-    @apply bg-gray-300/70 rounded-none
-}
-
-.range.range-player::-moz-range-track {
-    height: 100%;
-    @apply bg-gray-300/70 rounded-none
-}
-
 .btn:not(.btn-ghost) {
     @apply uppercase;
 }
-.tooltip.tooltip-config-dialog::before {
-    position: absolute;
-    left: -18px;
-}
 
-.tooltip.tooltip-config-dialog-input::before {
+.tooltip.tooltip-compatibility-mode::before {
     position: absolute;
-    left: -140px;
+    left: -120px;
 }
 
 @layer utilities {
-    .tooltip.tooltip-config-dialog-md::before {
+    .tooltip.tooltip-compatibility-mode-md::before {
         position: absolute;
-        left: -125px;
+        left: -100px;
     }
-}
-
-.collapse-content {
-    display: none;
-}
-
-.collapse[open] > .collapse-content, .collapse-open > .collapse-content, .collapse:focus:not(.collapse-close) > .collapse-content, .collapse:not(.collapse-close) > input[type="checkbox"]:checked ~ .collapse-content, .collapse:not(.collapse-close) > input[type="radio"]:checked ~ .collapse-content {
-    display: initial;
 }

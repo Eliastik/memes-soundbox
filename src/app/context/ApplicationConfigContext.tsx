@@ -43,8 +43,6 @@ export const ApplicationConfigProvider: FC<ApplicationConfigProviderProps> = ({ 
     const [currentLanguageValue, setCurrentLanguageValue] = useState("en");
     // State: update data
     const [updateData, setUpdateData] = useState<UpdateData | null>(null);
-    // State: true if the user already used the time one time
-    const [alreadyUsed, setAlreadyUsed] = useState(false);
     // State: true if compatibility/direct mode is enabled
     const [isCompatibilityModeEnabled, setCompatibilityModeEnabled] = useState(false);
 
@@ -55,7 +53,6 @@ export const ApplicationConfigProvider: FC<ApplicationConfigProviderProps> = ({ 
 
         setCurrentTheme(getService().getCurrentTheme());
         setCurrentThemeValue(getService().getCurrentThemePreference());
-        setAlreadyUsed(getService().hasAlreadyUsedApp());
         setCompatibilityModeEnabled(getService().isCompatibilityModeEnabled());
         getAudioEditor().on(EventType.COMPATIBILITY_MODE_AUTO_ENABLED, () => setCompatibilityModeEnabled(true));
 
@@ -82,11 +79,6 @@ export const ApplicationConfigProvider: FC<ApplicationConfigProviderProps> = ({ 
         setupLanguage();
     };
 
-    const closeFirstLaunchModal = () => {
-        getService().setAlreadyUsedApp();
-        setAlreadyUsed(true);
-    };
-
     const updateCurrentTheme = () => {
         if (currentThemeValue === "auto") {
             setCurrentTheme(getService().getCurrentTheme());
@@ -106,7 +98,7 @@ export const ApplicationConfigProvider: FC<ApplicationConfigProviderProps> = ({ 
     return (
         <ApplicationConfigContext.Provider value={{
             currentTheme, currentThemeValue, setTheme, setupLanguage, currentLanguageValue, setLanguage,
-            updateData, alreadyUsed, closeFirstLaunchModal, updateCurrentTheme, isCompatibilityModeEnabled,
+            updateData, updateCurrentTheme, isCompatibilityModeEnabled,
             toggleCompatibilityMode
         }}>
             {children}

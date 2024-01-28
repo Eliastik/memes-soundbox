@@ -2,11 +2,11 @@
 
 import { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
 import { ApplicationObjectsSingleton, SettingFormTypeEnum, useAudioEditor, useAudioPlayer } from "@eliastik/simple-sound-studio-components";
+import { Constants } from "@eliastik/simple-sound-studio-lib";
 import Sound from "../model/Sound";
 import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 import SoundboxLoaderService from "../services/SoundboxLoader";
 import { useApplicationConfig } from "./ApplicationConfigContext";
-import { Constants } from "@eliastik/simple-sound-studio-lib";
 
 const SoundboxContext = createContext<SoundboxContextProps | undefined>(undefined);
 
@@ -31,7 +31,7 @@ const getFilterService = () => {
 };
 
 export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
-    const { loadAudioPrincipalBuffer, downloadAudio } = useAudioEditor();
+    const { loadAudioPrincipalBuffer, downloadAudio, validateSettings } = useAudioEditor();
     const { playAudioBufferDirect } = useAudioPlayer();
     const { isCompatibilityModeEnabled } = useApplicationConfig();
 
@@ -184,6 +184,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
                 }
             }
         } else {
+            setErrorPlayingAudio(false);
             playAudioBufferDirect();
         }
 
@@ -197,6 +198,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             if (blob) {
                 await loadAudioPrincipalBuffer(new File([blob], "audioFile"));
             }
+
             // Setup Reverb Filter
             const reverbFilterForm = getFilterService()?.getFilter(Constants.FILTERS_NAMES.REVERB);
 

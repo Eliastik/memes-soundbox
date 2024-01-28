@@ -3,7 +3,7 @@ const Constants = {
     APP_BY: "By Eliastik's Softs",
     DEFAULT_LANGUAGE: "en",
     APP_VERSION: "1.0.0",
-    APP_VERSION_DATE: "12/31/2023",
+    APP_VERSION_DATE: "01/30/2023",
     CONFIG_URI: process.env.NEXT_PUBLIC_CONFIG_URI || "https://www.eliastiksofts.com/memes/{memeName}/config.json",
     MANIFEST_URI: process.env.NEXT_PUBLIC_MANIFEST_URI || "https://www.eliastiksofts.com/memes/{memeName}/manifest.json",
     UPDATER_URI: process.env.NEXT_PUBLIC_UPDATER_URI || "https://www.eliastiksofts.com/memes/update.json",
@@ -17,7 +17,7 @@ const Constants = {
         CURRENT_THEME: "current-theme",
         CURRENT_LANGUAGE: "current-language",
         ALREADY_USED: "already-used",
-        PREFIX: "todo-" // TODO
+        PREFIX: "memes-soundbox-"
     },
     THEMES: {
         AUTO: "auto",

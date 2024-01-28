@@ -8,8 +8,6 @@ export default interface ApplicationConfigContextProps {
     currentLanguageValue: string,
     setLanguage: (lng: string) => void,
     updateData: UpdateData | null,
-    alreadyUsed: boolean,
-    closeFirstLaunchModal: () => void,
     updateCurrentTheme: () => void,
     isCompatibilityModeEnabled: boolean,
     toggleCompatibilityMode: (enabled: boolean) => void

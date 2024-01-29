@@ -6,17 +6,22 @@ import Constants from "@/app/model/Constants";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const Navbar = () => {
-    const { updateData } = useApplicationConfig();
-    const { soundboxName } = useSoundbox();
+    const { updateData, currentLanguageValue } = useApplicationConfig();
+    const { soundboxName, soundboxLinks } = useSoundbox();
 
     return (
         <>
             <div className="navbar bg-primary text-white fixed z-40">
                 <div className="flex-1">
-                    <div className="btn btn-ghost normal-case sm:text-xl text-lg block text-left">
-                        <div>{soundboxName || Constants.APP_NAME}</div>
-                        <div className="font-light text-xs">{Constants.APP_BY}</div>
-                    </div>
+                    <details className="dropdown">
+                        <summary className="btn btn-ghost normal-case sm:text-xl text-lg block text-left">
+                            <div>{soundboxName || Constants.APP_NAME}</div>
+                            <div className="font-light text-xs">{Constants.APP_BY}</div>
+                        </summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            {soundboxLinks.map(soundbox => <li key={soundbox.url}><a href={soundbox.url}>{soundbox.labels[currentLanguageValue] || soundbox.labels["en"]}</a></li>)}
+                        </ul>
+                    </details>
                 </div>
                 <div className="flex-none">
                     <button className="btn btn-square btn-ghost" onClick={() => (document.getElementById("modalSettings")! as DaisyUIModal).showModal()}>

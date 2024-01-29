@@ -1,4 +1,5 @@
 import Sound from "../Sound";
+import { SoundboxLink } from "../SoundboxLink";
 
 export default interface SoundboxContextProps {
     currentSound: Sound,
@@ -20,5 +21,6 @@ export default interface SoundboxContextProps {
     editingSound: boolean,
     currentAnimationURL: string,
     downloadSound: () => void,
-    errorPlayingAudio: boolean
+    errorPlayingAudio: boolean,
+    soundboxLinks: SoundboxLink[]
 }

@@ -7,6 +7,7 @@ import Sound from "../model/Sound";
 import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 import SoundboxLoaderService from "../services/SoundboxLoader";
 import { useApplicationConfig } from "./ApplicationConfigContext";
+import { SoundboxLink } from "../model/SoundboxLink";
 
 const SoundboxContext = createContext<SoundboxContextProps | undefined>(undefined);
 
@@ -63,6 +64,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const [loadingError, setLoadingError] = useState(false);
     // State: error loading config
     const [loadingConfigError, setLoadingConfigError] = useState(false);
+    // State: soundbox links
+    const [soundboxLinks, setSoundboxLinks] = useState<SoundboxLink[]>([]);
 
     useEffect(() => {
         if (isReady) {
@@ -88,7 +91,10 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         // Loading config
         setLoadingConfig(true);
         await loaderService.loadConfig();
+        await loaderService.loadLinkList();
         setLoadingConfig(false);
+
+        setSoundboxLinks(await loaderService.getLinkList());
 
         const config = await loaderService.getConfig();
 
@@ -259,7 +265,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             closeErrorLoading, loadingOneImage,
             soundboxName, toggleAudioEdit,
             editingSound, currentAnimationURL,
-            downloadSound, errorPlayingAudio
+            downloadSound, errorPlayingAudio,
+            soundboxLinks
         }}>
             {children}
         </SoundboxContext.Provider>

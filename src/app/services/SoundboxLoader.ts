@@ -4,12 +4,14 @@ import Constants from "../model/Constants";
 import { EventTypes } from "../model/EventTypes";
 import Sound from "../model/Sound";
 import SoundboxConfig from "../model/SoundboxConfig";
+import { SoundboxLink } from "../model/SoundboxLink";
 import { EventEmitter, EventEmitterCallback } from "./EventEmitter";
 import SoundboxNameProvider from "./SoundboxNameProvider";
 
 export default class SoundboxLoaderService implements SoundboxLoaderInterface {
 
     private soundboxConfig: SoundboxConfig | undefined = undefined;
+    private soundboxLinks: SoundboxLink[] = [];
     private mapAudio: Map<string, HTMLAudioElement> = new Map();
     private preloadedImages: string[] = [];
     private eventEmitter: EventEmitter = new EventEmitter();
@@ -34,6 +36,23 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
         }
 
         return this.soundboxConfig;
+    }
+
+    async loadLinkList(): Promise<void> {
+        try {
+            const config = await fetch(Constants.LINK_LIST_URI);
+            this.soundboxLinks = await config.json();
+        } catch(error) {
+            console.error("Error loading link list:", error);
+        }
+    }
+
+    async getLinkList(): Promise<SoundboxLink[]> {
+        if (!this.soundboxLinks) {
+            await this.loadConfig();
+        }
+
+        return this.soundboxLinks;
     }
 
     async loadSounds(sounds: Sound[]): Promise<void> {

@@ -7,6 +7,7 @@ const Constants = {
     CONFIG_URI: process.env.NEXT_PUBLIC_CONFIG_URI || "https://www.eliastiksofts.com/memes/{memeName}/config.json",
     MANIFEST_URI: process.env.NEXT_PUBLIC_MANIFEST_URI || "https://www.eliastiksofts.com/memes/{memeName}/manifest.json",
     UPDATER_URI: process.env.NEXT_PUBLIC_UPDATER_URI || "https://www.eliastiksofts.com/memes/update.json",
+    LINK_LIST_URI: process.env.NEXT_PUBLIC_LINK_LIST_URI || "https://www.eliastiksofts.com/memes/list.json",
     OFFICIAL_WEBSITE: "https://www.eliastiksofts.com/memes/",
     SOURCE_CODE: "https://github.com/Eliastik/memes-soundbox",
     APP_LICENSE: "GNU GPL v3",

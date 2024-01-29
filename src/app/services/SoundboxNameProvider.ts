@@ -3,6 +3,6 @@ import SoundboxNameProviderInterface from "../interfaces/SoundboxNameProviderInt
 export default class SoundboxNameProvider implements SoundboxNameProviderInterface {
 
     getSoundboxName(): string {
-        return "macron";
+        return "risitas";
     }
 }

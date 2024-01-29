@@ -30,7 +30,7 @@ const SoundboxAudioEditor = () => {
                     </div>
                 </div>
                 <div className="flex flex-row md:gap-x-3 gap-x-1 sticky bottom-2 max-w-full flex-wrap justify-center gap-y-1 btn-group">
-                    <AudioEditorActionButtons onSettingsValidated={() => playSound(currentSound)}></AudioEditorActionButtons>
+                    <AudioEditorActionButtons onSettingsValidated={() => currentSound && playSound(currentSound)}></AudioEditorActionButtons>
                     <button className="btn btn-secondary opacity-80" onClick={() => downloadSound()}>{t("soundbox.downloadAudio")}</button>
                 </div>
             </div>

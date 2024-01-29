@@ -39,11 +39,11 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     // State: all sounds
     const [allSounds, setAllSounds] = useState<Sound[]>([]);
     // State: current sound
-    const [currentSound, setCurrentSound] = useState<Sound>({});
+    const [currentSound, setCurrentSound] = useState<Sound | null>(null);
     // State: current animation URL
     const [currentAnimationURL, setCurrentAnimationURL] = useState<string>("");
     // State: soundbox name
-    const [soundboxName, setSoundboxName] = useState<string | null>(null);
+    const [soundboxName, setSoundboxName] = useState<{[key: string]: string}>({});
     // State:editing sound?
     const [editingSound, setEditingSound] = useState(false);
     // State: error playing audio?
@@ -100,6 +100,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
         if (config) {
             const sounds = config.sounds;
+            console.log(sounds);
 
             setAllSounds(sounds);
             setSoundboxName(config.appTitle);
@@ -136,7 +137,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
      * @param name The sound name
      */
     const setSoundByName = async (name: string) => {
-        const sound = allSounds.find(sound => sound.name === name);
+        const sound = allSounds.find(sound => sound.animationURL === name);
 
         if (sound) {
             setLoadingOneImage(true);
@@ -239,18 +240,22 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     };
 
     const toggleAudioEdit = async () => {
-        if (!editingSound) {
-            await setupAudioEditor(currentSound);
+        if (currentSound) {
+            if (!editingSound) {
+                await setupAudioEditor(currentSound);
+            }
+    
+            setEditingSound(!editingSound);
         }
-
-        setEditingSound(!editingSound);
     };
 
     const downloadSound = async () => {
-        downloadAudio();
+        if (currentSound) {
+            downloadAudio();
 
-        if (isCompatibilityModeEnabled) {
-            reloadAnimation(currentSound);
+            if (isCompatibilityModeEnabled) {
+                reloadAnimation(currentSound);
+            }
         }
     };
 

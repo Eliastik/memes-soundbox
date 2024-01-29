@@ -2,7 +2,7 @@ import Sound from "../Sound";
 import { SoundboxLink } from "../SoundboxLink";
 
 export default interface SoundboxContextProps {
-    currentSound: Sound,
+    currentSound: Sound | null,
     allSounds: Sound[],
     setSoundByName: (name: string) => void,
     playSound: (sound: Sound) => void,
@@ -16,7 +16,7 @@ export default interface SoundboxContextProps {
     loadingConfig: boolean,
     loadingConfigError: boolean,
     loadingOneImage: boolean,
-    soundboxName: string | null,
+    soundboxName: {[key: string]: string},
     toggleAudioEdit: () => void,
     editingSound: boolean,
     currentAnimationURL: string,

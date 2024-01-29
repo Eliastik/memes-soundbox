@@ -1,13 +1,15 @@
+import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
 
 const SoundboxChoice = () => {
+    const { currentLanguageValue } = useApplicationConfig();
     const { allSounds, setSoundByName, currentSound } = useSoundbox();
     const { t } = useTranslation();
 
     return (
         <>
-            {currentSound && allSounds.length > 0 && (
+            {currentSound && allSounds && allSounds.length > 0 && (
                 <div className="flex flex-row justify-center items-center w-full">
                     <label htmlFor="selectSound" className="flex flex-row justify-center items-center mr-4 text-xs md:text-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 md:w-5 md:h-5">
@@ -18,10 +20,10 @@ const SoundboxChoice = () => {
                     <select
                         className="select select-bordered sm:w-96 w-64 h-10 min-h-10 md:h-12 md:min-h-12 text-xs md:text-sm"
                         onChange={e => setSoundByName(e.target.value)}
-                        value={currentSound.name}
+                        value={currentSound.animationURL}
                         id="selectSound"
                     >
-                        {allSounds.map(sound => <option value={sound.name} key={sound.name}>{sound.name}</option>)}
+                        {allSounds.map(sound => <option value={sound.animationURL} key={sound.animationURL}>{sound.labels[currentLanguageValue] || sound.labels["en"]}</option>)}
                     </select>
                 </div>
             )}

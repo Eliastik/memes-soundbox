@@ -1,6 +1,10 @@
+export interface SoundLabels {
+    [key: string]: string;
+}
+
 export default interface Sound {
-    name?: string;
-    soundURL?: string;
-    animationURL?: string;
+    labels: SoundLabels;
+    soundURL: string;
+    animationURL: string;
     animationSize?: number;
 }

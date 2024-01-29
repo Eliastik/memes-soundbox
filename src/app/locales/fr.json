@@ -30,7 +30,8 @@
             },
             "loadingError": {
                 "title": "Erreur lors du chargement",
-                "info": "Une erreur est survenue lors du chargement de certaines données de l'application. Vérifiez votre connexion Internet. Vous pouvez utiliser l'application, mais vous risquez de rencontrer des problèmes."
+                "info": "Une erreur est survenue lors du chargement de certaines données de l'application. Vérifiez votre connexion Internet. Vous pouvez utiliser l'application, mais vous risquez de rencontrer des problèmes.",
+                "minorInfo": "Une erreur est survenue lors du chargement de certaines données. Vérifiez votre connexion Internet."
             }
         },
         "soundbox": {

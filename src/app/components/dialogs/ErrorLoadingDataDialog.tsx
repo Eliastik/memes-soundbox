@@ -2,7 +2,7 @@ import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
 
 const ErrorLoadingDataDialog = () => {
-    const { loadingError, retryLoadingApp, closeErrorLoading } = useSoundbox();
+    const { loadingError, retryLoadingApp, closeErrorLoading, initialLoadingFinished } = useSoundbox();
     const { t } = useTranslation();
 
     return (
@@ -20,13 +20,14 @@ const ErrorLoadingDataDialog = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 stroke-red-500 flex-shrink-0">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span className="flex-shrink">{t("dialogs.loadingError.info")}</span>
+                                {!initialLoadingFinished && <span className="flex-shrink">{t("dialogs.loadingError.info")}</span>}
+                                {initialLoadingFinished && <span className="flex-shrink">{t("dialogs.loadingError.minorInfo")}</span>}
                             </p>
                         </div>
                     </div>
                     <div className="modal-action mt-0">
                         <form method="dialog">
-                            <button className="btn btn-primary" onClick={() => retryLoadingApp()}>{t("dialogs.configLoadingError.retry")}</button>
+                            {!initialLoadingFinished && <button className="btn btn-primary" onClick={() => retryLoadingApp()}>{t("dialogs.configLoadingError.retry")}</button>}
                             <button className="btn" onClick={() => closeErrorLoading()}>{t("Fermer")}</button>
                         </form>
                     </div>

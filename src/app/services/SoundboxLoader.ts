@@ -25,8 +25,8 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
             this.soundboxConfig = await config.json();
             this.eventEmitter.emit(EventTypes.LOADED_CONFIG);
         } catch(error) {
-            console.error(`Error loading config at ${url}:`, error);
             this.eventEmitter.emit(EventTypes.ERROR_LOADING_CONFIG);
+            throw new Error(`Error loading config at ${url}: ${error}`);
         }
     }
 
@@ -67,8 +67,8 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
                     this.mapAudio.set(sound.soundURL, audio);
                     this.eventEmitter.emit(EventTypes.LOADED_AUDIO, { loaded: loadedSounds, total: totalSounds, url: sound.soundURL });
                 } catch (error) {
-                    console.error(`Error loading audio at ${sound.soundURL}:`, error);
                     this.eventEmitter.emit(EventTypes.ERROR_LOADING_AUDIO, { url: sound.soundURL });
+                    throw new Error(`Error loading audio at ${sound.soundURL}: ${error}`);
                 }
             }
         }
@@ -94,8 +94,8 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
                     loadedImages++;
                     this.eventEmitter.emit(EventTypes.LOADED_IMAGE, { loaded: loadedImages, total: totalImages, url });
                 } catch (error) {
-                    console.error(`Error loading image at ${url}:`, error);
                     this.eventEmitter.emit(EventTypes.ERROR_LOADING_IMAGE, { url });
+                    throw new Error(`Error loading audio at ${url}: ${error}`);
                 }
             }
         }

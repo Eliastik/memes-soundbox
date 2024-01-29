@@ -33,7 +33,8 @@
             },
             "loadingError": {
                 "title": "Loading error",
-                "info": "An error has occurred while loading some data from the application. Check your Internet connection. You can still use the application, but you may encounter problems."
+                "info": "An error has occurred while loading some data from the application. Check your Internet connection. You can still use the application, but you may encounter problems.",
+                "minorInfo": "An error has occurred while loading some data. Check your Internet connection."
             }
         },
         "soundbox": {

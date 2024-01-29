@@ -11,7 +11,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="navbar bg-primary text-white fixed z-40">
+            <div className="navbar bg-primary text-white fixed z-40 overflow-hidden">
                 <div className="flex-1">
                     <details className="dropdown">
                         <summary className="btn btn-ghost normal-case sm:text-xl text-lg block text-left">

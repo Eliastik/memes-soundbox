@@ -4,7 +4,7 @@ import { ErrorProcessingAudio, ErrorDownloadingBufferDialog, ErrorLoadingAudioDi
 import LoadingAppDialog from "./dialogs/LoadingAppDialog";
 import LoadingAudioFileDialog from "./dialogs/LoadingAudioFileDialog";
 import SoundboxMain from "./soundbox/SoundboxMain";
-import ErrorLoadingConfigDialog from "./dialogs/ErrorLoadingAudioDialog";
+import ErrorLoadingConfigDialog from "./dialogs/ErrorLoadingConfigDialog";
 import ErrorLoadingDataDialog from "./dialogs/ErrorLoadingDataDialog";
 import LoadingImageDialog from "./dialogs/LoadingImageDialog";
 import { useSoundbox } from "../context/SoundboxContext";

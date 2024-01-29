@@ -43,7 +43,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     // State: current animation URL
     const [currentAnimationURL, setCurrentAnimationURL] = useState<string>("");
     // State: soundbox name
-    const [soundboxName, setSoundboxName] = useState<{[key: string]: string}>({});
+    const [soundboxName, setSoundboxName] = useState<{ [key: string]: string }>({});
     // State:editing sound?
     const [editingSound, setEditingSound] = useState(false);
     // State: error playing audio?
@@ -66,6 +66,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const [loadingConfigError, setLoadingConfigError] = useState(false);
     // State: soundbox links
     const [soundboxLinks, setSoundboxLinks] = useState<SoundboxLink[]>([]);
+    // State: error loading something
+    const [initialLoadingFinished, setInitialLoadingFinished] = useState(false);
 
     useEffect(() => {
         if (isReady) {
@@ -100,21 +102,28 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
         if (config) {
             const sounds = config.sounds;
-            console.log(sounds);
 
             setAllSounds(sounds);
             setSoundboxName(config.appTitle);
             setTotalAudioCount(sounds.length);
 
-            // Loading audio files
-            setLoadingAudio(true);
-            await loaderService.loadSounds(sounds);
-            setLoadingAudio(false);
+            try {
+                // Loading audio files
+                setLoadingAudio(true);
+                await loaderService.loadSounds(sounds);
+                setLoadingAudio(false);
 
-            // Loading first animation
-            setLoadingImages(true);
-            await loaderService.loadImages(sounds[0].animationURL ? [sounds[0].animationURL] : []);
-            setLoadingImages(false);
+                // Loading first animation
+                setLoadingImages(true);
+                await loaderService.loadImages(sounds[5].animationURL ? [sounds[5].animationURL] : []);
+                setLoadingImages(false);
+
+                setInitialLoadingFinished(true);
+            } catch (e) {
+                setLoadingAudio(false);
+                setLoadingImages(false);
+                console.error(e);
+            }
 
             setCurrentSound(sounds[0]);
             playSound(sounds[0]);
@@ -124,6 +133,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const retryLoadingApp = async () => {
         setLoadingError(false);
         setLoadingConfigError(false);
+        setInitialLoadingFinished(false);
 
         loadApp();
     };
@@ -140,16 +150,23 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         const sound = allSounds.find(sound => sound.animationURL === name);
 
         if (sound) {
-            setLoadingOneImage(true);
-            await loaderService.loadImages(sound.animationURL ? [sound.animationURL] : []);
-            setLoadingOneImage(false);
+            setInitialLoadingFinished(true);
 
-            if (editingSound) {
-                await setupAudioEditor(sound);
+            try {
+                setLoadingOneImage(true);
+                await loaderService.loadImages(sound.animationURL ? [sound.animationURL] : []);
+                setLoadingOneImage(false);
+
+                if (editingSound) {
+                    await setupAudioEditor(sound);
+                }
+
+                setCurrentSound(sound);
+                playSound(sound);
+            } catch (e) {
+                setLoadingOneImage(false);
+                console.error(e);
             }
-
-            setCurrentSound(sound);
-            playSound(sound);
         }
     };
 
@@ -176,18 +193,22 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const playSound = async (sound: Sound) => {
         if (!editingSound) {
             if (sound.soundURL) {
-                const audio = await loaderService.getAudioByUrl(sound.soundURL);
+                try {
+                    const audio = await loaderService.getAudioByUrl(sound.soundURL);
 
-                if (audio) {
-                    try {
-                        const audioCloned = audio.cloneNode() as HTMLAudioElement;
-                        audioCloned.addEventListener("ended", () => audioCloned.remove());
-                        await audioCloned.play();
-                        setErrorPlayingAudio(false);
-                    } catch (e) {
-                        setErrorPlayingAudio(true);
-                        console.error(e);
+                    if (audio) {
+                        try {
+                            const audioCloned = audio.cloneNode() as HTMLAudioElement;
+                            audioCloned.addEventListener("ended", () => audioCloned.remove());
+                            await audioCloned.play();
+                            setErrorPlayingAudio(false);
+                        } catch (e) {
+                            setErrorPlayingAudio(true);
+                            console.error(e);
+                        }
                     }
+                } catch(e) {
+                    console.error(e);
                 }
             }
         } else {
@@ -244,7 +265,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             if (!editingSound) {
                 await setupAudioEditor(currentSound);
             }
-    
+
             setEditingSound(!editingSound);
         }
     };
@@ -271,7 +292,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             soundboxName, toggleAudioEdit,
             editingSound, currentAnimationURL,
             downloadSound, errorPlayingAudio,
-            soundboxLinks
+            soundboxLinks, initialLoadingFinished
         }}>
             {children}
         </SoundboxContext.Provider>

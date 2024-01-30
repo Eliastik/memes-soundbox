@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { ErrorProcessingAudio, ErrorDownloadingBufferDialog, ErrorLoadingAudioDialog, useAudioEditor } from "@eliastik/simple-sound-studio-components";
 import LoadingAppDialog from "./dialogs/LoadingAppDialog";
 import LoadingAudioFileDialog from "./dialogs/LoadingAudioFileDialog";
@@ -9,9 +10,13 @@ import ErrorLoadingDataDialog from "./dialogs/ErrorLoadingDataDialog";
 import LoadingImageDialog from "./dialogs/LoadingImageDialog";
 import { useSoundbox } from "../context/SoundboxContext";
 
-const MainComponent = () => {
+const MainComponent = ({ memeName }: { memeName: string }) => {
+    const { setup, loadingAudio, loadingImages } = useSoundbox();
     const { downloadingInitialData } = useAudioEditor();
-    const { loadingAudio, loadingImages } = useSoundbox();
+
+    useEffect(() => {
+        setup(memeName);
+    }, [setup, memeName]);
     
     return (
         <>

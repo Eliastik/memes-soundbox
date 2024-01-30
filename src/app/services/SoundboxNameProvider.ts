@@ -2,7 +2,13 @@ import SoundboxNameProviderInterface from "../interfaces/SoundboxNameProviderInt
 
 export default class SoundboxNameProvider implements SoundboxNameProviderInterface {
 
+    private soundboxName: string = "";
+
+    constructor(soundboxName: string) {
+        this.soundboxName = soundboxName;
+    }
+
     getSoundboxName(): string {
-        return "macron-part-2";
+        return this.soundboxName;
     }
 }

@@ -11,10 +11,10 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="navbar bg-primary text-white fixed z-40 overflow-hidden">
+            <div className="navbar bg-primary text-white fixed z-40">
                 <div className="flex-1">
                     <details className="dropdown">
-                        <summary className="btn btn-ghost normal-case sm:text-xl text-lg block text-left">
+                        <summary className="btn btn-ghost normal-case sm:text-xl text-base block text-left overflow-hidden">
                             <div>{soundboxName[currentLanguageValue] || soundboxName["en"] || Constants.APP_NAME}</div>
                             <div className="font-light text-xs">{Constants.APP_BY}</div>
                         </summary>

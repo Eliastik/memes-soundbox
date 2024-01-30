@@ -2,6 +2,7 @@ import Sound from "../Sound";
 import { SoundboxLink } from "../SoundboxLink";
 
 export default interface SoundboxContextProps {
+    setup: (soundboxName: string) => void,
     currentSound: Sound | null,
     allSounds: Sound[],
     setSoundByName: (name: string) => void,

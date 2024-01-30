@@ -6,7 +6,6 @@ import Sound from "../model/Sound";
 import SoundboxConfig from "../model/SoundboxConfig";
 import { SoundboxLink } from "../model/SoundboxLink";
 import { EventEmitter, EventEmitterCallback } from "./EventEmitter";
-import SoundboxNameProvider from "./SoundboxNameProvider";
 
 export default class SoundboxLoaderService implements SoundboxLoaderInterface {
 
@@ -15,9 +14,18 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
     private mapAudio: Map<string, HTMLAudioElement> = new Map();
     private preloadedImages: string[] = [];
     private eventEmitter: EventEmitter = new EventEmitter();
-    private soundboxNameProvider: SoundboxNameProviderInterface = new SoundboxNameProvider();
+    private soundboxNameProvider: SoundboxNameProviderInterface | null = null;
+
+    constructor(soundboxNameProvider: SoundboxNameProviderInterface) {
+        this.soundboxNameProvider = soundboxNameProvider;
+    }
 
     async loadConfig(): Promise<void> {
+        if (!this.soundboxNameProvider) {
+            console.error("No SoundboxNameProvider is available");
+            return;
+        }
+
         const url = Constants.CONFIG_URI.replace(Constants.MEME_NAME_PLACEHOLDER, this.soundboxNameProvider.getSoundboxName());
 
         try {

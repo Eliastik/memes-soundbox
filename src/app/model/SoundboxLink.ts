@@ -4,5 +4,6 @@ export interface SoundboxLinkLabels {
 
 export interface SoundboxLink {
     labels: SoundboxLinkLabels,
-    url: string
+    url: string,
+    code: string
 }

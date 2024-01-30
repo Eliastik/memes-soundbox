@@ -8,6 +8,7 @@ import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 import SoundboxLoaderService from "../services/SoundboxLoader";
 import { useApplicationConfig } from "./ApplicationConfigContext";
 import { SoundboxLink } from "../model/SoundboxLink";
+import SoundboxNameProvider from "../services/SoundboxNameProvider";
 
 const SoundboxContext = createContext<SoundboxContextProps | undefined>(undefined);
 
@@ -23,8 +24,6 @@ interface SoundboxProviderProps {
     children: ReactNode;
 }
 
-const loaderService = new SoundboxLoaderService();
-
 let isReady = false;
 
 const getFilterService = () => {
@@ -36,6 +35,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const { playAudioBufferDirect } = useAudioPlayer();
     const { isCompatibilityModeEnabled } = useApplicationConfig();
 
+    // The loader service
+    const [loaderService, setLoaderService] = useState<SoundboxLoaderService | null>(null);
     // State: all sounds
     const [allSounds, setAllSounds] = useState<Sound[]>([]);
     // State: current sound
@@ -69,27 +70,40 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     // State: error loading something
     const [initialLoadingFinished, setInitialLoadingFinished] = useState(false);
 
-    useEffect(() => {
+    const setup = (soundboxName: string) => {
         if (isReady) {
             return;
         }
 
-        loaderService.onAudioLoaded((data) => {
+        const soundboxNameProvider = new SoundboxNameProvider(soundboxName);
+        const soundboxLoaderService = new SoundboxLoaderService(soundboxNameProvider);
+
+        soundboxLoaderService.onAudioLoaded((data) => {
             if (data && data.loaded) {
                 setLoadedAudioCount(data.loaded);
             }
         });
 
-        loaderService.onErrorLoadingAudio(() => setLoadingError(true));
-        loaderService.onErrorLoadingImage(() => setLoadingError(true));
-        loaderService.onErrorLoadingConfig(() => setLoadingConfigError(true));
+        soundboxLoaderService.onErrorLoadingAudio(() => setLoadingError(true));
+        soundboxLoaderService.onErrorLoadingImage(() => setLoadingError(true));
+        soundboxLoaderService.onErrorLoadingConfig(() => setLoadingConfigError(true));
 
-        loadApp();
+        setLoaderService(soundboxLoaderService);
 
         isReady = true;
-    }, []);
+    };
+
+    useEffect(() => {
+        if (loaderService) {
+            loadApp();
+        }
+    }, [loaderService]);
 
     const loadApp = async () => {
+        if (!loaderService) {
+            throw new Error("No SoundboxLoader is available");
+        }
+
         // Loading config
         setLoadingConfig(true);
         await loaderService.loadConfig();
@@ -147,6 +161,10 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
      * @param name The sound name
      */
     const setSoundByName = async (name: string) => {
+        if (!loaderService) {
+            throw new Error("No SoundboxLoader is available");
+        }
+
         const sound = allSounds.find(sound => sound.animationURL === name);
 
         if (sound) {
@@ -191,6 +209,10 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
      * @param sound  The sound
      */
     const playSound = async (sound: Sound) => {
+        if (!loaderService) {
+            throw new Error("No SoundboxLoader is available");
+        }
+
         if (!editingSound) {
             if (sound.soundURL) {
                 try {
@@ -207,7 +229,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
                             console.error(e);
                         }
                     }
-                } catch(e) {
+                } catch (e) {
                     console.error(e);
                 }
             }
@@ -220,6 +242,10 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     };
 
     const setupAudioEditor = async (sound: Sound) => {
+        if (!loaderService) {
+            throw new Error("No SoundboxLoader is available");
+        }
+
         if (sound.soundURL) {
             const blob = await loaderService.getBlobByUrl(sound.soundURL);
 
@@ -282,7 +308,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
     return (
         <SoundboxContext.Provider value={{
-            currentSound, allSounds,
+            setup, currentSound, allSounds,
             setSoundByName, playSound,
             loadedAudioCount, totalAudioCount,
             loadingImages, loadingAudio,

@@ -8,19 +8,35 @@ import { useApplicationConfig } from "./context/ApplicationConfigContext";
 import "./i18n";
 import PWA from "./pwa";
 import Constants from "./model/Constants";
-import { AudioEditorProvider, AudioPlayerProvider } from "@eliastik/simple-sound-studio-components";
+import { ApplicationObjectsSingleton, AudioEditorProvider, AudioPlayerProvider } from "@eliastik/simple-sound-studio-components";
 import { SoundboxProvider } from "./context/SoundboxContext";
+import ApplicationConfigSingleton from "./context/ApplicationConfigSingleton";
 
 const inter = Inter({ subsets: ["latin"] });
+
+// Configure audio editor
+if (typeof(window) !== "undefined") {
+    ApplicationObjectsSingleton.initializeApplicationObjects(ApplicationConfigSingleton.getConfigServiceInstance(), Constants.AUDIO_BUFFERS_TO_FETCH);
+}
 
 const LayoutChild = ({
     children,
 }: { children: React.ReactNode }) => {
+    const { updateCurrentTheme } = useApplicationConfig();
     const { currentTheme, setupLanguage, currentLanguageValue } = useApplicationConfig();
 
     useEffect(() => {
         setupLanguage();
     });
+
+    useEffect(() => {
+        const handleThemeChange = () => updateCurrentTheme();
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", handleThemeChange);
+
+        return () => {
+            window.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change", handleThemeChange);
+        };
+    }, [updateCurrentTheme]);
 
     return (
         <AudioPlayerProvider>

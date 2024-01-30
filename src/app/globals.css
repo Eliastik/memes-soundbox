@@ -15,6 +15,14 @@
     left: -120px;
 }
 
+.dropdown ul li a {
+    @apply text-black
+}
+
+html[data-theme="dark"] .dropdown ul li a {
+    @apply text-white
+}
+
 @layer utilities {
     .tooltip.tooltip-compatibility-mode-md::before {
         position: absolute;

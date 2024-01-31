@@ -39,9 +39,14 @@
         },
         "soundbox": {
             "editSound": "Edit voice",
-             "sound": "Sound:",
-             "downloadAudio": "Download audio",
-             "clickHere": "Click on the animation to play the sound!"
+            "sound": "Sound:",
+            "downloadAudio": "Download audio",
+            "clickHere": "Click on the animation to play the sound!",
+            "soundInfos": "Sound infos"
+        },
+        "soundInfos": {
+            "title": "Sound informations",
+            "noMoreInfos": "No informations available"
         },
         "appInfos": {
             "title": "Application informations",

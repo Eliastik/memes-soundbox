@@ -6,6 +6,7 @@ import SoundboxAnimation from "./SoundboxAnimation";
 import SoundboxButtons from "./SoundboxButtons";
 import SoundboxChoice from "./SoundboxChoice";
 import SoundboxAudioEditor from "./SoundboxAudioEditor";
+import SoundInfoDialog from "../dialogs/SoundInfoDialog";
 
 const SoundboxMain = () => {
     const { editingSound } = useSoundbox();
@@ -18,16 +19,18 @@ const SoundboxMain = () => {
                     <div className="flex flex-col w-full items-center md:gap-4 gap-1 sticky top-16 pt-2 z-10 bg-base-100 bg-opacity-85 backdrop-blur-sm">
                         <SoundboxChoice></SoundboxChoice>
                         <SoundboxAnimation></SoundboxAnimation>
-                        <SoundboxButtons></SoundboxButtons>
+                        {!editingSound && <SoundboxButtons></SoundboxButtons>}
                     </div>
                     {editingSound && (
                         <div className="flex flex-col md:flex-initial w-full overflow-visible">
+                            <SoundboxButtons></SoundboxButtons>
                             <SoundboxAudioEditor></SoundboxAudioEditor>
                         </div>
                     )}
                 </div>
             </div>
             <AudioEditorDialogs></AudioEditorDialogs>
+            <SoundInfoDialog></SoundInfoDialog>
         </>
     );
 };

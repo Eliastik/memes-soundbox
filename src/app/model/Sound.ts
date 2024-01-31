@@ -7,4 +7,6 @@ export default interface Sound {
     soundURL: string;
     animationURL: string;
     animationSize?: number;
+    sourceURL?: string;
+    soundDescription?: string;
 }

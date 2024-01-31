@@ -38,7 +38,12 @@
             "editSound": "Modifier la voix",
             "sound": "Son :",
             "downloadAudio": "Télécharger l'audio",
-            "clickHere": "Cliquez sur l'animation pour jouer le son !"
+            "clickHere": "Cliquez sur l'animation pour jouer le son !",
+            "soundInfos": "Infos du son"
+        },
+        "soundInfos": {
+            "title": "Informations sur le son",
+            "noMoreInfos": "Aucune information disponible"
         },
         "appInfos": {
             "title": "Informations sur l'application",

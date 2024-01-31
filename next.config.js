@@ -30,6 +30,7 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = withPWA({
     output: "export",
+    trailingSlash: true,
     //transpilePackages: ["@eliastik/simple-sound-studio-lib", "@eliastik/simple-sound-studio-components"],
     transpilePackages: [],
     basePath: process.env.NEXT_PUBLIC_BASE_PATH,

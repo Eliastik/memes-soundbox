@@ -4,8 +4,7 @@ import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
 
 const AppInfoDialog = () => {
     const { t } = useTranslation();
-    const { currentLanguageValue } = useApplicationConfig();
-    const { updateData } = useApplicationConfig();
+    const { currentLanguageValue, updateData } = useApplicationConfig();
 
     return (
         <dialog id="modalInfos" className="modal">

@@ -7,7 +7,7 @@ import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const Navbar = () => {
     const { updateData, currentLanguageValue } = useApplicationConfig();
-    const { soundboxName, soundboxLinks } = useSoundbox();
+    const { soundboxConfig, soundboxLinks } = useSoundbox();
 
     return (
         <>
@@ -15,7 +15,7 @@ const Navbar = () => {
                 <div className="flex-1">
                     <details className="dropdown">
                         <summary className="btn btn-ghost normal-case sm:text-xl text-base block text-left overflow-hidden">
-                            <div>{soundboxName[currentLanguageValue] || soundboxName["en"] || Constants.APP_NAME} </div>
+                            <div>{soundboxConfig && (soundboxConfig.appTitle[currentLanguageValue] || soundboxConfig.appTitle["en"]) || Constants.APP_NAME} </div>
                             <div className="font-light text-xs">{Constants.APP_BY}</div>
                         </summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">

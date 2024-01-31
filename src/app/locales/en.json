@@ -46,7 +46,8 @@
         },
         "soundInfos": {
             "title": "Sound informations",
-            "noMoreInfos": "No informations available"
+            "noMoreInfos": "No informations available",
+            "sourceLink": "Source:"
         },
         "appInfos": {
             "title": "Application informations",

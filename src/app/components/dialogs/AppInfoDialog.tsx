@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import Constants from "@/app/model/Constants";
 import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
+import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const AppInfoDialog = () => {
     const { t } = useTranslation();
+    const { soundboxConfig } = useSoundbox();
     const { currentLanguageValue, updateData } = useApplicationConfig();
 
     return (
@@ -17,7 +19,7 @@ const AppInfoDialog = () => {
                     <div className="mt-3">
                         <div className="font-light text-sm flex flex-col md:flex-row gap-3 md:items-center justify-between">
                             <div className="w-full">
-                                <span>{t("appInfos.infos", { appName: Constants.APP_NAME })}</span>
+                                <span>{soundboxConfig && soundboxConfig.soundboxDescription && (soundboxConfig.soundboxDescription[currentLanguageValue] || soundboxConfig?.soundboxDescription["en"])}</span>
                             </div>
                         </div>
                     </div>

@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useSoundbox } from "@/app/context/SoundboxContext";
+import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
 
 const SoundInfoDialog = () => {
     const { t } = useTranslation();
+    const { currentLanguageValue } = useApplicationConfig();
     const { currentSound } = useSoundbox();
 
     return (
@@ -19,7 +21,7 @@ const SoundInfoDialog = () => {
                                 <div className="mt-3">
                                     <div className="font-light text-md flex flex-col md:flex-row gap-3 md:items-center justify-between">
                                         <div className="w-full">
-                                            <span>{currentSound.soundDescription}</span>
+                                            <span>{currentSound.soundDescription[currentLanguageValue] || currentSound.soundDescription["en"]}</span>
                                         </div>
                                     </div>
                                 </div>

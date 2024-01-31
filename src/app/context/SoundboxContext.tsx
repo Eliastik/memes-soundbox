@@ -9,6 +9,7 @@ import SoundboxLoaderService from "../services/SoundboxLoader";
 import { useApplicationConfig } from "./ApplicationConfigContext";
 import { SoundboxLink } from "../model/SoundboxLink";
 import SoundboxNameProvider from "../services/SoundboxNameProvider";
+import SoundboxConfig from "../model/SoundboxConfig";
 
 const SoundboxContext = createContext<SoundboxContextProps | undefined>(undefined);
 
@@ -43,8 +44,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const [currentSound, setCurrentSound] = useState<Sound | null>(null);
     // State: current animation URL
     const [currentAnimationURL, setCurrentAnimationURL] = useState<string>("");
-    // State: soundbox name
-    const [soundboxName, setSoundboxName] = useState<{ [key: string]: string }>({});
+    // State: soundbox config
+    const [soundboxConfig, setSoundboxConfig] = useState<SoundboxConfig | null>(null);
     // State:editing sound?
     const [editingSound, setEditingSound] = useState(false);
     // State: error playing audio?
@@ -117,8 +118,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         if (config) {
             const sounds = config.sounds;
 
+            setSoundboxConfig(config);
             setAllSounds(sounds);
-            setSoundboxName(config.appTitle);
             setTotalAudioCount(sounds.length);
 
             try {
@@ -315,7 +316,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             loadingError, loadingConfig,
             loadingConfigError, retryLoadingApp,
             closeErrorLoading, loadingOneImage,
-            soundboxName, toggleAudioEdit,
+            soundboxConfig, toggleAudioEdit,
             editingSound, currentAnimationURL,
             downloadSound, errorPlayingAudio,
             soundboxLinks, initialLoadingFinished

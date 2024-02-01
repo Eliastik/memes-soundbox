@@ -9,6 +9,7 @@ const Constants = {
     UPDATER_URI: process.env.NEXT_PUBLIC_UPDATER_URI || "https://www.eliastiksofts.com/memes/config/update.json",
     LINK_LIST_URI: process.env.NEXT_PUBLIC_LINK_LIST_URI || "https://www.eliastiksofts.com/memes/config/list.json",
     OFFICIAL_WEBSITE: "https://www.eliastiksofts.com/memes/",
+    OFFICIAL_SIMPLE_VOICE_CHANGER_WEBSITE: "https://www.eliastiksofts.com/simple-voice-changer",
     SOURCE_CODE: "https://github.com/Eliastik/memes-soundbox",
     APP_LICENSE: "GNU GPL v3",
     RELEASE_LINK: "https://github.com/Eliastik/memes-soundbox/releases/tag/1.0",

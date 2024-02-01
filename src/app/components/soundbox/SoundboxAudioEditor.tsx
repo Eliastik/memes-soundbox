@@ -4,6 +4,7 @@ import { AudioEditorActionButtons, FilterButtonList } from "@eliastik/simple-sou
 import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
+import Constants from "@/app/model/Constants";
 
 const SoundboxAudioEditor = () => {
     const { currentSound, playSound, downloadSound } = useSoundbox();
@@ -28,6 +29,9 @@ const SoundboxAudioEditor = () => {
                             </svg>
                         </div>
                     </div>
+                </div>
+                <div className="flex items-center text-xs">
+                    <span>{t("audioEditor.poweredBy")} <a href={Constants.OFFICIAL_SIMPLE_VOICE_CHANGER_WEBSITE} target="_blank" className="link link-primary hover:no-underline">Simple Voice Changer</a></span>
                 </div>
                 <div className="flex flex-row md:gap-x-3 gap-x-1 sticky bottom-1 max-w-full flex-wrap justify-center gap-y-1 btn-group">
                     <AudioEditorActionButtons onSettingsValidated={() => currentSound && playSound(currentSound)}></AudioEditorActionButtons>

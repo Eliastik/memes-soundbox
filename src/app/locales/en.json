@@ -37,6 +37,9 @@
                 "minorInfo": "An error has occurred while loading some data. Check your Internet connection."
             }
         },
+        "audioEditor": {
+            "poweredBy": "Powered by "
+        },
         "soundbox": {
             "editSound": "Edit voice",
             "sound": "Sound:",

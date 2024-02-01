@@ -220,15 +220,11 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
                     const audio = await loaderService.getAudioByUrl(sound.soundURL);
 
                     if (audio) {
-                        try {
-                            const audioCloned = audio.cloneNode() as HTMLAudioElement;
-                            audioCloned.addEventListener("ended", () => audioCloned.remove());
-                            await audioCloned.play();
-                            setErrorPlayingAudio(false);
-                        } catch (e) {
-                            setErrorPlayingAudio(true);
-                            console.error(e);
-                        }
+                        const audioCloned = audio.cloneNode() as HTMLAudioElement;
+                        audioCloned.addEventListener("ended", () => audioCloned.remove());
+                        audioCloned.play()
+                            .then(() => setErrorPlayingAudio(false))
+                            .catch(() => setErrorPlayingAudio(true));
                     }
                 } catch (e) {
                     console.error(e);

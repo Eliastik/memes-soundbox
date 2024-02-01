@@ -46,6 +46,9 @@
             "noMoreInfos": "Aucune information disponible",
             "sourceLink": "Source :"
         },
+        "audioEditor": {
+            "poweredBy": "Propulsé par "
+        },
         "appInfos": {
             "title": "Informations sur l'application",
             "infos": "{{appName}} TODO",

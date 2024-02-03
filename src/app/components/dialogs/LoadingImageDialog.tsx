@@ -7,7 +7,7 @@ const LoadingImageDialog = () => {
 
     return (
         <>
-            <input type="checkbox" id="loadingDataModal" className="modal-toggle" checked={loadingOneImage} readOnly />
+            {loadingOneImage && <input type="checkbox" id="loadingDataModal" className="modal-toggle" defaultChecked={true} />}
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingOneImage.title")}</h3>

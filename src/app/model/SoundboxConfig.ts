@@ -17,7 +17,7 @@ export default interface SoundboxConfig {
     appTitle: AppTitle,
     favicon: string,
     icon: string,
-    soundboxDescription: SoundboxDescription,
-    primaryColor: PrimaryColor,
+    soundboxDescription?: SoundboxDescription,
+    primaryColor?: PrimaryColor,
     sounds: Sound[]
 }

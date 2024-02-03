@@ -1,4 +1,4 @@
-import ApplicationConfigService from "./ApplicationConfigService";
+import ApplicationConfigService from "../services/ApplicationConfigService";
 
 export default class ApplicationConfigSingleton {
 

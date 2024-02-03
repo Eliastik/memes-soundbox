@@ -25,5 +25,6 @@ export default interface SoundboxContextProps {
     downloadSound: () => void,
     errorPlayingAudio: boolean,
     soundboxLinks: SoundboxLink[],
-    initialLoadingFinished: boolean
+    initialLoadingFinished: boolean,
+    soundboxName: string
 }

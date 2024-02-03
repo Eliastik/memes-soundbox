@@ -46,6 +46,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const [currentAnimationURL, setCurrentAnimationURL] = useState<string>("");
     // State: soundbox config
     const [soundboxConfig, setSoundboxConfig] = useState<SoundboxConfig | null>(null);
+    // State: soundbox name
+    const [soundboxName, setSoundboxName] = useState<string>("");
     // State:editing sound?
     const [editingSound, setEditingSound] = useState(false);
     // State: error playing audio?
@@ -89,6 +91,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         soundboxLoaderService.onErrorLoadingImage(() => setLoadingError(true));
         soundboxLoaderService.onErrorLoadingConfig(() => setLoadingConfigError(true));
 
+        setSoundboxName(soundboxName);
         setLoaderService(soundboxLoaderService);
 
         isReady = true;
@@ -315,7 +318,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             soundboxConfig, toggleAudioEdit,
             editingSound, currentAnimationURL,
             downloadSound, errorPlayingAudio,
-            soundboxLinks, initialLoadingFinished
+            soundboxLinks, initialLoadingFinished,
+            soundboxName
         }}>
             {children}
         </SoundboxContext.Provider>

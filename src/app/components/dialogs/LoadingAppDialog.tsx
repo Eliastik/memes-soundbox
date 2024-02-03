@@ -8,7 +8,7 @@ const LoadingAppDialog = () => {
     const { downloadingInitialData } = useAudioEditor();
     const { loadedAudioCount, totalAudioCount, loadingAudio, loadingImages, loadingConfig } = useSoundbox();
 
-    const [displayed, setDisplayed] = useState(false);
+    const [displayed, setDisplayed] = useState(true);
     const [progressValue, setProgessValue] = useState(0);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const LoadingAppDialog = () => {
 
     return (
         <>
-            <input type="checkbox" id="loadingDataModal" className="modal-toggle" checked={displayed} readOnly />
+            {displayed && <input type="checkbox" id="loadingDataModal" className="modal-toggle" defaultChecked={true} />}
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingApp.title")}</h3>

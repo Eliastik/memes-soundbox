@@ -1,6 +1,6 @@
 "use client";
 
-import MainComponent from "./components/MainComponent";
+import MainComponent from "./components/SoundboxMainComponent";
 import Constants from "./model/Constants";
 
 const Home = () => {

@@ -7,7 +7,7 @@ const ErrorLoadingDataDialog = () => {
 
     return (
         <>
-            <input type="checkbox" id="errorLoadingAudioDialog" className="modal-toggle" checked={loadingError} readOnly />
+            {loadingError && <input type="checkbox" id="errorLoadingAudioDialog" className="modal-toggle" defaultChecked={true} />}
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingError.title")}</h3>

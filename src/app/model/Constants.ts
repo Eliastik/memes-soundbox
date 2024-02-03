@@ -1,7 +1,7 @@
 const Constants = {
     APP_NAME: "Memes Soundbox",
     APP_BY: "By Eliastik's Softs",
-    DEFAULT_LANGUAGE: "en",
+    DEFAULT_LANGUAGE: "fr",
     APP_VERSION: "1.0.0",
     APP_VERSION_DATE: "01/31/2024",
     CONFIG_URI: process.env.NEXT_PUBLIC_CONFIG_URI || "https://www.eliastiksofts.com/memes/config/{memeName}.json",
@@ -13,7 +13,7 @@ const Constants = {
     SOURCE_CODE: "https://github.com/Eliastik/memes-soundbox",
     APP_LICENSE: "GNU GPL v3",
     RELEASE_LINK: "https://github.com/Eliastik/memes-soundbox/releases/tag/1.0",
-    AUDIO_BUFFERS_TO_FETCH: ["../static/sounds/impulse_response.wav","../static/sounds/modulator.mp3"],
+    AUDIO_BUFFERS_TO_FETCH: ["impulse_response.wav","modulator.mp3"],
     SERVICE_WORKER_SCOPE: process.env.NEXT_PUBLIC_BASE_PATH,
     PREFERENCES_KEYS: {
         CURRENT_THEME: "current-theme",

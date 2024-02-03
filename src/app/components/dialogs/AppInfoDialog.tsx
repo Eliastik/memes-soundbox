@@ -17,7 +17,7 @@ const AppInfoDialog = () => {
                 </form>
                 <div className="flex flex-col">
                     <div className="mt-3">
-                        <div className="font-light text-sm flex flex-col md:flex-row gap-3 md:items-center justify-between">
+                        <div className="font-light text-md flex flex-col md:flex-row gap-3 md:items-center justify-between">
                             <div className="w-full">
                                 <span>{soundboxConfig && soundboxConfig.soundboxDescription && (soundboxConfig.soundboxDescription[currentLanguageValue] || soundboxConfig?.soundboxDescription["en"])}</span>
                             </div>

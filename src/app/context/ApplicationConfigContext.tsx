@@ -6,7 +6,7 @@ import { ApplicationObjectsSingleton } from "@eliastik/simple-sound-studio-compo
 import i18n from "@eliastik/simple-sound-studio-components/lib/i18n";
 import i18next from "i18next";
 import ApplicationConfigContextProps from "../model/contextProps/ApplicationConfigContextProps";
-import ApplicationConfigService from "./ApplicationConfigService";
+import ApplicationConfigService from "../services/ApplicationConfigService";
 import { UpdateData } from "../model/UpdateData";
 import ApplicationConfigSingleton from "./ApplicationConfigSingleton";
 
@@ -40,7 +40,7 @@ export const ApplicationConfigProvider: FC<ApplicationConfigProviderProps> = ({ 
     // State: theme setting (auto/dark/light)
     const [currentThemeValue, setCurrentThemeValue] = useState("auto");
     // State: current language
-    const [currentLanguageValue, setCurrentLanguageValue] = useState("en");
+    const [currentLanguageValue, setCurrentLanguageValue] = useState("fr");
     // State: update data
     const [updateData, setUpdateData] = useState<UpdateData | null>(null);
     // State: true if compatibility/direct mode is enabled

@@ -252,37 +252,6 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             if (blob) {
                 await loadAudioPrincipalBuffer(new File([blob], "audioFile"));
             }
-
-            // Setup Reverb Filter
-            const reverbFilterForm = getFilterService()?.getFilter(Constants.FILTERS_NAMES.REVERB);
-
-            if (reverbFilterForm && reverbFilterForm.settingsForm) {
-                reverbFilterForm.settingsForm[1] = {
-                    settingId: "reverbEnvironment",
-                    settingTitle: "filters.reverb.settings.environment",
-                    settingType: SettingFormTypeEnum.SelectField,
-                    selectValues: [
-                        {
-                            name: Constants.DEFAULT_REVERB_ENVIRONMENT.name,
-                            value: Constants.DEFAULT_REVERB_ENVIRONMENT.url,
-                            additionalData: {
-                                size: Constants.DEFAULT_REVERB_ENVIRONMENT.size,
-                                link: Constants.DEFAULT_REVERB_ENVIRONMENT.link,
-                                addDuration: Constants.DEFAULT_REVERB_ENVIRONMENT.addDuration,
-                            }
-                        },
-                        {
-                            name: "filters.reverb.settings.customEnvironment",
-                            value: "custom",
-                            additionalData: {}
-                        }
-                    ]
-                };
-
-                getFilterService()?.updateFilter(Constants.FILTERS_NAMES.REVERB, {
-                    settingsForm: reverbFilterForm.settingsForm
-                });
-            }
         }
     };
 

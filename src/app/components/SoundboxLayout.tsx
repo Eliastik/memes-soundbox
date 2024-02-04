@@ -15,10 +15,31 @@ const SoundboxLayout = ({
 }: { children: React.ReactNode, memeName: string, soundboxConfig?: SoundboxConfig }) => {
     const { currentTheme, currentLanguageValue } = useApplicationConfig();
 
+    // Configure colors based on configuration
     useEffect(() => {
-        if (soundboxConfig && soundboxConfig.primaryColor) {
-            const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.primaryColor.dark : soundboxConfig.primaryColor.light;
+        // Primary color - normal
+        if (soundboxConfig && soundboxConfig.primaryColor && soundboxConfig.primaryColor.normal) {
+            const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.primaryColor.normal.dark : soundboxConfig.primaryColor.normal.light;
             document.body.style.setProperty("--fallback-p", color);
+            document.body.style.setProperty("--primary-color", color);
+        }
+
+        // Secondary color - normal
+        if (soundboxConfig && soundboxConfig.secondaryColor && soundboxConfig.secondaryColor.normal) {
+            const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.secondaryColor.normal.dark : soundboxConfig.secondaryColor.normal.light;
+            document.body.style.setProperty("--secondary-color", color);
+        }
+
+        // Primary color - hover
+        if (soundboxConfig && soundboxConfig.primaryColor && soundboxConfig.primaryColor.hover) {
+            const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.primaryColor.hover.dark : soundboxConfig.primaryColor.hover.light;
+            document.body.style.setProperty("--primary-color-hover", color);
+        }
+
+        // Secondary color - hover
+        if (soundboxConfig && soundboxConfig.secondaryColor && soundboxConfig.secondaryColor.normal) {
+            const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.secondaryColor.hover.dark : soundboxConfig.secondaryColor.hover.light;
+            document.body.style.setProperty("--secondary-color-hover", color);
         }
     }, [soundboxConfig, currentTheme]);
     

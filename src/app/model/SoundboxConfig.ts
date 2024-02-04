@@ -8,7 +8,12 @@ export interface SoundboxDescription {
     [key: string]: string;
 }
 
-export interface PrimaryColor {
+export interface Color {
+    normal: ColorByTheme,
+    hover: ColorByTheme
+}
+
+export interface ColorByTheme {
     light: string,
     dark: string
 }
@@ -18,6 +23,7 @@ export default interface SoundboxConfig {
     favicon: string,
     icon: string,
     soundboxDescription?: SoundboxDescription,
-    primaryColor?: PrimaryColor,
+    primaryColor?: Color,
+    secondaryColor?: Color,
     sounds: Sound[]
 }

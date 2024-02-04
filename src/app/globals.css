@@ -29,3 +29,24 @@ html[data-theme="dark"] .dropdown ul li a {
         left: -100px;
     }
 }
+
+.btn-primary {
+    background-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+    border-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+}
+
+
+.btn-secondary {
+    background-color: var(--secondary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+    border-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+    border-color: var(--primary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+    border-color: var(--primary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+}

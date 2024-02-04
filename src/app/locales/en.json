@@ -23,6 +23,9 @@
             "loadingApp": {
                 "title": "Loading app"
             },
+            "loadingAudioFile": {
+                "title": "Loading audio file"
+            },
             "loadingOneImage": {
                 "title": "Loading data"
             },

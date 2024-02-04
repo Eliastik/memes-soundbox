@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { DaisyUIModal } from "@eliastik/simple-sound-studio-components";
 import AppConfigDialog from "../dialogs/AppConfigDialog";
 import AppInfoDialog from "../dialogs/AppInfoDialog";
@@ -7,19 +8,22 @@ import { useSoundbox } from "@/app/context/SoundboxContext";
 import SoundboxConfig from "@/app/model/SoundboxConfig";
 
 const Navbar = ({
-    soundboxConfig
-}: { soundboxConfig?: SoundboxConfig }) => {
+    config
+}: { config?: SoundboxConfig }) => {
     const { updateData, currentLanguageValue } = useApplicationConfig();
-    const { soundboxLinks } = useSoundbox();
+    const { soundboxLinks, soundboxConfig } = useSoundbox();
 
     return (
         <>
             <div className="navbar bg-primary text-white fixed z-40">
                 <div className="flex-1">
                     <details className="dropdown">
-                        <summary className="btn btn-ghost normal-case sm:text-xl text-base block text-left overflow-hidden">
-                            <div>{(soundboxConfig && soundboxConfig.appTitle[currentLanguageValue]) || (soundboxConfig && soundboxConfig.appTitle["en"]) || Constants.APP_NAME} </div>
-                            <div className="font-light text-xs">{Constants.APP_BY}</div>
+                        <summary className="btn btn-ghost normal-case sm:text-xl text-base text-left overflow-hidden flex items-center justify-center gap-x-3 flex-col md:pl-2 pl-1">
+                            {config && config.icon && <div><img src={config.icon} alt="App icon" className="w-10 h-10" /></div>}
+                            <div>
+                                <div>{(config && config.appTitle[currentLanguageValue]) || (soundboxConfig && soundboxConfig.appTitle[currentLanguageValue]) || Constants.APP_NAME}</div>
+                                <div className="font-light text-xs">{Constants.APP_BY}</div>
+                            </div>
                         </summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                             {soundboxLinks.map(soundbox => <li key={soundbox.url}><a href={soundbox.url}>{soundbox.labels[currentLanguageValue] || soundbox.labels["en"]}</a></li>)}

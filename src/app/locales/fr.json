@@ -20,6 +20,9 @@
             "loadingApp": {
                 "title": "Chargement de l'application"
             },
+            "loadingAudioFile": {
+                "title": "Chargement du fichier audio"
+            },
             "loadingOneImage": {
                 "title": "Chargement de données"
             },

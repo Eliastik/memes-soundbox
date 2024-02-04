@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import { useApplicationConfig } from "../context/ApplicationConfigContext";
 import Constants from "../model/Constants";
 import Navbar from "./navbar/navbar";
 import PWA from "../pwa";
 import SoundboxConfig from "../model/SoundboxConfig";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,8 @@ const SoundboxLayout = ({
 }: { children: React.ReactNode, memeName: string, soundboxConfig?: SoundboxConfig }) => {
     const { currentTheme, currentLanguageValue } = useApplicationConfig();
 
+    const [currentPrimaryColor, setCurrentPrimaryColor] = useState("#61A6FA");
+
     // Configure colors based on configuration
     useEffect(() => {
         // Primary color - normal
@@ -22,6 +25,9 @@ const SoundboxLayout = ({
             const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.primaryColor.normal.dark : soundboxConfig.primaryColor.normal.light;
             document.body.style.setProperty("--fallback-p", color);
             document.body.style.setProperty("--primary-color", color);
+            setCurrentPrimaryColor(color);
+        } else {
+            setCurrentPrimaryColor(currentTheme == Constants.THEMES.LIGHT ? "#61A6FA" : "#3884FF");
         }
 
         // Secondary color - normal
@@ -45,14 +51,14 @@ const SoundboxLayout = ({
     
     return (
         <html data-theme={currentTheme ? currentTheme : Constants.THEMES.DARK} className="h-full" lang={currentLanguageValue}>
-            <head>
+            <Head>
                 <link rel="manifest" href={Constants.MANIFEST_URI.replace(Constants.MEME_NAME_PLACEHOLDER, memeName)} />
-                <meta name="theme-color" content={currentTheme == Constants.THEMES.LIGHT ? "#61A6FA" : "#3884FF"} />
+                <meta name="theme-color" content={currentPrimaryColor} />
                 {soundboxConfig && soundboxConfig.soundboxDescription && <meta name="description" content={soundboxConfig.soundboxDescription[currentLanguageValue] || soundboxConfig.soundboxDescription["en"]} />}
                 {soundboxConfig && soundboxConfig.appTitle && <title>{soundboxConfig.appTitle[currentLanguageValue] || soundboxConfig.appTitle["en"]}</title>}
-            </head>
+            </Head>
             <body className={`${inter.className} h-full flex flex-col overflow-x-hidden`}>
-                <Navbar soundboxConfig={soundboxConfig}></Navbar>
+                <Navbar config={soundboxConfig}></Navbar>
                 {children}
                 <PWA></PWA>
             </body>

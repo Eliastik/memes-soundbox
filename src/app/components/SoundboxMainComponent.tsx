@@ -9,7 +9,6 @@ import SoundboxMain from "./soundbox/SoundboxMain";
 import ErrorLoadingConfigDialog from "./dialogs/ErrorLoadingConfigDialog";
 import ErrorLoadingDataDialog from "./dialogs/ErrorLoadingDataDialog";
 import LoadingImageDialog from "./dialogs/LoadingImageDialog";
-import Navbar from "./navbar/navbar";
 import PWA from "../pwa";
 import MainLayout from "./SoundboxLayout";
 import SoundboxConfig from "../model/SoundboxConfig";
@@ -24,7 +23,6 @@ const SoundboxMainComponent = ({ memeName, sounboxConfig }: { memeName: string, 
     
     return (
         <MainLayout memeName={memeName} soundboxConfig={sounboxConfig}>
-            <Navbar></Navbar>
             {!downloadingInitialData && !loadingAudio && !loadingImages && <SoundboxMain></SoundboxMain>}
             <LoadingAppDialog></LoadingAppDialog>
             <LoadingAudioFileDialog></LoadingAudioFileDialog>

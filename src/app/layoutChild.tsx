@@ -9,6 +9,7 @@ import { ApplicationObjectsSingleton, AudioEditorProvider, AudioPlayerProvider }
 import { SoundboxProvider } from "./context/SoundboxContext";
 import ApplicationConfigSingleton from "./context/ApplicationConfigSingleton";
 import i18next from "i18next";
+import i18n from "@eliastik/simple-sound-studio-components/lib/i18n";
 
 // Configure audio editor
 if (typeof(window) !== "undefined") {
@@ -17,6 +18,7 @@ if (typeof(window) !== "undefined") {
 
 // Setup default language
 i18next.changeLanguage(Constants.DEFAULT_LANGUAGE);
+i18n.i18next.changeLanguage(Constants.DEFAULT_LANGUAGE);
 
 const LayoutChild = ({
     children,

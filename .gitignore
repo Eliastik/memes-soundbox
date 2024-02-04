@@ -40,7 +40,3 @@ public/service-worker.js.map
 public/workbox-*
 public/worklets/*
 .rollup.cache
-
-public/static/img/**/*.gif
-public/static/img/**/*.png
-public/static/sounds/**/*.mp3

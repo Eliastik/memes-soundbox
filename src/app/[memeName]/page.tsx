@@ -33,6 +33,10 @@ export async function generateMetadata({ params }: { params: { memeName: string,
         config.icons = { icon: sounboxConfig.favicon };
     }
 
+    if (sounboxConfig.primaryColor && sounboxConfig.primaryColor.normal) {
+        config.themeColor = sounboxConfig.primaryColor.normal.light;
+    }
+
     return config;
 };
 

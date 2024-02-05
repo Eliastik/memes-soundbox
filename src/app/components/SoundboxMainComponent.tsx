@@ -22,7 +22,7 @@ const SoundboxMainComponent = ({ memeName, sounboxConfig }: { memeName: string, 
     }, [setup, memeName]);
     
     return (
-        <MainLayout memeName={memeName} soundboxConfig={sounboxConfig}>
+        <MainLayout soundboxConfig={sounboxConfig}>
             {!downloadingInitialData && !loadingAudio && !loadingImages && <SoundboxMain></SoundboxMain>}
             <LoadingAppDialog></LoadingAppDialog>
             <LoadingAudioFileDialog></LoadingAudioFileDialog>

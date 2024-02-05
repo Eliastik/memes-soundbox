@@ -18,7 +18,7 @@ const Navbar = ({
             <div className="navbar bg-primary text-white fixed z-40">
                 <div className="flex-1">
                     <details className="dropdown">
-                        <summary className="btn btn-ghost normal-case sm:text-xl text-base text-left overflow-hidden flex items-center justify-center gap-x-3 flex-col md:pl-2 pl-1">
+                        <summary className="btn btn-ghost normal-case sm:text-xl text-base text-left overflow-hidden flex items-center justify-center gap-x-2 flex-col md:pl-2 pl-1">
                             {config && config.icon && <div><img src={config.icon} alt="App icon" className="w-10 h-10" /></div>}
                             <div>
                                 <div>{(config && config.appTitle[currentLanguageValue]) || (soundboxConfig && soundboxConfig.appTitle[currentLanguageValue]) || Constants.APP_NAME}</div>

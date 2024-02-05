@@ -28,8 +28,13 @@ const SoundboxLayout = ({
                 metaThemeColor.setAttribute("content", color);
             }
         } else {
+            const color = currentTheme == Constants.THEMES.LIGHT ? "#61A6FA" : "#3884FF";
+
+            document.body.style.setProperty("--fallback-p", color);
+            document.body.style.setProperty("--primary-color", color);
+
             if (metaThemeColor) {
-                metaThemeColor.setAttribute("content", currentTheme == Constants.THEMES.LIGHT ? "#61A6FA" : "#3884FF");
+                metaThemeColor.setAttribute("content", color);
             }
         }
 

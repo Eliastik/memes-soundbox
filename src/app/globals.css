@@ -35,18 +35,29 @@ html[data-theme="dark"] .dropdown ul li a {
     border-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
 }
 
-
 .btn-secondary {
     background-color: var(--secondary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-    border-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+    border-color: var(--secondary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+}
+
+.border-t-primary  {
+    border-top-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+}
+
+.border-l-primary  {
+    border-left-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+}
+
+.border-r-primary  {
+    border-right-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-    border-color: var(--primary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+    background-color: var(--primary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%, black ));
+    border-color: var(--primary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%, black ));
 }
 
 .btn-secondary:hover {
-    background-color: var(--secondary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-    border-color: var(--primary-color-hover, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
+    background-color: var(--secondary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%, black ));
+    border-color: var(--secondary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%, black ));
 }

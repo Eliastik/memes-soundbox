@@ -1,8 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
-import { ApplicationObjectsSingleton, SettingFormTypeEnum, useAudioEditor, useAudioPlayer } from "@eliastik/simple-sound-studio-components";
-import { Constants } from "@eliastik/simple-sound-studio-lib";
+import { useAudioEditor, useAudioPlayer } from "@eliastik/simple-sound-studio-components";
 import Sound from "../model/Sound";
 import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 import SoundboxLoaderService from "../services/SoundboxLoader";
@@ -26,10 +25,6 @@ interface SoundboxProviderProps {
 }
 
 let isReady = false;
-
-const getFilterService = () => {
-    return ApplicationObjectsSingleton.getFilterServiceInstance();
-};
 
 export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const { loadAudioPrincipalBuffer, downloadAudio } = useAudioEditor();

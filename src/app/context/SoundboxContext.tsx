@@ -196,17 +196,18 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
      * Reload the GIF animation
      * @param sound The sound
      */
-    const reloadAnimation = (sound: Sound) => {
-        if (sound) {
-            const animationURL = sound.animationURL;
-
-            setCurrentAnimationURL("#");
-
-            setTimeout(() => {
-                setCurrentAnimationURL(animationURL || "");
-            }, 1);
-        }
+    const reloadAnimation = () => {
+        setCurrentAnimationURL("#");
     };
+
+    // Reload GIF effect when the location is "#"
+    useEffect(() => {
+        if (currentAnimationURL === "#") {
+            if (currentSound) {
+                setCurrentAnimationURL(currentSound.animationURL || "");
+            }
+        }
+    }, [currentAnimationURL, currentSound]);
 
     /**
      * Play a sound
@@ -238,7 +239,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             playAudioBufferDirect();
         }
 
-        reloadAnimation(sound);
+        reloadAnimation();
     };
 
     const setupAudioEditor = async (sound: Sound) => {
@@ -270,7 +271,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             downloadAudio();
 
             if (isCompatibilityModeEnabled) {
-                reloadAnimation(currentSound);
+                reloadAnimation();
             }
         }
     };

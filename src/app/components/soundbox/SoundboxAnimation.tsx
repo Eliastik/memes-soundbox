@@ -17,7 +17,7 @@ const SoundboxAnimation = () => {
                             src={currentAnimationURL}
                             alt={currentSound.labels[currentLanguageValue] || currentSound.labels["en"]}
                             onClick={() => playSound(currentSound)}
-                            className="lg:h-96 md:h-80 max-h-56 md:max-h-80 lg:max-h-96 w-full rounded-xl cursor-pointer"
+                            className="lg:h-96 md:h-80 max-h-56 md:max-h-80 lg:max-h-96 w-auto rounded-xl cursor-pointer"
                         />
                     </div>
                 </div>

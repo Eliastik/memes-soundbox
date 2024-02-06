@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: { memeName: string,
     const sounboxConfig = await getConfigForPage(memeName);
 
     const config: Metadata = {
-        title: sounboxConfig.appTitle[Constants.DEFAULT_LANGUAGE],
+        title: sounboxConfig.windowTitle[Constants.DEFAULT_LANGUAGE],
         description: sounboxConfig.soundboxDescription && sounboxConfig.soundboxDescription[Constants.DEFAULT_LANGUAGE],
         manifest: Constants.MANIFEST_URI.replace(Constants.MEME_NAME_PLACEHOLDER, memeName)
     };

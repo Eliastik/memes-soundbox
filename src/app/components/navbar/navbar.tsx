@@ -17,12 +17,14 @@ const Navbar = ({
         <>
             <div className="navbar bg-primary text-white fixed z-40">
                 <div className="flex-1">
-                    <details className="dropdown">
-                        <summary className="btn btn-ghost normal-case sm:text-xl text-base text-left overflow-hidden flex items-center justify-center gap-x-2 flex-col md:pl-2 pl-1">
-                            {config && config.icon && <div><img src={config.icon} alt="App icon" className="w-10 h-10" /></div>}
-                            <div>
-                                <div>{(config && config.appTitle[currentLanguageValue]) || (soundboxConfig && soundboxConfig.appTitle[currentLanguageValue]) || Constants.APP_NAME}</div>
-                                <div className="font-light text-xs">{Constants.APP_BY}</div>
+                    <details className="dropdown max-h-12">
+                        <summary className="btn btn-ghost normal-case sm:text-xl text-base text-left overflow-hidden md:pl-2 md:pr-2 pl-1 pr-1 border-none">
+                            <div className="flex flex-row justify-center">
+                                {config && config.icon && <img src={config.icon} alt="App icon" className="w-11 h-11" />}
+                                <div className="flex flex-col h-full justify-center ml-2">
+                                    <span className="inline-block">{(config && config.appTitle[currentLanguageValue]) || (soundboxConfig && soundboxConfig.appTitle[currentLanguageValue]) || Constants.APP_NAME}</span>
+                                    <span className="font-light text-xs inline-block">{Constants.APP_BY}</span>
+                                </div>
                             </div>
                         </summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">

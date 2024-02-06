@@ -58,8 +58,8 @@ const SoundboxLayout = ({
     }, [soundboxConfig, currentTheme]);
 
     useEffect(() => {
-        if (soundboxConfig && soundboxConfig.appTitle) {
-            document.title = soundboxConfig.appTitle[currentLanguageValue] || soundboxConfig.appTitle["en"];
+        if (soundboxConfig && soundboxConfig.windowTitle) {
+            document.title = soundboxConfig.windowTitle[currentLanguageValue] || soundboxConfig.windowTitle["en"];
         }
     }, [soundboxConfig, currentLanguageValue]);
     

@@ -20,6 +20,7 @@ export interface ColorByTheme {
 
 export default interface SoundboxConfig {
     appTitle: AppTitle,
+    windowTitle: AppTitle,
     favicon: string,
     icon: string,
     soundboxDescription?: SoundboxDescription,

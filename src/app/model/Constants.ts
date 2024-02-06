@@ -3,7 +3,7 @@ const Constants = {
     APP_BY: "By Eliastik's Softs",
     DEFAULT_LANGUAGE: "fr",
     APP_VERSION: "1.0.0",
-    APP_VERSION_DATE: "01/31/2024",
+    APP_VERSION_DATE: "02/07/2024",
     CONFIG_URI: process.env.NEXT_PUBLIC_CONFIG_URI || "https://www.eliastiksofts.com/memes/config/{memeName}.json",
     MANIFEST_URI: process.env.NEXT_PUBLIC_MANIFEST_URI || "https://www.eliastiksofts.com/memes/manifest/{memeName}.json",
     UPDATER_URI: process.env.NEXT_PUBLIC_UPDATER_URI || "https://www.eliastiksofts.com/memes/config/update.json",

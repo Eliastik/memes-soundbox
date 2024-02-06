@@ -128,7 +128,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
                 // Loading first animation
                 setLoadingImages(true);
-                await loaderService.loadImages(sounds[5].animationURL ? [sounds[5].animationURL] : []);
+                await loaderService.loadImages(sounds && sounds[0].animationURL ? [sounds[0].animationURL] : []);
                 setLoadingImages(false);
 
                 setInitialLoadingFinished(true);

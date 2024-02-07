@@ -28,7 +28,7 @@ const SoundboxMainComponent = ({ memeName, sounboxConfig }: { memeName: string, 
             <LoadingAudioFileDialog></LoadingAudioFileDialog>
             <LoadingImageDialog></LoadingImageDialog>
             <ErrorLoadingAudioDialog></ErrorLoadingAudioDialog>
-            <ErrorDownloadingBufferDialog></ErrorDownloadingBufferDialog>
+            {!downloadingInitialData && !loadingAudio && !loadingImages && <ErrorDownloadingBufferDialog></ErrorDownloadingBufferDialog>}
             <ErrorProcessingAudio></ErrorProcessingAudio>
             <ErrorLoadingDataDialog></ErrorLoadingDataDialog>
             <ErrorLoadingConfigDialog></ErrorLoadingConfigDialog>

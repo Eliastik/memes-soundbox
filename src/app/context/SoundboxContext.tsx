@@ -147,6 +147,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         setLoadingError(false);
         setLoadingConfigError(false);
         setInitialLoadingFinished(false);
+        setLoadedAudioCount(0);
 
         loadApp();
     };

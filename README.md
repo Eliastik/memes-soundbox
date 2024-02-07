@@ -1,7 +1,7 @@
 ﻿# Memes Soundbox
 
-<img src="https://raw.githubusercontent.com/Eliastik/memes-soundbox/master/screenshot_1.png" width="400" alt="Screenshot" />
-<img src="https://raw.githubusercontent.com/Eliastik/memes-soundbox/master/screenshot_2.png" width="400" alt="Screenshot 2" />
+<img src="https://raw.githubusercontent.com/Eliastik/memes-soundbox/master/screenshot.png" width="640" alt="Screenshot 2" />
+<img src="https://raw.githubusercontent.com/Eliastik/memes-soundbox/master/screenshot_1.png" width="640" alt="Screenshot" />
 
 # Français
 

@@ -8,7 +8,7 @@
 Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes Internet totalement paramétrables, composées d'animations sonores. De plus, grâce à l'utilisation de mes librairies [Simple Sound Studio Library](https://github.com/eliastik/simple-sound-studio-lib) et ses [composants React](https://github.com/Eliastik/simple-sound-studio-components), il est possible de modifier la voix !
 
 * Versions en ligne : [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
-* Repository Github : [https://github.com/Eliastik/memes-soundboxr](https://github.com/Eliastik/memes-soundbox)
+* Repository Github : [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
 * Version : 1.0 (07/02/2024)
 
 ### Technologies
@@ -21,7 +21,7 @@ Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes I
 ### Credits
 
 * Voir les dépendances dans le fichier package.json
-* Utilise des fichiers [Impulse Response](https://en.wikipedia.org/wiki/Impulse_response) (pour le filtre de réverbération) [venant d'ici](http://www.cksde.com/p_6_250.htm) (Medium Damping Cave E002 M2S) et [here](https://openairlib.net/?page_id=36) (lien vers les sources dans les paramètres du filtre)
+* Utilise des fichiers [Impulse Response](https://en.wikipedia.org/wiki/Impulse_response) (pour le filtre de réverbération) [venant d'ici](http://www.cksde.com/p_6_250.htm) (Medium Damping Cave E002 M2S) et [d'ici](https://openairlib.net/?page_id=36) (lien vers les sources dans les paramètres du filtre)
 * Utilise des icônes venant de [Heroicons](https://heroicons.com/) sous licence MIT
 * Utilise des icônes venant de [Font Awesome](https://fontawesome.com/) - [Licence](https://github.com/FortAwesome/Font-Awesome/blob/6.x/LICENSE.txt)
 
@@ -128,7 +128,7 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 Memes Soundbox is a base for creating fully customizable soundboxes of Internet memes, composed of sound animations. Thanks to the use of my [Simple Sound Studio Library](https://github.com/eliastik/simple-sound-studio-lib) and its [React components](https://github.com/Eliastik/simple-sound-studio-components), it's possible to modify the voice!
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
-* Github repository: [https://github.com/Eliastik/memes-soundboxr](https://github.com/Eliastik/memes-soundbox)
+* Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
 * Version: 1.0 (2/7/2024)
 
 ### Technologies

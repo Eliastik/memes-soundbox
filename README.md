@@ -238,7 +238,7 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 }
 ```
 
-## Journal des versions
+## Changelog
 
-* Version 1.0 (2/7/2024) :
+* Version 1.0 (2/7/2024):
     - Initial version

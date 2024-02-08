@@ -31,8 +31,7 @@ const withPWA = require("next-pwa")({
 const nextConfig = withPWA({
     output: "export",
     trailingSlash: true,
-    //transpilePackages: ["@eliastik/simple-sound-studio-lib", "@eliastik/simple-sound-studio-components"],
-    transpilePackages: [],
+    transpilePackages: ["@eliastik/simple-sound-studio-lib", "@eliastik/simple-sound-studio-components"],
     basePath: process.env.NEXT_PUBLIC_BASE_PATH,
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         config.plugins.push(

@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: { memeName: string,
     if (sounboxConfig.primaryColor && sounboxConfig.primaryColor.normal) {
         config.themeColor = sounboxConfig.primaryColor.normal.light;
     } else {
-        config.themeColor = "#61A6FA";
+        config.themeColor = Constants.DEFAULT_THEME.PRIMARY_COLOR.LIGHT;
     }
 
     return config;

@@ -12,7 +12,7 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
     private soundboxConfig: SoundboxConfig | undefined = undefined;
     private soundboxLinks: SoundboxLink[] = [];
     private mapAudio: Map<string, HTMLAudioElement> = new Map();
-    private preloadedImages: string[] = [];
+    private mapImages: Map<string, HTMLImageElement> = new Map();
     private eventEmitter: EventEmitter = new EventEmitter();
     private soundboxNameProvider: SoundboxNameProviderInterface | null = null;
 
@@ -95,10 +95,10 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
         let loadedImages = 0;
 
         for (const url of imageURLs) {
-            if (!this.preloadedImages.includes(url)) {
+            if (!this.mapImages.has(url)) {
                 try {
-                    await this.loadImage(url);
-                    this.preloadedImages.push(url);
+                    const image = await this.loadImage(url);
+                    this.mapImages.set(url, image);
                     loadedImages++;
                     this.eventEmitter.emit(EventTypes.LOADED_IMAGE, { loaded: loadedImages, total: totalImages, url });
                 } catch (error) {
@@ -112,19 +112,12 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
     }
 
     private async loadImage(url: string): Promise<HTMLImageElement> {
-        return new Promise((resolve, reject) => {
-            const imageElement = new Image();
+        const audio = await fetch(url);
+        const audioBlob = await audio.blob();
+        const image = new Image();
+        image.src = URL.createObjectURL(audioBlob);
 
-            imageElement.addEventListener("load", () => {
-                resolve(imageElement);
-            });
-
-            imageElement.addEventListener("error", (event) => {
-                reject(event.error || new Error("Unknown image loading error"));
-            });
-
-            imageElement.src = url;
-        });
+        return image;
     }
 
     async getAudioByUrl(url: string): Promise<HTMLAudioElement | undefined> {
@@ -144,12 +137,22 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
         return audioElement;
     }
 
-    async getBlobByUrl(url: string): Promise<Blob | undefined> {
+    async getAudioBlob(url: string): Promise<Blob | undefined> {
         const audioElement = this.mapAudio.get(url);
 
         if (audioElement) {
             const data = await fetch(audioElement.src);
             return await data.blob();
+        }
+
+        return undefined;
+    }
+
+    async getImageBlobURL(url: string): Promise<string | undefined> {
+        const imageElement = this.mapImages.get(url);
+
+        if (imageElement) {
+            return imageElement.src;
         }
 
         return undefined;

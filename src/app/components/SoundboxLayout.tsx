@@ -28,7 +28,7 @@ const SoundboxLayout = ({
                 metaThemeColor.setAttribute("content", color);
             }
         } else {
-            const color = currentTheme == Constants.THEMES.LIGHT ? "#61A6FA" : "#3884FF";
+            const color = currentTheme == Constants.THEMES.LIGHT ? Constants.DEFAULT_THEME.PRIMARY_COLOR.LIGHT : Constants.DEFAULT_THEME.PRIMARY_COLOR.DARK;
 
             document.body.style.setProperty("--fallback-p", color);
             document.body.style.setProperty("--primary-color", color);

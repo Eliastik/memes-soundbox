@@ -27,7 +27,13 @@ const Constants = {
         LIGHT: "light"
     },
     MEME_NAME_PLACEHOLDER: "{memeName}",
-    DEFAULT_MEME_NAME: "ah"
+    DEFAULT_MEME_NAME: "ah",
+    DEFAULT_THEME: {
+        PRIMARY_COLOR: {
+            LIGHT: "#61A6FA",
+            DARK: "#3884FF"
+        }
+    }
 };
 
 export default Constants;

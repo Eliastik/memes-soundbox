@@ -27,7 +27,7 @@ interface SoundboxProviderProps {
 let isReady = false;
 
 export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
-    const { loadAudioPrincipalBuffer, downloadAudio } = useAudioEditor();
+    const { loadAudioPrincipalBuffer, downloadAudio, audioProcessing } = useAudioEditor();
     const { playAudioBufferDirect } = useAudioPlayer();
     const { isCompatibilityModeEnabled } = useApplicationConfig();
 
@@ -193,12 +193,16 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
      * @param sound The sound
      */
     const reloadAnimation = () => {
-        setCurrentAnimationURL("");
+        if (currentSound && loaderService) {
+            loaderService.getImageBlobURL(currentSound.animationURL).then((url) => {
+                setCurrentAnimationURL(url + "#" || "");
+            });
+        }
     };
 
     // Reload GIF effect when the location is "#"
     useEffect(() => {
-        if (currentAnimationURL === "") {
+        if (currentAnimationURL === "" || currentAnimationURL.endsWith("#")) {
             if (currentSound && loaderService) {
                 loaderService.getImageBlobURL(currentSound.animationURL).then((url) => {
                     setCurrentAnimationURL(url || "");
@@ -237,7 +241,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             playAudioBufferDirect();
         }
 
-        reloadAnimation();
+        setTimeout(reloadAnimation, 1);
     };
 
     const setupAudioEditor = async (sound: Sound) => {

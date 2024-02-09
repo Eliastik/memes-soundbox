@@ -1,11 +1,10 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
+import { createContext, useContext, useState, ReactNode, FC, useEffect, useRef, useCallback } from "react";
 import { useAudioEditor, useAudioPlayer } from "@eliastik/simple-sound-studio-components";
 import Sound from "../model/Sound";
 import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 import SoundboxLoaderService from "../services/SoundboxLoader";
-import { useApplicationConfig } from "./ApplicationConfigContext";
 import { SoundboxLink } from "../model/SoundboxLink";
 import SoundboxNameProvider from "../services/SoundboxNameProvider";
 import SoundboxConfig from "../model/SoundboxConfig";
@@ -27,18 +26,17 @@ interface SoundboxProviderProps {
 let isReady = false;
 
 export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
-    const { loadAudioPrincipalBuffer, downloadAudio, audioProcessing } = useAudioEditor();
-    const { playAudioBufferDirect } = useAudioPlayer();
-    const { isCompatibilityModeEnabled } = useApplicationConfig();
+    const { loadAudioPrincipalBuffer, downloadAudio } = useAudioEditor();
+    const { playAudioBufferDirect, isCompatibilityModeEnabled, stopAudioBuffer } = useAudioPlayer();
 
+    // State: animation ref
+    const animationRef = useRef(null);
     // The loader service
     const [loaderService, setLoaderService] = useState<SoundboxLoaderService | null>(null);
     // State: all sounds
     const [allSounds, setAllSounds] = useState<Sound[]>([]);
     // State: current sound
     const [currentSound, setCurrentSound] = useState<Sound | null>(null);
-    // State: current animation URL
-    const [currentAnimationURL, setCurrentAnimationURL] = useState<string>("");
     // State: soundbox config
     const [soundboxConfig, setSoundboxConfig] = useState<SoundboxConfig | null>(null);
     // State: soundbox name
@@ -192,24 +190,23 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
      * Reload the GIF animation
      * @param sound The sound
      */
-    const reloadAnimation = () => {
+    const reloadAnimation = useCallback(() => {
         if (currentSound && loaderService) {
             loaderService.getImageBlobURL(currentSound.animationURL).then((url) => {
-                setCurrentAnimationURL(url + "#" || "");
+                const element = animationRef.current;
+
+                if (element) {
+                    const imageElement = element as HTMLImageElement;
+                    imageElement.src = "#";
+                    imageElement.src = url || "";
+                }
             });
         }
-    };
+    }, [currentSound, loaderService]);
 
-    // Reload GIF effect when the location is "#"
     useEffect(() => {
-        if (currentAnimationURL === "" || currentAnimationURL.endsWith("#")) {
-            if (currentSound && loaderService) {
-                loaderService.getImageBlobURL(currentSound.animationURL).then((url) => {
-                    setCurrentAnimationURL(url || "");
-                });
-            }
-        }
-    }, [currentAnimationURL, currentSound, loaderService]);
+        reloadAnimation();
+    }, [animationRef, reloadAnimation]);
 
     /**
      * Play a sound
@@ -241,7 +238,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             playAudioBufferDirect();
         }
 
-        setTimeout(reloadAnimation, 1);
+        reloadAnimation();
     };
 
     const setupAudioEditor = async (sound: Sound) => {
@@ -270,11 +267,12 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
     const downloadSound = async () => {
         if (currentSound) {
-            downloadAudio();
-
             if (isCompatibilityModeEnabled) {
                 reloadAnimation();
+                stopAudioBuffer();
             }
+
+            downloadAudio();
         }
     };
 
@@ -288,10 +286,10 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             loadingConfigError, retryLoadingApp,
             closeErrorLoading, loadingOneImage,
             soundboxConfig, toggleAudioEdit,
-            editingSound, currentAnimationURL,
-            downloadSound, errorPlayingAudio,
-            soundboxLinks, initialLoadingFinished,
-            soundboxName
+            editingSound, downloadSound,
+            errorPlayingAudio, soundboxLinks,
+            initialLoadingFinished, soundboxName,
+            animationRef
         }}>
             {children}
         </SoundboxContext.Provider>

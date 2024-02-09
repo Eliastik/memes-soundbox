@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 const SoundboxAnimation = () => {
     const { currentLanguageValue } = useApplicationConfig();
-    const { currentSound, currentAnimationURL, playSound, errorPlayingAudio } = useSoundbox();
+    const { currentSound, playSound, errorPlayingAudio, animationRef } = useSoundbox();
     const { t } = useTranslation();
 
     return (
@@ -14,10 +14,11 @@ const SoundboxAnimation = () => {
                 <div className={errorPlayingAudio ? "tooltip tooltip-open tooltip-top" : ""} data-tip={t("soundbox.clickHere")}>
                     <div className="p-1 md:p-2">
                         <img
-                            src={currentAnimationURL}
+                            src={currentSound.animationURL}
                             alt={currentSound.labels[currentLanguageValue] || currentSound.labels["en"]}
                             onClick={() => playSound(currentSound)}
                             className="lg:h-96 md:h-80 max-h-56 md:max-h-80 lg:max-h-96 w-auto rounded-xl cursor-pointer"
+                            ref={animationRef}
                         />
                     </div>
                 </div>

@@ -54,7 +54,6 @@
         },
         "appInfos": {
             "title": "Informations sur l'application",
-            "infos": "{{appName}} TODO",
             "appVersion": "Version de l'application :",
             "versionDate": "Date de version :",
             "license": "Licence :",

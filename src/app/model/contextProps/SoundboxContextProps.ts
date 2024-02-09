@@ -1,3 +1,4 @@
+import { MutableRefObject } from "react";
 import Sound from "../Sound";
 import SoundboxConfig from "../SoundboxConfig";
 import { SoundboxLink } from "../SoundboxLink";
@@ -21,10 +22,10 @@ export default interface SoundboxContextProps {
     loadingOneImage: boolean,
     toggleAudioEdit: () => void,
     editingSound: boolean,
-    currentAnimationURL: string,
     downloadSound: () => void,
     errorPlayingAudio: boolean,
     soundboxLinks: SoundboxLink[],
     initialLoadingFinished: boolean,
-    soundboxName: string
+    soundboxName: string,
+    animationRef: MutableRefObject<HTMLImageElement | null>
 }

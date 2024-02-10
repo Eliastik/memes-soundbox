@@ -190,9 +190,11 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
      * Reload the GIF animation
      * @param sound The sound
      */
-    const reloadAnimation = useCallback(() => {
-        if (currentSound && loaderService) {
-            loaderService.getImageBlobURL(currentSound.animationURL).then((url) => {
+    const reloadAnimation = useCallback((newSound?: Sound) => {
+        const sound = newSound || currentSound;
+
+        if (sound && loaderService) {
+            loaderService.getImageBlobURL(sound.animationURL).then((url) => {
                 const element = animationRef.current;
 
                 if (element) {
@@ -238,7 +240,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             playAudioBufferDirect();
         }
 
-        reloadAnimation();
+        reloadAnimation(sound);
     };
 
     const setupAudioEditor = async (sound: Sound) => {

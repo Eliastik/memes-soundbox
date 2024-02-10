@@ -9,7 +9,7 @@ Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes I
 
 * Versions en ligne : [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Repository Github : [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version : 1.0.1 (09/02/2024)
+* Version : 1.0.2 (10/02/2024)
 
 ### Technologies
 
@@ -120,6 +120,9 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 
 ## Journal des versions
 
+* Version 1.0.2 (10/02/2024) :
+    - Correction d'un bug survenant lors de la sélection d'un son, puis en revenant sur un son déjà chargé : l'animation n'était pas mise à jour
+
 * Version 1.0.1 (09/02/2024) :
     - Correction de bugs mineurs
 
@@ -132,7 +135,7 @@ Memes Soundbox is a base for creating fully customizable soundboxes of Internet 
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version: 1.0.1 (2/9/2024)
+* Version: 1.0.2 (2/10/2024)
 
 ### Technologies
 
@@ -242,6 +245,9 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 ```
 
 ## Changelog
+
+* Version 1.0.2 (2/10/2024) :
+    - Fixed a bug that occurred when selecting a sound, then returning to a sound that had already been loaded: the animation was not updated
 
 * Version 1.0.1 (2/9/2024) :
     - Minor bug fixes

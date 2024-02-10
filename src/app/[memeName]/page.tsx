@@ -33,13 +33,22 @@ export async function generateMetadata({ params }: { params: { memeName: string,
         config.icons = { icon: sounboxConfig.favicon };
     }
 
-    if (sounboxConfig.primaryColor && sounboxConfig.primaryColor.normal) {
-        config.themeColor = sounboxConfig.primaryColor.normal.light;
-    } else {
-        config.themeColor = Constants.DEFAULT_THEME.PRIMARY_COLOR.LIGHT;
-    }
-
     return config;
+};
+
+export async function generateViewport({ params }: { params: { memeName: string, sounboxConfig: SoundboxConfig } }): Promise<Metadata> {
+    const { memeName } = params;
+    const sounboxConfig = await getConfigForPage(memeName);
+
+    if (sounboxConfig.primaryColor && sounboxConfig.primaryColor.normal) {
+        return {
+            themeColor: sounboxConfig.primaryColor.normal.light
+        };
+    }
+    
+    return {
+        themeColor: Constants.DEFAULT_THEME.PRIMARY_COLOR.LIGHT
+    };
 };
 
 const MemePage = async ({ params }: { params: { memeName: string, sounboxConfig: SoundboxConfig } }) => {

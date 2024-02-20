@@ -26,7 +26,7 @@ interface SoundboxProviderProps {
 let isReady = false;
 
 export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
-    const { loadAudioPrincipalBuffer, downloadAudio } = useAudioEditor();
+    const { loadAudioPrincipalBuffer, downloadAudio, changeFilterSettings } = useAudioEditor();
     const { playAudioBufferDirect, isCompatibilityModeEnabled, stopAudioBuffer } = useAudioPlayer();
 
     // State: animation ref
@@ -250,6 +250,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
         if (sound.soundURL) {
             const blob = await loaderService.getAudioBlob(sound.soundURL);
+
+            await changeFilterSettings("limiter", { lookAheadTime: 0.05 });
 
             if (blob) {
                 await loadAudioPrincipalBuffer(new File([blob], "audioFile"));

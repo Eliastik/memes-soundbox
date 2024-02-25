@@ -34,7 +34,7 @@ const SoundInfoDialog = () => {
                                         <div className="md:w-4/6">
                                             <label>{t("soundInfos.sourceLink")}</label>
                                         </div>
-                                        <a href={currentSound.sourceURL} className="link link-info hover:no-underline" target="_blank">{currentSound.sourceURL}</a>
+                                        <a href={currentSound.sourceURL} className="link link-primary hover:no-underline" target="_blank">{currentSound.sourceURL}</a>
                                     </div>
                                 </div>
                             </div>

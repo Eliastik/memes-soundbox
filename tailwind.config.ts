@@ -20,6 +20,9 @@ const config: Config = {
             },
             fontSize: {
                 "filters": "12.5px"
+            },
+            screens: {
+                "3xl": "1940px"
             }
         },
     },

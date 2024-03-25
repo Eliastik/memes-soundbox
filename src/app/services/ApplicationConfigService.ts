@@ -103,6 +103,10 @@ export default class ApplicationConfigService extends GenericConfigService {
         return null;
     }
 
+    isInitialRenderingDisabled(): boolean {
+        return false;
+    }
+
     getSoundBasePath(): string {
         return Constants.SERVICE_WORKER_SCOPE + "/static/sounds/";
     }

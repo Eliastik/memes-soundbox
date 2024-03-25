@@ -34,7 +34,7 @@ const SoundboxAudioEditor = () => {
                     <span>{t("audioEditor.poweredBy")} <a href={Constants.OFFICIAL_SIMPLE_VOICE_CHANGER_WEBSITE} target="_blank" className="link link-primary hover:no-underline">Simple Voice Changer</a></span>
                 </div>
                 <div className="flex flex-row md:gap-x-3 gap-x-1 sticky bottom-1 max-w-full flex-wrap justify-center gap-y-1 btn-group">
-                    <AudioEditorActionButtons onSettingsValidated={() => currentSound && playSound(currentSound)}></AudioEditorActionButtons>
+                    <AudioEditorActionButtons onSettingsValidated={(result: boolean) => result && currentSound && playSound(currentSound)}></AudioEditorActionButtons>
                     <button className="btn btn-secondary opacity-80" onClick={() => downloadSound()}>{t("soundbox.downloadAudio")}</button>
                 </div>
             </div>

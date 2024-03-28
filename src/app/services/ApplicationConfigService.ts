@@ -114,4 +114,8 @@ export default class ApplicationConfigService extends GenericConfigService {
     getWorkletBasePath(): string {
         return Constants.SERVICE_WORKER_SCOPE + "/worklets/";
     }
+
+    getWorkerBasePath(): string {
+        return Constants.SERVICE_WORKER_SCOPE + "/workers/";
+    }
 };

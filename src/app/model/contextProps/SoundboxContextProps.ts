@@ -1,4 +1,5 @@
 import { MutableRefObject } from "react";
+import { SaveBufferOptions } from "@eliastik/simple-sound-studio-lib";
 import Sound from "../Sound";
 import SoundboxConfig from "../SoundboxConfig";
 import { SoundboxLink } from "../SoundboxLink";
@@ -22,7 +23,7 @@ export default interface SoundboxContextProps {
     loadingOneImage: boolean,
     toggleAudioEdit: () => void,
     editingSound: boolean,
-    downloadSound: () => void,
+    downloadSound: (options?: SaveBufferOptions) => void,
     errorPlayingAudio: boolean,
     soundboxLinks: SoundboxLink[],
     initialLoadingFinished: boolean,

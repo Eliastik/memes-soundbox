@@ -47,6 +47,8 @@
             "editSound": "Edit voice",
             "sound": "Sound:",
             "downloadAudio": "Download audio",
+            "saveToMp3": "MP3 format",
+            "saveToWav": "WAV format",
             "clickHere": "Click on the animation to play the sound!",
             "soundInfos": "Sound infos"
         },

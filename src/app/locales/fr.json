@@ -41,6 +41,8 @@
             "editSound": "Modifier la voix",
             "sound": "Son :",
             "downloadAudio": "Télécharger l'audio",
+            "saveToMp3": "Format MP3",
+            "saveToWav": "Format WAV",
             "clickHere": "Cliquez sur l'animation pour jouer le son !",
             "soundInfos": "Infos du son"
         },

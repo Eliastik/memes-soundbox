@@ -10,6 +10,11 @@ const SoundboxAudioEditor = () => {
     const { currentSound, playSound, downloadSound } = useSoundbox();
     const { isCompatibilityModeEnabled, toggleCompatibilityMode } = useApplicationConfig();
     const { t } = useTranslation();
+
+    const removeOpenAttribute = () => {
+        document.querySelector("#dropdownDownloadAudio")?.removeAttribute("open");
+        return true;
+    };
     
     return (
         <>
@@ -35,7 +40,13 @@ const SoundboxAudioEditor = () => {
                 </div>
                 <div className="flex flex-row md:gap-x-3 gap-x-1 sticky bottom-1 max-w-full flex-wrap justify-center gap-y-1 btn-group">
                     <AudioEditorActionButtons onSettingsValidated={(result: boolean) => result && currentSound && playSound(currentSound)}></AudioEditorActionButtons>
-                    <button className="btn btn-secondary opacity-80" onClick={() => downloadSound()}>{t("soundbox.downloadAudio")}</button>
+                    <details className="dropdown dropdown-top" id="dropdownDownloadAudio">
+                        <summary role="button" className="btn btn-secondary opacity-80">{t("soundbox.downloadAudio")}</summary>
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li onClick={() => removeOpenAttribute() && downloadSound({ format: "mp3" })}><a>{t("soundbox.saveToMp3")}</a></li>
+                            <li onClick={() => removeOpenAttribute() && downloadSound({ format: "wav" })}><a>{t("soundbox.saveToWav")}</a></li>
+                        </ul>
+                    </details>
                 </div>
             </div>
         </>

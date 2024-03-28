@@ -8,6 +8,7 @@ import SoundboxLoaderService from "../services/SoundboxLoader";
 import { SoundboxLink } from "../model/SoundboxLink";
 import SoundboxNameProvider from "../services/SoundboxNameProvider";
 import SoundboxConfig from "../model/SoundboxConfig";
+import { SaveBufferOptions } from "@eliastik/simple-sound-studio-lib";
 
 const SoundboxContext = createContext<SoundboxContextProps | undefined>(undefined);
 
@@ -269,14 +270,14 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         }
     };
 
-    const downloadSound = async () => {
+    const downloadSound = async (options?: SaveBufferOptions) => {
         if (currentSound) {
             if (isCompatibilityModeEnabled) {
                 reloadAnimation();
                 stopAudioBuffer();
             }
 
-            downloadAudio();
+            downloadAudio(options);
         }
     };
 

@@ -277,7 +277,9 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
                 stopAudioBuffer();
             }
 
-            downloadAudio(options);
+            setTimeout(() => {
+                downloadAudio(options);
+            }, 1);
         }
     };
 

@@ -9,7 +9,7 @@ Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes I
 
 * Versions en ligne : [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Repository Github : [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version : 1.0.2 (10/02/2024)
+* Version : 1.1.0 (31/03/2024)
 
 ### Technologies
 
@@ -120,6 +120,13 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 
 ## Journal des versions
 
+* Version 1.1.0 (31/03/2024) :
+   - Petits ajustements dans l'interface utilisateur ;
+   - Mise à jour vers la version 2.2.0 de simple-sound-studio-lib et simple-sound-studio-components, apportant des améliorations :
+      - Affichage du pourcentage et du temps restant lors du traitement audio, possibilité d'annuler le traitement audio ;
+      - Possibilité d'enregistrer l'audio modifié au format MP3 ;
+      - Correction de bugs
+
 * Version 1.0.2 (10/02/2024) :
     - Correction d'un bug survenant lors de la sélection d'un son, puis en revenant sur un son déjà chargé : l'animation n'était pas mise à jour
 
@@ -135,7 +142,7 @@ Memes Soundbox is a base for creating fully customizable soundboxes of Internet 
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version: 1.0.2 (2/10/2024)
+* Version: 1.1.0 (3/31/2024)
 
 ### Technologies
 
@@ -245,6 +252,13 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 ```
 
 ## Changelog
+
+* Version 1.1.0 (03/31/2024):
+   - Small adjustments to the user interface;
+   - simple-sound-studio-lib and simple-sound-studio-components updated to version 2.2.0, with improvements:
+      - Display of percentage and time remaining during audio processing, ability to cancel audio processing;
+      - Ability to save edited audio in MP3 format;
+      - Bug fixes
 
 * Version 1.0.2 (2/10/2024) :
     - Fixed a bug that occurred when selecting a sound, then returning to a sound that had already been loaded: the animation was not updated

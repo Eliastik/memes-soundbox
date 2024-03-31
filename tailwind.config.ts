@@ -18,6 +18,9 @@ const config: Config = {
                 "32": "8rem",
                 "36": "9rem",
             },
+            maxHeight: {
+                "68": "17rem"
+            },
             fontSize: {
                 "filters": "12.5px"
             },

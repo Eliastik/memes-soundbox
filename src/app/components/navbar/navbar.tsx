@@ -19,12 +19,17 @@ const Navbar = ({
                 <div className="flex-1">
                     <details className="dropdown max-h-12">
                         <summary className="btn btn-ghost normal-case sm:text-xl text-base text-left overflow-hidden md:pl-2 md:pr-2 pl-1 pr-1 border-none">
-                            <div className="flex flex-row justify-center">
+                            <div className="flex flex-row justify-center max-h-12">
                                 {config && config.icon && <img src={config.icon} alt="App icon" className="w-11 h-11" />}
                                 <div className="flex flex-col h-full justify-center ml-2">
                                     <span className="inline-block">{(config && config.appTitle[currentLanguageValue]) || (soundboxConfig && soundboxConfig.appTitle[currentLanguageValue]) || Constants.APP_NAME}</span>
                                     <span className="font-light text-xs inline-block">{Constants.APP_BY}</span>
                                 </div>
+                                <span className="font-light text-xs flex justify-center items-center ml-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </span>
                             </div>
                         </summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">

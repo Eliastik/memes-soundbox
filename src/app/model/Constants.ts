@@ -14,7 +14,7 @@ const Constants = {
     APP_LICENSE: "GNU GPL v3",
     RELEASE_LINK: "https://github.com/Eliastik/memes-soundbox/releases/tag/1.1.0",
     AUDIO_BUFFERS_TO_FETCH: ["impulse_response.wav","modulator.mp3"],
-    SERVICE_WORKER_SCOPE: process.env.NEXT_PUBLIC_BASE_PATH,
+    SERVICE_WORKER_SCOPE: process.env.NEXT_PUBLIC_BASE_PATH || "",
     PREFERENCES_KEYS: {
         CURRENT_THEME: "current-theme",
         CURRENT_LANGUAGE: "current-language",

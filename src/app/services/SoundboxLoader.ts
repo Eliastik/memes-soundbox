@@ -157,7 +157,7 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
         const percentLoaded = Math.min(currentTime / estimatedLoadTime, 1); // Limiter le pourcentage à 1
 
         this.eventEmitter.emit(EventTypes.LOADING_STATE, {
-            speed: this.autoConvertByte(this.averageImageLoadSpeed || 0),
+            speed: this.autoConvertByte((this.averageImageLoadSpeed || 0) * 1000),
             percent: percentLoaded * 100,
             size,
             time: Math.max(0, (estimatedLoadTime - currentTime) / 1000)
@@ -169,12 +169,12 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
             return ["0", "byteSec"];
         }
 
-        if(speed >= 1000000000) {
-            return [(speed / 1000000000).toFixed(2).replace(".", ","), "gigabyteSec"];
-        } else if(speed >= 1000000) {
-            return [(speed / 1000000).toFixed(2).replace(".", ","), "megabyteSec"];
-        } else if(speed >= 1000) {
-            return [(speed / 1000).toFixed(2).replace(".", ","), "kilobyteSec"];
+        if(speed >= 1e9) {
+            return [(speed / 1e9).toFixed(2).replace(".", ","), "gigabyteSec"];
+        } else if(speed >= 1e6) {
+            return [(speed / 1e6).toFixed(2).replace(".", ","), "megabyteSec"];
+        } else if(speed >= 1e3) {
+            return [(speed / 1e3).toFixed(2).replace(".", ","), "kilobyteSec"];
         } else {
             return ["" + speed, "byteSec"];
         }

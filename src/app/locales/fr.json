@@ -24,7 +24,8 @@
                 "title": "Chargement du fichier audio"
             },
             "loadingOneImage": {
-                "title": "Chargement de données"
+                "title": "Chargement de données",
+                "remaining": "Temps restant estimé :"
             },
             "configLoadingError": {
                 "title": "Erreur lors du chargement de la configuration",
@@ -49,7 +50,8 @@
         "soundInfos": {
             "title": "Informations sur le son",
             "noMoreInfos": "Aucune information disponible",
-            "sourceLink": "Source :"
+            "sourceLink": "Source :",
+            "animationSize": "Poids de l'animation :"
         },
         "audioEditor": {
             "poweredBy": "Propulsé par "
@@ -68,6 +70,11 @@
         "ok": "OK",
         "cancel": "Annuler",
         "validate": "Valider",
-        "reset": "Réinitialiser"
+        "reset": "Réinitialiser",
+        "megabyte": "Mo",
+        "gigabyteSec": "Go/s",
+        "megabyteSec": "Mo/s",
+        "kilobyteSec": "Ko/s",
+        "byteSec": "o/s"
     }
 }

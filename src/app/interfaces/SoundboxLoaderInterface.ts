@@ -10,7 +10,7 @@ export default interface SoundboxLoaderInterface {
 
     loadSounds(sounds: Sound[]): Promise<void>;
 
-    loadImages(imageURLs: string[]): Promise<void>;
+    loadImages(sounds: Sound[]): Promise<void>;
 
     getAudioByUrl(url: string): Promise<HTMLAudioElement | undefined>;
 
@@ -29,4 +29,6 @@ export default interface SoundboxLoaderInterface {
     onErrorLoadingConfig(callback: EventEmitterCallback): void;
 
     onLoadedConfig(callback: EventEmitterCallback): void;
+
+    onLoadingState(callback: EventEmitterCallback): void;
 }

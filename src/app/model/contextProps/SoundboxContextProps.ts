@@ -3,6 +3,7 @@ import { SaveBufferOptions } from "@eliastik/simple-sound-studio-lib";
 import Sound from "../Sound";
 import SoundboxConfig from "../SoundboxConfig";
 import { SoundboxLink } from "../SoundboxLink";
+import AudioLoadingEvent from "../AudioLoadingEvent";
 
 export default interface SoundboxContextProps {
     setup: (soundboxName: string) => void,
@@ -28,5 +29,6 @@ export default interface SoundboxContextProps {
     soundboxLinks: SoundboxLink[],
     initialLoadingFinished: boolean,
     soundboxName: string,
-    animationRef: MutableRefObject<HTMLImageElement | null>
+    animationRef: MutableRefObject<HTMLImageElement | null>,
+    loadingState: AudioLoadingEvent | undefined
 }

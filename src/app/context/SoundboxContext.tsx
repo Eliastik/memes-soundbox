@@ -9,6 +9,7 @@ import { SoundboxLink } from "../model/SoundboxLink";
 import SoundboxNameProvider from "../services/SoundboxNameProvider";
 import SoundboxConfig from "../model/SoundboxConfig";
 import { SaveBufferOptions } from "@eliastik/simple-sound-studio-lib";
+import AudioLoadingEvent from "../model/AudioLoadingEvent";
 
 const SoundboxContext = createContext<SoundboxContextProps | undefined>(undefined);
 
@@ -66,6 +67,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const [soundboxLinks, setSoundboxLinks] = useState<SoundboxLink[]>([]);
     // State: error loading something
     const [initialLoadingFinished, setInitialLoadingFinished] = useState(false);
+    // State: current downloading speed/time remaining
+    const [loadingState, setLoadingState] = useState<AudioLoadingEvent | undefined>({});
 
     const setup = (soundboxName: string) => {
         if (isReady) {
@@ -84,6 +87,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         soundboxLoaderService.onErrorLoadingAudio(() => setLoadingError(true));
         soundboxLoaderService.onErrorLoadingImage(() => setLoadingError(true));
         soundboxLoaderService.onErrorLoadingConfig(() => setLoadingConfigError(true));
+        soundboxLoaderService.onLoadingState(event => setLoadingState(event));
 
         setSoundboxName(soundboxName);
         setLoaderService(soundboxLoaderService);
@@ -127,7 +131,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
                 // Loading first animation
                 setLoadingImages(true);
-                await loaderService.loadImages(sounds && sounds[0].animationURL ? [sounds[0].animationURL] : []);
+                await loaderService.loadImages(sounds && sounds[0] ? [sounds[0]] : []);
                 setLoadingImages(false);
 
                 setInitialLoadingFinished(true);
@@ -171,7 +175,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
 
             try {
                 setLoadingOneImage(true);
-                await loaderService.loadImages(sound.animationURL ? [sound.animationURL] : []);
+                await loaderService.loadImages(sound ? [sound] : []);
                 setLoadingOneImage(false);
 
                 if (editingSound) {
@@ -296,7 +300,7 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             editingSound, downloadSound,
             errorPlayingAudio, soundboxLinks,
             initialLoadingFinished, soundboxName,
-            animationRef
+            animationRef, loadingState
         }}>
             {children}
         </SoundboxContext.Provider>

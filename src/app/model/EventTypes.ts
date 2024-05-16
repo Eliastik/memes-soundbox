@@ -6,5 +6,6 @@ export enum EventTypes {
     ERROR_LOADING_IMAGE = "errorLoadingImage",
     LOADED_ALL_IMAGES = "loadedAllImages",
     LOADED_CONFIG = "loadedConfig",
-    ERROR_LOADING_CONFIG = "errorLoadingConfig"
+    ERROR_LOADING_CONFIG = "errorLoadingConfig",
+    LOADING_STATE = "loadingState"
 }

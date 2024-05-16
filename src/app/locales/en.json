@@ -27,7 +27,8 @@
                 "title": "Loading audio file"
             },
             "loadingOneImage": {
-                "title": "Loading data"
+                "title": "Loading data",
+                "remaining": "Remaining time estimated:"
             },
             "configLoadingError": {
                 "title": "Error loading configuration",
@@ -55,7 +56,8 @@
         "soundInfos": {
             "title": "Sound informations",
             "noMoreInfos": "No informations available",
-            "sourceLink": "Source:"
+            "sourceLink": "Source:",
+            "animationSize": "Animation size:"
         },
         "appInfos": {
             "title": "Application informations",
@@ -71,6 +73,11 @@
         "ok": "OK",
         "cancel": "Cancel",
         "validate": "Validate",
-        "reset": "Reset"
+        "reset": "Reset",
+        "megabyte": "MB",
+        "gigabyteSec": "GB/s",
+        "megabyteSec": "MB/s",
+        "kilobyteSec": "KB/s",
+        "byteSec": "B/s"
     }
 }

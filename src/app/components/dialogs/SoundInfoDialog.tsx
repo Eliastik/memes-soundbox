@@ -42,16 +42,16 @@ const SoundInfoDialog = () => {
                         {currentSound.animationSize && (
                             <div className="flex flex-col">
                                 <div className="mt-3">
-                                    <div className="font-light text-md flex flex-col md:flex-row gap-3 md:items-center justify-between">
+                                    <div className="font-normal text-base flex flex-col md:flex-row gap-3 md:items-center justify-between">
                                         <div className="md:w-4/6">
-                                            <span>{t("soundInfos.animationSize")}</span>
+                                            <label>{t("soundInfos.animationSize")}</label>
                                         </div>
                                         <div>{(currentSound.animationSize / 1000000).toFixed(2).replace(".", ",")} {t("megabyte")}</div>
                                     </div>
                                 </div>
                             </div>
                         )}
-                        {!currentSound.soundDescription && !currentSound.sourceURL && (
+                        {!currentSound.soundDescription && !currentSound.sourceURL && !currentSound.animationSize && (
                             <div className="flex flex-col">
                                 <div className="mt-3">
                                     <div className="font-light text-md flex flex-col md:flex-row gap-3 md:items-center justify-between">

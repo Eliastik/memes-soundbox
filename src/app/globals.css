@@ -61,3 +61,9 @@ html[data-theme="dark"] .dropdown ul li a {
     background-color: var(--secondary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%, black ));
     border-color: var(--secondary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%, black ));
 }
+
+@layer base {
+    :root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
+      scrollbar-gutter: revert !important;
+    }
+}

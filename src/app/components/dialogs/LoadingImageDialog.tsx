@@ -23,7 +23,7 @@ const LoadingImageDialog = () => {
                             {t("dialogs.loadingOneImage.remaining")}
                             &nbsp;
                             {(
-                                <>{("0" + Math.trunc((loadingState.time || 0) / 60)).slice(-2) + ":" + ("0" + Math.trunc((loadingState.time || 0) % 60)).slice(-2)} ({((loadingState.speed && loadingState.speed[0]) || "0")} {t(loadingState.speed && loadingState.speed[1] || "megabyteSec")})</>
+                                <>{("0" + Math.trunc((loadingState.time || 0) / 60)).slice(-2) + ":" + ("0" + Math.trunc((loadingState.time || 0) % 60)).slice(-2)} ({((loadingState.speed && loadingState.speed[0]) || "0")} {t(loadingState.speed && loadingState.speed[1] || "megabyteSec")}) – {loadingState.size && (loadingState.size / 1000000).toFixed(2).replace(".", ",")} {t("megabyte")}</>
                             )}
                         </p>
                     )}

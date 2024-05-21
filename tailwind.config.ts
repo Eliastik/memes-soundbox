@@ -26,6 +26,9 @@ const config: Config = {
             },
             screens: {
                 "3xl": "1940px"
+            },
+            transitionDuration: {
+                "50": "50ms"
             }
         },
     },

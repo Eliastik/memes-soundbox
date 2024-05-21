@@ -9,7 +9,7 @@ Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes I
 
 * Versions en ligne : [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Repository Github : [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version : 1.1.0 (31/03/2024)
+* Version : 1.1.1 (21/05/2024)
 
 ### Technologies
 
@@ -120,6 +120,13 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 
 ## Journal des versions
 
+* Version 1.1.1 (21/05/2024) :
+  - Affichage du temps et du pourcentage de chargement estimé lors de la sélection d'un son ;
+  - La hauteur de l'animation se réduit au fur et à mesure que la page est défilée, pour faciliter l'utilisation de la fonctionnalité Modifier la voix ;
+  - Petits ajustements dans la taille des animations (hauteur) pour optimiser l'utilisation de la fonctionnalité Modifier la voix ;
+  - Affichage de la taille (en Mo) des animations dans les informations des sons ;
+  - Autres corrections mineures, mise à jour des bibliothèques logicielles
+
 * Version 1.1.0 (31/03/2024) :
    - Petits ajustements dans l'interface utilisateur ;
    - Mise à jour vers la version 2.2.0 de simple-sound-studio-lib et simple-sound-studio-components, apportant des améliorations :
@@ -142,7 +149,7 @@ Memes Soundbox is a base for creating fully customizable soundboxes of Internet 
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version: 1.1.0 (3/31/2024)
+* Version: 1.1.1 (5/25/2024)
 
 ### Technologies
 
@@ -252,6 +259,13 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 ```
 
 ## Changelog
+
+* Version 1.1.1 (21/05/2024) :
+  - Display of estimated loading time and percentage when selecting a sound;
+  - Animation height reduced as the page is scrolled, to facilitate use of the Edit voice feature;
+  - Small adjustments to animation size (height) to optimize use of the Edit voice feature;
+  - Display of animation size (in MB) in sound information;
+  - Other minor corrections, updated dependencies
 
 * Version 1.1.0 (03/31/2024):
    - Small adjustments to the user interface;

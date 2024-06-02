@@ -22,10 +22,21 @@ const LoadingAppDialog = () => {
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingApp.title")}</h3>
-                    <p className="py-4 flex items-center"><span className="loading loading-spinner loading-lg mr-4 text-primary"></span> {t("dialogs.pleaseWait")} {loadingConfig && (
-                        <><br />{t("dialogs.gettingConfig")}</>
-                    )}</p>
-                    {(loadingAudio || loadingImages) && <progress className="progress progress-primary w-full" value={progressValue} max={totalAudioCount + 2}></progress>}
+                    <div className="py-4 flex flex-row items-center gap-x-4">
+                        <span className="loading loading-spinner loading-lg text-primary"></span>
+                        <p className="flex flex-col">
+                            <span>{t("dialogs.pleaseWait")}</span>
+                            {loadingConfig && (
+                                <span className="mt-2">{t("dialogs.gettingConfig")}</span>
+                            )}
+                        </p>
+                    </div>
+                    {(loadingAudio || loadingImages) && (
+                        <p className="flex items-center justify-around pb-0 gap-x-2 w-full">
+                            <progress className="progress progress-primary w-full" value={progressValue} max={totalAudioCount + 2}></progress>
+                            <span className="min-w-8 text-right">{Math.round((progressValue / (totalAudioCount + 2)) * 100)}%</span>
+                        </p>
+                    )}
                 </div>
             </div>
         </>

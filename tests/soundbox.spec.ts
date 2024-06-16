@@ -30,5 +30,7 @@ test("changing sound when editing should work", async ({ page }) => {
 
     const loadingPopup = page.locator("#loadingAudioProcessing");
 
-    expect(loadingPopup).toHaveCount(1);
+    await loadingPopup.waitFor({ state: "attached", timeout: 5000 });
+
+    await expect(loadingPopup).toHaveCount(1);
 });

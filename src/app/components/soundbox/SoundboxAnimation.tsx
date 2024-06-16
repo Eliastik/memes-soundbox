@@ -43,6 +43,7 @@ const SoundboxAnimation = () => {
                     <div className="p-1 md:p-2">
                         <img
                             src={currentSound.animationURL}
+                            id="soundboxAnimation"
                             alt={currentSound.labels[currentLanguageValue] || currentSound.labels["en"]}
                             onClick={() => playSound(currentSound)}
                             className="lg:h-96 md:h-96 max-h-56 md:max-h-60 lg:max-h-64 xl:max-h-68 2xl:max-h-72 3xl:max-h-96 w-auto rounded-xl cursor-pointer transition-all duration-50"

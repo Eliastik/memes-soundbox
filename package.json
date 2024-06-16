@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "npx playwright test --ui"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "semver": "^7.6.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.1",
     "@types/audioworklet": "^0.0.54",
     "@types/lodash": "^4.17.4",
     "@types/node": "^20.13.0",

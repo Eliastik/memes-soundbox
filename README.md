@@ -120,6 +120,11 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 
 ## Journal des versions
 
+* Version 1.1.2 (10/09/2024) :
+  - Ajout de la possibilité de switcher entre les animations avec les boutons fléchés ;
+  - Ajout du pourcentage de chargement sur la fenêtre de chargement de l'application ;
+  - Autres corrections mineures, mise à jour des bibliothèques logicielles
+
 * Version 1.1.1 (21/05/2024) :
   - Affichage du temps et du pourcentage de chargement estimé lors de la sélection d'un son ;
   - La hauteur de l'animation se réduit au fur et à mesure que la page est défilée, pour faciliter l'utilisation de la fonctionnalité Modifier la voix ;
@@ -149,7 +154,7 @@ Memes Soundbox is a base for creating fully customizable soundboxes of Internet 
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version: 1.1.1 (5/25/2024)
+* Version: 1.1.2 (9/10/2024)
 
 ### Technologies
 
@@ -259,6 +264,11 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 ```
 
 ## Changelog
+
+* Version 1.1.2 (9/10/2024):
+  - Added the ability to switch between animations with arrow buttons;
+  - Added loading percentage to application loading window;
+  - Other minor fixes, software library updates
 
 * Version 1.1.1 (21/05/2024) :
   - Display of estimated loading time and percentage when selecting a sound;

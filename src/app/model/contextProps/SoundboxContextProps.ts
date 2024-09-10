@@ -10,7 +10,8 @@ export default interface SoundboxContextProps {
     currentSound: Sound | null,
     allSounds: Sound[],
     soundboxConfig: SoundboxConfig | null,
-    setSoundByName: (name: string) => void,
+    setSoundByName: (name: string) => Promise<void>,
+    setSoundByIndex: (index: number) => Promise<void>,
     playSound: (sound: Sound) => void,
     retryLoadingApp: () => void,
     closeErrorLoading: () => void,
@@ -30,5 +31,6 @@ export default interface SoundboxContextProps {
     initialLoadingFinished: boolean,
     soundboxName: string,
     animationRef: MutableRefObject<HTMLImageElement | null>,
-    loadingState: AudioLoadingEvent | undefined
+    loadingState: AudioLoadingEvent | undefined,
+    currentSoundIndex: number
 }

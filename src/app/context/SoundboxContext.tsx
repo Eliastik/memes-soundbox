@@ -39,6 +39,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
     const [allSounds, setAllSounds] = useState<Sound[]>([]);
     // State: current sound
     const [currentSound, setCurrentSound] = useState<Sound | null>(null);
+    // State: current sound
+    const [currentSoundIndex, setCurrentSoundIndex] = useState(0);
     // State: soundbox config
     const [soundboxConfig, setSoundboxConfig] = useState<SoundboxConfig | null>(null);
     // State: soundbox name
@@ -159,16 +161,12 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         setLoadingError(false);
     };
 
-    /**
-     * Change sound
-     * @param name The sound name
-     */
-    const setSoundByName = async (name: string) => {
+    const setSound = async (soundIndex: number) => {
         if (!loaderService) {
             throw new Error("No SoundboxLoader is available");
         }
 
-        const sound = allSounds.find(sound => sound.animationURL === name);
+        const sound = allSounds[soundIndex];
 
         if (sound) {
             setInitialLoadingFinished(true);
@@ -183,12 +181,29 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
                 }
 
                 setCurrentSound(sound);
+                setCurrentSoundIndex(soundIndex);
                 playSound(sound);
             } catch (e) {
                 setLoadingOneImage(false);
                 console.error(e);
             }
         }
+    };
+
+    /**
+     * Change sound
+     * @param name The sound name
+     */
+    const setSoundByName = async (name: string) => {
+        await setSound(allSounds.findIndex(sound => sound.animationURL === name));
+    };
+
+    /**
+     * Change sound
+     * @param index The sound index
+     */
+    const setSoundByIndex = async (index: number) => {
+        await setSound(index);
     };
 
     /**
@@ -300,7 +315,8 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
             editingSound, downloadSound,
             errorPlayingAudio, soundboxLinks,
             initialLoadingFinished, soundboxName,
-            animationRef, loadingState
+            animationRef, loadingState,
+            currentSoundIndex, setSoundByIndex
         }}>
             {children}
         </SoundboxContext.Provider>

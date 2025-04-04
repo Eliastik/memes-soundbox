@@ -18,7 +18,7 @@ const SoundboxAudioEditor = () => {
     
     return (
         <>
-            <div className="flex justify-center items-center flex-grow gap-6 flex-col">
+            <div className="flex justify-center items-center grow gap-6 flex-col">
                 <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 md:gap-4 gap-2 place-content-center p-2 md:p-0">
                     <FilterButtonList></FilterButtonList>
                 </div>
@@ -42,7 +42,7 @@ const SoundboxAudioEditor = () => {
                     <AudioEditorActionButtons onSettingsValidated={(result: boolean) => result && currentSound && playSound(currentSound)}></AudioEditorActionButtons>
                     <details className="dropdown dropdown-top" id="dropdownDownloadAudio">
                         <summary role="button" className="btn btn-secondary opacity-80">{t("soundbox.downloadAudio")}</summary>
-                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                        <ul className="p-2 shadow-sm menu dropdown-content z-1 bg-base-100 rounded-box w-52">
                             <li onClick={() => removeOpenAttribute() && downloadSound({ format: "mp3" })}><a>{t("soundbox.saveToMp3")}</a></li>
                             <li onClick={() => removeOpenAttribute() && downloadSound({ format: "wav" })}><a>{t("soundbox.saveToWav")}</a></li>
                         </ul>

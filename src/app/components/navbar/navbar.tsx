@@ -32,7 +32,7 @@ const Navbar = ({
                                 </span>
                             </div>
                         </summary>
-                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                        <ul className="p-2 shadow-sm menu dropdown-content z-1 bg-base-100 rounded-box w-52">
                             {soundboxLinks.map(soundbox => <li key={soundbox.url}><a href={soundbox.url}>{soundbox.labels[currentLanguageValue] || soundbox.labels["en"]}</a></li>)}
                         </ul>
                     </details>

@@ -1,69 +1,172 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui";
 
-.btn:not(.btn-ghost) {
-    @apply uppercase;
+@plugin "daisyui/theme" {
+  name: "light";
+  color-scheme: light;
+
+  --color-base-100: oklch(1 0 0);
+  --color-base-200: oklch(0.2 0 0 / 0.04);
+  --color-base-content: oklch(0.2 0 0);
+  --color-primary: oklch(71% 0.143 254.13);
+  --color-primary-content: oklch(98% 0.01 240);
+  --color-secondary: oklch(88% 0.0571 254.13);
+  --color-secondary-content: oklch(17% 0.011411 254.128);
+  --color-accent: oklch(76% 0.1313 184.17);
+  --color-accent-content: oklch(98% 0.01 160);
+  --color-neutral: oklch(32% 0.0248 255.7);
+  --color-neutral-content: oklch(98% 0.01 240);
+  --color-info: oklch(70% 0.2 220); /* #3abff8 */
+  --color-info-content: oklch(98% 0.01 220);
+  --color-success: oklch(65% 0.25 140); /* #36d399 */
+  --color-success-content: oklch(98% 0.01 140);
+  --color-warning: oklch(80% 0.25 80); /* #fbbd23 */
+  --color-warning-content: oklch(20% 0.05 80);
+  --color-error: oklch(65% 0.3 30); /* #f87272 */
+  --color-error-content: oklch(98% 0.01 30);
+
+  /* border radius */
+  --radius-selector: 8px;
+  --radius-field: 8px;
+  --radius-box: 16px;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.3rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 0;
+  --noise: 0;
 }
 
-.btn-group .btn:not(.btn-ghost) {
-    @apply text-xs md:text-sm h-10 min-h-10 md:h-12 md:min-h-12;
+@plugin "daisyui/theme" {
+  name: "dark";
+  color-scheme: dark;
+
+  --color-base-100: oklch(26% 0.020407 251.602);
+  --color-base-200: oklch(100% 0 0 / 0.08);
+  --color-base-300: oklch(26% 0.019511 257.277);
+  --color-base-content: oklch(85% 0.004081 251.602);
+  --color-primary: oklch(63% 0.198 259.75);
+  --color-primary-content: oklch(98% 0.01 240);
+  --color-secondary: oklch(71% 0.1495 268.51);
+  --color-secondary-content: oklch(32% 0 0);
+  --color-accent: oklch(70% 0.111 188.12);
+  --color-accent-content: oklch(13% 0.022197 188.119);
+  --color-neutral: oklch(76% 0.0389 268.79);
+  --color-neutral-content: oklch(13% 0.022197 188.119);
+  --color-info: oklch(70% 0.2 220);
+  --color-info-content: oklch(13% 0.022197 188.119);
+  --color-success: oklch(77% 0.1529 163.1);
+  --color-success-content: oklch(13% 0.022197 188.119);
+  --color-warning: oklch(83% 0.1642 83.42);
+  --color-warning-content: oklch(20% 0.05 80);
+  --color-error: oklch(71% 0.1649 22.15);
+  --color-error-content: oklch(13% 0.022197 188.119);
+
+  /* border radius */
+  --radius-selector: 8px;
+  --radius-field: 8px;
+  --radius-box: 16px;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.3rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 0;
+  --noise: 0;
 }
 
-.tooltip.tooltip-compatibility-mode::before {
+@source '../../node_modules/@eliastik/simple-sound-studio-components/lib/**/*.{js,ts,jsx,tsx,mdx}';
+
+@theme {
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+
+  --container-28: 7rem;
+  --container-32: 8rem;
+  --container-36: 9rem;
+
+  --max-height-68: 17rem;
+
+  --text-filters: 12.5px;
+
+  --breakpoint-3xl: 1940px;
+
+  --transition-duration-50: 50ms;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility tooltip {
+  &.tooltip-compatibility-mode-md::before {
     position: absolute;
-    left: -120px;
+    left: -100px;
+  }
 }
 
-.dropdown ul li a {
-    @apply text-black
-}
-
-html[data-theme="dark"] .dropdown ul li a {
-    @apply text-white
+@utility tooltip-compatibility-mode-md {
+  &.tooltip::before {
+    position: absolute;
+    left: -100px;
+  }
 }
 
 @layer utilities {
-    .tooltip.tooltip-compatibility-mode-md::before {
-        position: absolute;
-        left: -100px;
-    }
-}
+  .btn:not(.btn-ghost) {
+    @apply uppercase;
+  }
 
-.btn-primary {
-    background-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-    border-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-}
+  .btn-group .btn:not(.btn-ghost) {
+    @apply text-xs md:text-sm h-10 min-h-10 md:h-12 md:min-h-12;
+  }
 
-.btn-secondary {
-    background-color: var(--secondary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-    border-color: var(--secondary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-}
+  .tooltip.tooltip-compatibility-mode::before {
+    position: absolute;
+    left: -120px;
+  }
 
-.border-t-primary  {
-    border-top-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-}
+  .dropdown ul li a {
+    @apply text-black;
+  }
 
-.border-l-primary  {
-    border-left-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-}
-
-.border-r-primary  {
-    border-right-color: var(--primary-color, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity)));
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%, black ));
-    border-color: var(--primary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%, black ));
-}
-
-.btn-secondary:hover {
-    background-color: var(--secondary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-bg-opacity, 1)) 90%, black ));
-    border-color: var(--secondary-color-hover, color-mix( in oklab, oklch(var(--btn-color, var(--b2)) / var(--tw-border-opacity, 1)) 90%, black ));
+  html[data-theme='dark'] .dropdown ul li a {
+    @apply text-white;
+  }
 }
 
 @layer base {
     :root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
       scrollbar-gutter: revert !important;
     }
+}
+
+nextjs-portal {
+  display: none;
 }

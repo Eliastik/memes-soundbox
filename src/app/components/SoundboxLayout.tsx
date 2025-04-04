@@ -21,8 +21,8 @@ const SoundboxLayout = ({
         // Primary color - normal
         if (soundboxConfig && soundboxConfig.primaryColor && soundboxConfig.primaryColor.normal) {
             const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.primaryColor.normal.dark : soundboxConfig.primaryColor.normal.light;
-            document.body.style.setProperty("--fallback-p", color);
-            document.body.style.setProperty("--primary-color", color);
+            
+            document.body.style.setProperty("--color-primary", color);
 
             if (metaThemeColor) {
                 metaThemeColor.setAttribute("content", color);
@@ -30,8 +30,7 @@ const SoundboxLayout = ({
         } else {
             const color = currentTheme == Constants.THEMES.LIGHT ? Constants.DEFAULT_THEME.PRIMARY_COLOR.LIGHT : Constants.DEFAULT_THEME.PRIMARY_COLOR.DARK;
 
-            document.body.style.setProperty("--fallback-p", color);
-            document.body.style.setProperty("--primary-color", color);
+            document.body.style.setProperty("--color-primary", color);
 
             if (metaThemeColor) {
                 metaThemeColor.setAttribute("content", color);
@@ -41,19 +40,19 @@ const SoundboxLayout = ({
         // Secondary color - normal
         if (soundboxConfig && soundboxConfig.secondaryColor && soundboxConfig.secondaryColor.normal) {
             const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.secondaryColor.normal.dark : soundboxConfig.secondaryColor.normal.light;
-            document.body.style.setProperty("--secondary-color", color);
+            document.body.style.setProperty("--color-secondary", color);
         }
 
         // Primary color - hover
         if (soundboxConfig && soundboxConfig.primaryColor && soundboxConfig.primaryColor.hover) {
             const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.primaryColor.hover.dark : soundboxConfig.primaryColor.hover.light;
-            document.body.style.setProperty("--primary-color-hover", color);
+            document.body.style.setProperty("--color-primary-hover", color);
         }
 
         // Secondary color - hover
         if (soundboxConfig && soundboxConfig.secondaryColor && soundboxConfig.secondaryColor.normal) {
             const color = currentTheme === Constants.THEMES.DARK ? soundboxConfig.secondaryColor.hover.dark : soundboxConfig.secondaryColor.hover.light;
-            document.body.style.setProperty("--secondary-color-hover", color);
+            document.body.style.setProperty("--color-secondary-hover", color);
         }
     }, [soundboxConfig, currentTheme]);
 

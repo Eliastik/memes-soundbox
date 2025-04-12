@@ -1,13 +1,22 @@
-import { useSoundbox } from "@/app/context/SoundboxContext";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const LoadingImageDialog = () => {
     const { t } = useTranslation();
     const { loadingOneImage, loadingState } = useSoundbox();
+            
+    const loadingImageDataModalCheckbox = useMemo(() => {
+        if (loadingOneImage) {
+            return <input type="checkbox" id="loadingImageDataModal" className="modal-toggle" defaultChecked={true} />;
+        } else {
+            return <></>
+        }
+    }, [loadingOneImage]);
 
     return (
         <>
-            {loadingOneImage && <input type="checkbox" id="loadingImageDataModal" className="modal-toggle" defaultChecked={true} />}
+            {loadingImageDataModalCheckbox}
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingOneImage.title")}</h3>

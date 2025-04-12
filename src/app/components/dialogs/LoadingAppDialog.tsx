@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAudioEditor } from "@eliastik/simple-sound-studio-components";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
@@ -15,10 +15,18 @@ const LoadingAppDialog = () => {
         setDisplayed(downloadingInitialData || loadingAudio || loadingImages || loadingConfig);
         setProgessValue(loadedAudioCount + (downloadingInitialData ? 0 : 1) + (loadingImages ? 0 : 1));
     }, [downloadingInitialData, loadingAudio, loadingImages, loadingConfig, loadedAudioCount]);
+    
+    const loadingDataModalCheckbox = useMemo(() => {
+        if (displayed) {
+            return <input type="checkbox" id="loadingDataModal" className="modal-toggle" defaultChecked={true} />;
+        } else {
+            return <></>
+        }
+    }, [displayed]);
 
     return (
         <>
-            {displayed && <input type="checkbox" id="loadingDataModal" className="modal-toggle" defaultChecked={true} />}
+            {loadingDataModalCheckbox}
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingApp.title")}</h3>

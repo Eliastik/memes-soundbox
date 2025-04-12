@@ -1,13 +1,22 @@
-import { useSoundbox } from "@/app/context/SoundboxContext";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const ErrorLoadingConfigDialog = () => {
     const { loadingConfigError, retryLoadingApp } = useSoundbox();
     const { t } = useTranslation();
+                                            
+    const loadingConfigErrorCheckbox = useMemo(() => {
+        if (loadingConfigError) {
+            return <input type="checkbox" id="errorLoadingAudioDialog" className="modal-toggle" defaultChecked={true} />;
+        } else {
+            return <></>
+        }
+    }, [loadingConfigError]);
 
     return (
         <>
-            {loadingConfigError && <input type="checkbox" id="errorLoadingAudioDialog" className="modal-toggle" defaultChecked={true} />}
+            {loadingConfigErrorCheckbox}
             <div className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.configLoadingError.title")}</h3>

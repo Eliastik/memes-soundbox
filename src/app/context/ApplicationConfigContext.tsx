@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
-import { AudioEditor, EventType } from "@eliastik/simple-sound-studio-lib";
+import { AudioEditor, EventEmitter, EventType } from "@eliastik/simple-sound-studio-lib";
 import { SoundStudioApplicationFactory } from "@eliastik/simple-sound-studio-components";
 import i18n from "@eliastik/simple-sound-studio-components/lib/i18n";
 import i18next from "i18next";
@@ -32,6 +32,10 @@ const getAudioEditor = (): AudioEditor => {
     return SoundStudioApplicationFactory.getAudioEditorInstance()!;
 };
 
+const getEventEmitter = (): EventEmitter => {
+    return SoundStudioApplicationFactory.getEventEmitterInstance()!;
+};
+
 let isReady = false;
 
 export const ApplicationConfigProvider: FC<ApplicationConfigProviderProps> = ({ children }) => {
@@ -54,7 +58,7 @@ export const ApplicationConfigProvider: FC<ApplicationConfigProviderProps> = ({ 
         setCurrentTheme(getService().getCurrentTheme());
         setCurrentThemeValue(getService().getCurrentThemePreference());
         setCompatibilityModeEnabled(getService().isCompatibilityModeEnabled());
-        getAudioEditor().on(EventType.COMPATIBILITY_MODE_AUTO_ENABLED, () => setCompatibilityModeEnabled(true));
+        getEventEmitter().on(EventType.COMPATIBILITY_MODE_AUTO_ENABLED, () => setCompatibilityModeEnabled(true));
 
         getService().checkAppUpdate().then(result => setUpdateData(result));
 

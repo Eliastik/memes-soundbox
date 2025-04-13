@@ -19,7 +19,7 @@ async function getConfigForPage(memeName: string) {
     return config;
 }
  
-export async function generateMetadata({ params }: { params: { memeName: string, sounboxConfig: SoundboxConfig } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ memeName: string, sounboxConfig: SoundboxConfig }> }): Promise<Metadata> {
     const { memeName } = await params;
     const sounboxConfig = await getConfigForPage(memeName);
 
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: { memeName: string,
     return config;
 };
 
-export async function generateViewport({ params }: { params: { memeName: string, sounboxConfig: SoundboxConfig } }): Promise<Metadata> {
+export async function generateViewport({ params }: { params: Promise<{ memeName: string, sounboxConfig: SoundboxConfig }> }): Promise<Metadata> {
     const { memeName } = await params;
     const sounboxConfig = await getConfigForPage(memeName);
 
@@ -51,7 +51,7 @@ export async function generateViewport({ params }: { params: { memeName: string,
     };
 };
 
-const MemePage = async ({ params }: { params: { memeName: string, sounboxConfig: SoundboxConfig } }) => {
+const MemePage = async ({ params }: { params: Promise<{ memeName: string, sounboxConfig: SoundboxConfig }> }) => {
     const { memeName } = await params;
     const sounboxConfig = await getConfigForPage(memeName);
 

@@ -9,7 +9,7 @@ Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes I
 
 * Versions en ligne : [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Repository Github : [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version : 1.1.1 (21/05/2024)
+* Version : 1.1.3 (13/04/2025)
 
 ### Technologies
 
@@ -120,6 +120,12 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 
 ## Journal des versions
 
+* Version 1.1.3 (13/04/2025) :
+   - Mise à jour vers la version 2.3.0 de simple-sound-studio-lib et simple-sound-studio-components ;
+   - Suite à la mise à jour des dépendances de l'application, le thème graphique général de l'application a dû être adapté :
+        - Le contraste du thème sombre a été optimisé ;
+        - D'autres changements ont été apportés.
+
 * Version 1.1.2 (10/09/2024) :
   - Ajout de la possibilité de switcher entre les animations avec les boutons fléchés ;
   - Ajout du pourcentage de chargement sur la fenêtre de chargement de l'application ;
@@ -154,7 +160,7 @@ Memes Soundbox is a base for creating fully customizable soundboxes of Internet 
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version: 1.1.2 (9/10/2024)
+* Version: 1.1.3 (4/13/2025)
 
 ### Technologies
 
@@ -264,6 +270,12 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 ```
 
 ## Changelog
+
+* Version 1.1.3 (4/13/2025):
+  - Updated to version 2.3.0 of simple-sound-studio-lib and simple-sound-studio-components.
+  - Following the update of the application’s dependencies, the overall visual theme of the app has been adjusted:
+    - The contrast of the dark theme has been optimized.
+    - Other design adjustments have been made.
 
 * Version 1.1.2 (9/10/2024):
   - Added the ability to switch between animations with arrow buttons;

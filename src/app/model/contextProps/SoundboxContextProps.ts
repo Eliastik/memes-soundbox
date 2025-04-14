@@ -1,12 +1,15 @@
-import { MutableRefObject } from "react";
+import { RefObject } from "react";
 import { SaveBufferOptions } from "@eliastik/simple-sound-studio-lib";
 import Sound from "../Sound";
 import SoundboxConfig from "../SoundboxConfig";
 import { SoundboxLink } from "../SoundboxLink";
 import AudioLoadingEvent from "../AudioLoadingEvent";
+import SoundboxLoaderService from "@/app/services/SoundboxLoader";
 
 export default interface SoundboxContextProps {
+    isInitialized: boolean,
     setup: (soundboxName: string) => void,
+    loaderService: SoundboxLoaderService | null,
     currentSound: Sound | null,
     allSounds: Sound[],
     soundboxConfig: SoundboxConfig | null,
@@ -30,7 +33,7 @@ export default interface SoundboxContextProps {
     soundboxLinks: SoundboxLink[],
     initialLoadingFinished: boolean,
     soundboxName: string,
-    animationRef: MutableRefObject<HTMLImageElement | null>,
+    animationRef: RefObject<HTMLImageElement | null>,
     loadingState: AudioLoadingEvent | undefined,
     currentSoundIndex: number
 }

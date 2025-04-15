@@ -19,7 +19,10 @@ const SoundboxChoice = () => {
                     </label>
                     <select
                         className="select select-bordered sm:w-96 w-64 h-10 min-h-10 md:h-12 md:min-h-12 text-xs md:text-sm bg-base-200/50"
-                        onChange={e => setSoundByName(e.target.value)}
+                        onChange={e => {
+                            setSoundByName(e.target.value);
+                            e.target.blur();
+                        }}
                         value={currentSound.animationURL}
                         id="selectSound"
                     >

@@ -1,6 +1,6 @@
 "use client";
 
-import { create } from "zustand";
+import { create } from "zustand/react";
 import { useAudioEditor, useAudioPlayer } from "@eliastik/simple-sound-studio-components";
 import Sound from "../model/Sound";
 import SoundboxLoaderService from "../services/SoundboxLoader";
@@ -11,9 +11,34 @@ import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 export const useSoundbox = create<SoundboxContextProps>((set, get) => {
     const animationRef = { current: null };
 
+    const initialState = {
+        isInitialized: false,
+        animationRef,
+        loaderService: null,
+        allSounds: [],
+        currentSound: null,
+        currentSoundIndex: 0,
+        soundboxConfig: null,
+        soundboxName: "",
+        editingSound: false,
+        errorPlayingAudio: false,
+        loadingImages: false,
+        loadingConfig: false,
+        loadingOneImage: false,
+        loadingAudio: false,
+        loadedAudioCount: 0,
+        totalAudioCount: 0,
+        loadingError: false,
+        loadingConfigError: false,
+        soundboxLinks: [],
+        initialLoadingFinished: false,
+        loadingState: undefined,
+    };
+
     const reloadAnimation = async (newSound?: Sound) => {
         const { loaderService, currentSound } = get();
         const sound = newSound || currentSound;
+
         if (!sound || !loaderService) return;
 
         const url = await loaderService.getImageBlobURL(sound.animationURL);
@@ -32,7 +57,6 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         if (!loaderService) throw new Error("No SoundboxLoader is available");
 
         if (sound.soundURL) {
-
             const blob = await loaderService.getAudioBlob(sound.soundURL);
             await changeFilterSettings("limiter", { lookAheadTime: 0.05 });
 
@@ -50,16 +74,19 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
 
         if (!editingSound && sound.soundURL) {
             try {
-            const audio = await loaderService.getAudioByUrl(sound.soundURL);
-            if (audio) {
-                const audioCloned = audio.cloneNode() as HTMLAudioElement;
-                audioCloned.addEventListener("ended", () => audioCloned.remove());
-                await audioCloned.play();
-                set({ errorPlayingAudio: false });
-            }
+                const audio = await loaderService.getAudioByUrl(sound.soundURL);
+
+                if (audio) {
+                    const audioCloned = audio.cloneNode() as HTMLAudioElement;
+                    audioCloned.addEventListener("ended", () => audioCloned.remove());
+
+                    await audioCloned.play();
+
+                    set({ errorPlayingAudio: false });
+                }
             } catch (e) {
-            console.error(e);
-            set({ errorPlayingAudio: true });
+                console.error(e);
+                set({ errorPlayingAudio: true });
             }
         } else {
             set({ errorPlayingAudio: false });
@@ -71,9 +98,11 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
 
     const loadApp = async () => {
         const { loaderService } = get();
+
         if (!loaderService) throw new Error("No SoundboxLoader is available");
 
         set({ loadingConfig: true });
+
         await loaderService.loadConfig();
         await loaderService.loadLinkList();
 
@@ -83,6 +112,7 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         });
 
         const config = await loaderService.getConfig();
+
         if (!config) return;
 
         const sounds = config.sounds;
@@ -105,6 +135,7 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         }
 
         set({ currentSound: sounds[0] });
+
         await playSound(sounds[0]);
     };
 
@@ -112,8 +143,6 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         if (get().isInitialized) {
             return;
         }
-
-        console.log("ok");
 
         const soundboxNameProvider = new SoundboxNameProvider(soundboxName);
         const soundboxLoaderService = new SoundboxLoaderService(soundboxNameProvider);
@@ -128,6 +157,8 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         soundboxLoaderService.onLoadingState(event => set({ loadingState: event }));
 
         set({ soundboxName, loaderService: soundboxLoaderService, isInitialized: true });
+
+        loadApp();
     };
 
     const retryLoadingApp = async () => {
@@ -145,21 +176,25 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
 
     const setSound = async (soundIndex: number) => {
         const { allSounds, loaderService, editingSound } = get();
+
         if (!loaderService) throw new Error("No SoundboxLoader is available");
 
         const sound = allSounds[soundIndex];
+        
         if (!sound) return;
 
         set({ initialLoadingFinished: true, loadingOneImage: true });
 
         try {
             await loaderService.loadImages([sound]);
+
+            set({ loadingOneImage: false });
+
             if (editingSound) await setupAudioEditor(sound);
 
             set({
-            currentSound: sound,
-            currentSoundIndex: soundIndex,
-            loadingOneImage: false,
+                currentSound: sound,
+                currentSoundIndex: soundIndex
             });
 
             await playSound(sound);
@@ -181,9 +216,10 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
 
     const toggleAudioEdit = async () => {
         const { currentSound, editingSound } = get();
-        if (!currentSound) return;
 
+        if (!currentSound) return;
         if (!editingSound) await setupAudioEditor(currentSound);
+
         set({ editingSound: !editingSound });
     };
 
@@ -205,28 +241,7 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
     };
 
     return {
-        isInitialized: false,
-        animationRef,
-        loaderService: null,
-        allSounds: [],
-        currentSound: null,
-        currentSoundIndex: 0,
-        soundboxConfig: null,
-        soundboxName: "",
-        editingSound: false,
-        errorPlayingAudio: false,
-        loadingImages: false,
-        loadingConfig: false,
-        loadingOneImage: false,
-        loadingAudio: false,
-        loadedAudioCount: 0,
-        totalAudioCount: 0,
-        loadingError: false,
-        loadingConfigError: false,
-        soundboxLinks: [],
-        initialLoadingFinished: false,
-        loadingState: undefined,
-
+        ...initialState,
         setup,
         loadApp,
         retryLoadingApp,

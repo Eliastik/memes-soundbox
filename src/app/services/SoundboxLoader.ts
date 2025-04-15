@@ -106,7 +106,9 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
                 try {
                     const image = await this.loadImage(url, size);
                     this.mapImages.set(url, image);
+
                     loadedImages++;
+                    
                     this.eventEmitter.emit(EventTypes.LOADED_IMAGE, { loaded: loadedImages, total: totalImages, url });
                 } catch (error) {
                     this.eventEmitter.emit(EventTypes.ERROR_LOADING_IMAGE, { url });

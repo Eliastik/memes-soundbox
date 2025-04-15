@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
+import { useShallow } from "zustand/shallow";
 import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
@@ -18,7 +19,7 @@ const SoundboxAnimation = () => {
         animationRef,
         editingSound,
         setSoundByIndex
-    ] = useSoundbox(state => [
+    ] = useSoundbox(useShallow(state => [
         state.currentSound,
         state.currentSoundIndex,
         state.playSound,
@@ -26,7 +27,7 @@ const SoundboxAnimation = () => {
         state.animationRef,
         state.editingSound,
         state.setSoundByIndex
-    ]);
+    ]));
 
     useEffect(() => {
         const handleScroll = () => {

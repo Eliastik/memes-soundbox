@@ -7,8 +7,8 @@
             "colorThemeLight": "Thème clair",
             "colorThemeDark": "Thème sombre",
             "language": "Langue :",
-            "compatibilityMode": "Mode de compatibilité",
-            "compatibilityModeInfos": "Ce mode est activé automatiquement en cas de problème de compatibilité détecté. Activez-le si l'application ne produit aucun son."
+            "compatibilityMode": "Mode édition en direct",
+            "compatibilityModeInfos": "Ce mode permet de modifier les paramètres en temps réel. Il peut également être activé automatiquement en cas de problème de compatibilité détecté, par exemple si l'application ne produit aucun son."
         },
         "languages": {
             "fr": "Français",

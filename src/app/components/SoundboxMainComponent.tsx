@@ -14,8 +14,10 @@ import MainLayout from "./SoundboxLayout";
 import SoundboxConfig from "../model/SoundboxConfig";
 
 const SoundboxMainComponent = ({ memeName, sounboxConfig }: { memeName: string, sounboxConfig?: SoundboxConfig }) => {
-    const { setup, loadingAudio, loadingImages } = useSoundbox();
-    const { downloadingInitialData } = useAudioEditor();
+    const setup = useSoundbox(state => state.setup);
+    const loadingAudio = useSoundbox(state => state.loadingAudio);
+    const loadingImages = useSoundbox(state => state.loadingImages);
+    const downloadingInitialData = useAudioEditor(state => state.downloadingInitialData);
 
     useEffect(() => {
         setup(memeName);

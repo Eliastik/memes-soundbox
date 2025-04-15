@@ -4,8 +4,9 @@ import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
 
 const SoundInfoDialog = () => {
     const { t } = useTranslation();
-    const { currentLanguageValue } = useApplicationConfig();
-    const { currentSound } = useSoundbox();
+    
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
+    const currentSound = useSoundbox(state => state.currentSound);
 
     return (
         <dialog id="modalSoundInfos" className="modal">

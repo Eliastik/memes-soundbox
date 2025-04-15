@@ -22,7 +22,9 @@ i18n.i18next.changeLanguage(Constants.DEFAULT_LANGUAGE);
 const LayoutChild = ({
     children,
 }: { children: React.ReactNode }) => {
-    const { setupLanguage, updateCurrentTheme, initializeStore } = useApplicationConfig();
+    const setupLanguage = useApplicationConfig(state => state.setupLanguage);
+    const updateCurrentTheme = useApplicationConfig(state => state.updateCurrentTheme);
+    const initializeStore = useApplicationConfig(state => state.initializeStore);
 
     useEffect(() => {
         // Initialize contexts

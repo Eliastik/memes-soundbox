@@ -3,8 +3,9 @@ import { DaisyUIModal } from "@eliastik/simple-sound-studio-components";
 import { useTranslation } from "react-i18next";
 
 const SoundboxButtons = () => {
-    const { toggleAudioEdit } = useSoundbox();
     const { t } = useTranslation();
+
+    const toggleAudioEdit = useSoundbox(state => state.toggleAudioEdit);
 
     return (
         <div className="flex justify-center mb-2 md:mb-6 btn-group gap-x-2">

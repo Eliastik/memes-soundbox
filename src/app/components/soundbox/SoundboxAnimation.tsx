@@ -5,10 +5,28 @@ import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
 
 const SoundboxAnimation = () => {
-    const { currentLanguageValue } = useApplicationConfig();
-    const { currentSound, currentSoundIndex, playSound, errorPlayingAudio, animationRef, editingSound, setSoundByIndex } = useSoundbox();
     const { t } = useTranslation();
     const [imageHeight, setImageHeight] = useState(-1);
+
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
+    
+    const [
+        currentSound,
+        currentSoundIndex,
+        playSound,
+        errorPlayingAudio,
+        animationRef,
+        editingSound,
+        setSoundByIndex
+    ] = useSoundbox(state => [
+        state.currentSound,
+        state.currentSoundIndex,
+        state.playSound,
+        state.errorPlayingAudio,
+        state.animationRef,
+        state.editingSound,
+        state.setSoundByIndex
+    ]);
 
     useEffect(() => {
         const handleScroll = () => {

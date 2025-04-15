@@ -10,8 +10,11 @@ import SoundboxConfig from "@/app/model/SoundboxConfig";
 const Navbar = ({
     config
 }: { config?: SoundboxConfig }) => {
-    const { updateData, currentLanguageValue } = useApplicationConfig();
-    const { soundboxLinks, soundboxConfig } = useSoundbox();
+    const updateData = useApplicationConfig(state => state.updateData);
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
+
+    const soundboxLinks = useSoundbox(state => state.soundboxLinks);
+    const soundboxConfig = useSoundbox(state => state.soundboxConfig);
 
     return (
         <>

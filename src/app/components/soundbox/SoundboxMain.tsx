@@ -9,7 +9,7 @@ import SoundboxAudioEditor from "./SoundboxAudioEditor";
 import SoundInfoDialog from "../dialogs/SoundInfoDialog";
 
 const SoundboxMain = () => {
-    const { editingSound } = useSoundbox();
+    const editingSound = useSoundbox(state => state.editingSound);
 
     return (
         <>

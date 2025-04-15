@@ -3,9 +3,13 @@ import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
 
 const SoundboxChoice = () => {
-    const { currentLanguageValue } = useApplicationConfig();
-    const { allSounds, setSoundByName, currentSound } = useSoundbox();
     const { t } = useTranslation();
+
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
+
+    const allSounds = useSoundbox(state => state.allSounds);
+    const setSoundByName = useSoundbox(state => state.setSoundByName);
+    const currentSound = useSoundbox(state => state.currentSound);
 
     return (
         <>

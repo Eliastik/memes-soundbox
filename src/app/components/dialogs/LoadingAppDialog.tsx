@@ -5,8 +5,22 @@ import { useTranslation } from "react-i18next";
 
 const LoadingAppDialog = () => {
     const { t } = useTranslation();
-    const { downloadingInitialData } = useAudioEditor();
-    const { loadedAudioCount, totalAudioCount, loadingAudio, loadingImages, loadingConfig } = useSoundbox();
+    
+    const downloadingInitialData = useAudioEditor(state => state.downloadingInitialData);
+    
+    const [
+        loadedAudioCount,
+        totalAudioCount,
+        loadingAudio,
+        loadingImages,
+        loadingConfig
+    ] = useSoundbox(state => [
+        state.loadedAudioCount,
+        state.totalAudioCount,
+        state.loadingAudio,
+        state.loadingImages,
+        state.loadingConfig
+    ]);
 
     const [displayed, setDisplayed] = useState(true);
     const [progressValue, setProgessValue] = useState(0);

@@ -1,5 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+  exclude: rootscrollgutter;
+}
 
 @plugin "daisyui/theme" {
   name: "light";
@@ -201,12 +204,6 @@
         }
     }
   }
-}
-
-@layer base {
-    :root:has(:is(.modal-open, .modal:target, .modal-toggle:checked + .modal, .modal[open])) {
-      scrollbar-gutter: revert !important;
-    }
 }
 
 nextjs-portal {

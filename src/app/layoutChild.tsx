@@ -6,7 +6,6 @@ import { useApplicationConfig } from "./context/ApplicationConfigContext";
 import "./i18n";
 import Constants from "./model/Constants";
 import { SoundStudioApplicationFactory } from "@eliastik/simple-sound-studio-components";
-import { SoundboxProvider } from "./context/SoundboxContext";
 import ApplicationConfigSingleton from "./context/ApplicationConfigSingleton";
 import i18next from "i18next";
 import i18n from "@eliastik/simple-sound-studio-components/lib/i18n";
@@ -23,7 +22,9 @@ i18n.i18next.changeLanguage(Constants.DEFAULT_LANGUAGE);
 const LayoutChild = ({
     children,
 }: { children: React.ReactNode }) => {
-    const { setupLanguage, updateCurrentTheme, initializeStore } = useApplicationConfig();
+    const setupLanguage = useApplicationConfig(state => state.setupLanguage);
+    const updateCurrentTheme = useApplicationConfig(state => state.updateCurrentTheme);
+    const initializeStore = useApplicationConfig(state => state.initializeStore);
 
     useEffect(() => {
         // Initialize contexts
@@ -43,11 +44,7 @@ const LayoutChild = ({
         };
     }, [updateCurrentTheme]);
 
-    return (
-        <SoundboxProvider>
-            {children}
-        </SoundboxProvider>
-    );
+    return children;
 };
 
 export default LayoutChild;

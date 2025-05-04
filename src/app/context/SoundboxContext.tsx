@@ -1,276 +1,63 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode, FC, useEffect, useRef, useCallback } from "react";
+import { create } from "zustand/react";
 import { useAudioEditor, useAudioPlayer } from "@eliastik/simple-sound-studio-components";
 import Sound from "../model/Sound";
-import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 import SoundboxLoaderService from "../services/SoundboxLoader";
-import { SoundboxLink } from "../model/SoundboxLink";
 import SoundboxNameProvider from "../services/SoundboxNameProvider";
-import SoundboxConfig from "../model/SoundboxConfig";
 import { SaveBufferOptions } from "@eliastik/simple-sound-studio-lib";
-import AudioLoadingEvent from "../model/AudioLoadingEvent";
+import SoundboxContextProps from "../model/contextProps/SoundboxContextProps";
 
-const SoundboxContext = createContext<SoundboxContextProps | undefined>(undefined);
+export const useSoundbox = create<SoundboxContextProps>((set, get) => {
+    const animationRef = { current: null };
 
-export const useSoundbox = (): SoundboxContextProps => {
-    const context = useContext(SoundboxContext);
-    if (!context) {
-        throw new Error("useSoundbox must be used inside an SoundboxProvider");
-    }
-    return context;
-};
-
-interface SoundboxProviderProps {
-    children: ReactNode;
-}
-
-let isReady = false;
-
-export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
-    const { loadAudioPrincipalBuffer, downloadAudio, changeFilterSettings } = useAudioEditor();
-    const { playAudioBufferDirect, isCompatibilityModeEnabled, stopAudioBuffer } = useAudioPlayer();
-
-    // State: animation ref
-    const animationRef = useRef(null);
-    // The loader service
-    const [loaderService, setLoaderService] = useState<SoundboxLoaderService | null>(null);
-    // State: all sounds
-    const [allSounds, setAllSounds] = useState<Sound[]>([]);
-    // State: current sound
-    const [currentSound, setCurrentSound] = useState<Sound | null>(null);
-    // State: current sound
-    const [currentSoundIndex, setCurrentSoundIndex] = useState(0);
-    // State: soundbox config
-    const [soundboxConfig, setSoundboxConfig] = useState<SoundboxConfig | null>(null);
-    // State: soundbox name
-    const [soundboxName, setSoundboxName] = useState<string>("");
-    // State:editing sound?
-    const [editingSound, setEditingSound] = useState(false);
-    // State: error playing audio?
-    const [errorPlayingAudio, setErrorPlayingAudio] = useState(false);
-    // State: loading images?
-    const [loadingImages, setLoadingImages] = useState(false);
-    // State: error loading config
-    const [loadingConfig, setLoadingConfig] = useState(false);
-    // State: loading one image?
-    const [loadingOneImage, setLoadingOneImage] = useState(false);
-    // State: loading audio?
-    const [loadingAudio, setLoadingAudio] = useState(false);
-    // State: number of loaded audio files
-    const [loadedAudioCount, setLoadedAudioCount] = useState(0);
-    // State: the total audio count
-    const [totalAudioCount, setTotalAudioCount] = useState(0);
-    // State: error loading something
-    const [loadingError, setLoadingError] = useState(false);
-    // State: error loading config
-    const [loadingConfigError, setLoadingConfigError] = useState(false);
-    // State: soundbox links
-    const [soundboxLinks, setSoundboxLinks] = useState<SoundboxLink[]>([]);
-    // State: error loading something
-    const [initialLoadingFinished, setInitialLoadingFinished] = useState(false);
-    // State: current downloading speed/time remaining
-    const [loadingState, setLoadingState] = useState<AudioLoadingEvent | undefined>({});
-
-    const setup = (soundboxName: string) => {
-        if (isReady) {
-            return;
-        }
-
-        const soundboxNameProvider = new SoundboxNameProvider(soundboxName);
-        const soundboxLoaderService = new SoundboxLoaderService(soundboxNameProvider);
-
-        soundboxLoaderService.onAudioLoaded((data) => {
-            if (data && data.loaded) {
-                setLoadedAudioCount(data.loaded);
-            }
-        });
-
-        soundboxLoaderService.onErrorLoadingAudio(() => setLoadingError(true));
-        soundboxLoaderService.onErrorLoadingImage(() => setLoadingError(true));
-        soundboxLoaderService.onErrorLoadingConfig(() => setLoadingConfigError(true));
-        soundboxLoaderService.onLoadingState(event => setLoadingState(event));
-
-        setSoundboxName(soundboxName);
-        setLoaderService(soundboxLoaderService);
-
-        isReady = true;
+    const initialState = {
+        isInitialized: false,
+        animationRef,
+        loaderService: null,
+        allSounds: [],
+        currentSound: null,
+        currentSoundIndex: 0,
+        soundboxConfig: null,
+        soundboxName: "",
+        editingSound: false,
+        errorPlayingAudio: false,
+        loadingImages: false,
+        loadingConfig: false,
+        loadingOneImage: false,
+        loadingAudio: false,
+        loadedAudioCount: 0,
+        totalAudioCount: 0,
+        loadingError: false,
+        loadingConfigError: false,
+        soundboxLinks: [],
+        initialLoadingFinished: false,
+        loadingState: undefined,
     };
 
-    useEffect(() => {
-        if (loaderService) {
-            loadApp();
-        }
-    }, [loaderService]);
-
-    const loadApp = async () => {
-        if (!loaderService) {
-            throw new Error("No SoundboxLoader is available");
-        }
-
-        // Loading config
-        setLoadingConfig(true);
-        await loaderService.loadConfig();
-        await loaderService.loadLinkList();
-        setLoadingConfig(false);
-
-        setSoundboxLinks(await loaderService.getLinkList());
-
-        const config = await loaderService.getConfig();
-
-        if (config) {
-            const sounds = config.sounds;
-
-            setSoundboxConfig(config);
-            setAllSounds(sounds);
-            setTotalAudioCount(sounds.length);
-
-            try {
-                // Loading audio files
-                setLoadingAudio(true);
-                await loaderService.loadSounds(sounds);
-                setLoadingAudio(false);
-
-                // Loading first animation
-                setLoadingImages(true);
-                await loaderService.loadImages(sounds && sounds[0] ? [sounds[0]] : []);
-                setLoadingImages(false);
-
-                setInitialLoadingFinished(true);
-            } catch (e) {
-                setLoadingAudio(false);
-                setLoadingImages(false);
-                console.error(e);
-            }
-
-            setCurrentSound(sounds[0]);
-            playSound(sounds[0]);
-        }
-    };
-
-    const retryLoadingApp = async () => {
-        setLoadingError(false);
-        setLoadingConfigError(false);
-        setInitialLoadingFinished(false);
-        setLoadedAudioCount(0);
-
-        loadApp();
-    };
-
-    const closeErrorLoading = () => {
-        setLoadingError(false);
-    };
-
-    const setSound = async (soundIndex: number) => {
-        if (!loaderService) {
-            throw new Error("No SoundboxLoader is available");
-        }
-
-        const sound = allSounds[soundIndex];
-
-        if (sound) {
-            setInitialLoadingFinished(true);
-
-            try {
-                setLoadingOneImage(true);
-                await loaderService.loadImages(sound ? [sound] : []);
-                setLoadingOneImage(false);
-
-                if (editingSound) {
-                    await setupAudioEditor(sound);
-                }
-
-                setCurrentSound(sound);
-                setCurrentSoundIndex(soundIndex);
-                playSound(sound);
-            } catch (e) {
-                setLoadingOneImage(false);
-                console.error(e);
-            }
-        }
-    };
-
-    /**
-     * Change sound
-     * @param name The sound name
-     */
-    const setSoundByName = async (name: string) => {
-        await setSound(allSounds.findIndex(sound => sound.animationURL === name));
-    };
-
-    /**
-     * Change sound
-     * @param index The sound index
-     */
-    const setSoundByIndex = async (index: number) => {
-        await setSound(index);
-    };
-
-    /**
-     * Reload the GIF animation
-     * @param sound The sound
-     */
-    const reloadAnimation = useCallback((newSound?: Sound) => {
+    const reloadAnimation = async (newSound?: Sound) => {
+        const { loaderService, currentSound } = get();
         const sound = newSound || currentSound;
 
-        if (sound && loaderService) {
-            loaderService.getImageBlobURL(sound.animationURL).then((url) => {
-                const element = animationRef.current;
+        if (!sound || !loaderService) return;
 
-                if (element) {
-                    const imageElement = element as HTMLImageElement;
-                    imageElement.src = "#";
-                    imageElement.src = url || "";
-                }
-            });
+        const url = await loaderService.getImageBlobURL(sound.animationURL);
+        const element = animationRef.current as HTMLImageElement | null;
+
+        if (element) {
+            element.src = "#";
+            element.src = url || "";
         }
-    }, [currentSound, loaderService]);
-
-    useEffect(() => {
-        reloadAnimation();
-    }, [animationRef, reloadAnimation]);
-
-    /**
-     * Play a sound
-     * @param sound  The sound
-     */
-    const playSound = async (sound: Sound) => {
-        if (!loaderService) {
-            throw new Error("No SoundboxLoader is available");
-        }
-
-        if (!editingSound) {
-            if (sound.soundURL) {
-                try {
-                    const audio = await loaderService.getAudioByUrl(sound.soundURL);
-
-                    if (audio) {
-                        const audioCloned = audio.cloneNode() as HTMLAudioElement;
-                        audioCloned.addEventListener("ended", () => audioCloned.remove());
-                        audioCloned.play()
-                            .then(() => setErrorPlayingAudio(false))
-                            .catch(() => setErrorPlayingAudio(true));
-                    }
-                } catch (e) {
-                    console.error(e);
-                }
-            }
-        } else {
-            setErrorPlayingAudio(false);
-            playAudioBufferDirect();
-        }
-
-        reloadAnimation(sound);
     };
 
     const setupAudioEditor = async (sound: Sound) => {
-        if (!loaderService) {
-            throw new Error("No SoundboxLoader is available");
-        }
+        const { loaderService } = get();
+        const { loadAudioPrincipalBuffer, changeFilterSettings } = useAudioEditor.getState();
+
+        if (!loaderService) throw new Error("No SoundboxLoader is available");
 
         if (sound.soundURL) {
             const blob = await loaderService.getAudioBlob(sound.soundURL);
-
             await changeFilterSettings("limiter", { lookAheadTime: 0.05 });
 
             if (blob) {
@@ -279,46 +66,190 @@ export const SoundboxProvider: FC<SoundboxProviderProps> = ({ children }) => {
         }
     };
 
-    const toggleAudioEdit = async () => {
-        if (currentSound) {
-            if (!editingSound) {
-                await setupAudioEditor(currentSound);
-            }
+    const playSound = async (sound: Sound) => {
+        const { loaderService, editingSound } = get();
+        const { playAudioBufferDirect } = useAudioPlayer.getState();
 
-            setEditingSound(!editingSound);
+        if (!loaderService) throw new Error("No SoundboxLoader is available");
+
+        if (!editingSound && sound.soundURL) {
+            try {
+                const audio = await loaderService.getAudioByUrl(sound.soundURL);
+
+                if (audio) {
+                    const audioCloned = audio.cloneNode() as HTMLAudioElement;
+                    audioCloned.addEventListener("ended", () => audioCloned.remove());
+
+                    await audioCloned.play();
+
+                    set({ errorPlayingAudio: false });
+                }
+            } catch (e) {
+                console.error(e);
+                set({ errorPlayingAudio: true });
+            }
+        } else {
+            set({ errorPlayingAudio: false });
+            playAudioBufferDirect();
         }
+
+        await reloadAnimation(sound);
+    };
+
+    const loadApp = async () => {
+        const { loaderService } = get();
+
+        if (!loaderService) throw new Error("No SoundboxLoader is available");
+
+        set({ loadingConfig: true });
+
+        await loaderService.loadConfig();
+        await loaderService.loadLinkList();
+
+        set({
+            loadingConfig: false,
+            soundboxLinks: await loaderService.getLinkList(),
+        });
+
+        const config = await loaderService.getConfig();
+
+        if (!config) return;
+
+        const sounds = config.sounds;
+
+        set({
+            soundboxConfig: config,
+            allSounds: sounds,
+            totalAudioCount: sounds.length,
+            loadingAudio: true,
+        });
+
+        try {
+            await loaderService.loadSounds(sounds);
+            set({ loadingAudio: false, loadingImages: true });
+            await loaderService.loadImages(sounds.length ? [sounds[0]] : []);
+            set({ loadingImages: false, initialLoadingFinished: true });
+        } catch (e) {
+            console.error(e);
+            set({ loadingAudio: false, loadingImages: false });
+        }
+
+        set({ currentSound: sounds[0] });
+
+        await playSound(sounds[0]);
+    };
+
+    const setup = (soundboxName: string) => {
+        if (get().isInitialized) {
+            return;
+        }
+
+        const soundboxNameProvider = new SoundboxNameProvider(soundboxName);
+        const soundboxLoaderService = new SoundboxLoaderService(soundboxNameProvider);
+
+        soundboxLoaderService.onAudioLoaded(data => {
+            if (data !== undefined) set({ loadedAudioCount: data.loaded });
+        });
+
+        soundboxLoaderService.onErrorLoadingAudio(() => set({ loadingError: true }));
+        soundboxLoaderService.onErrorLoadingImage(() => set({ loadingError: true }));
+        soundboxLoaderService.onErrorLoadingConfig(() => set({ loadingConfigError: true }));
+        soundboxLoaderService.onLoadingState(event => set({ loadingState: event }));
+
+        set({ soundboxName, loaderService: soundboxLoaderService, isInitialized: true });
+
+        loadApp();
+    };
+
+    const retryLoadingApp = async () => {
+        set({
+            loadingError: false,
+            loadingConfigError: false,
+            initialLoadingFinished: false,
+            loadedAudioCount: 0,
+        });
+
+        await loadApp();
+    };
+
+    const closeErrorLoading = () => set({ loadingError: false });
+
+    const setSound = async (soundIndex: number) => {
+        const { allSounds, loaderService, editingSound } = get();
+
+        if (!loaderService) throw new Error("No SoundboxLoader is available");
+
+        const sound = allSounds[soundIndex];
+        
+        if (!sound) return;
+
+        set({ initialLoadingFinished: true, loadingOneImage: true });
+
+        try {
+            await loaderService.loadImages([sound]);
+
+            set({ loadingOneImage: false });
+
+            if (editingSound) await setupAudioEditor(sound);
+
+            set({
+                currentSound: sound,
+                currentSoundIndex: soundIndex
+            });
+
+            await playSound(sound);
+        } catch (e) {
+            console.error(e);
+            set({ loadingOneImage: false });
+        }
+    };
+
+    const setSoundByName = async (name: string) => {
+        const { allSounds } = get();
+        const index = allSounds.findIndex(sound => sound.animationURL === name);
+        await setSound(index);
+    };
+
+    const setSoundByIndex = async (index: number) => {
+        await setSound(index);
+    };
+
+    const toggleAudioEdit = async () => {
+        const { currentSound, editingSound } = get();
+
+        if (!currentSound) return;
+        if (!editingSound) await setupAudioEditor(currentSound);
+
+        set({ editingSound: !editingSound });
     };
 
     const downloadSound = async (options?: SaveBufferOptions) => {
-        if (currentSound) {
-            if (isCompatibilityModeEnabled) {
-                reloadAnimation();
-                stopAudioBuffer();
-            }
+        const { currentSound } = get();
+        const { downloadAudio } = useAudioEditor.getState();
+        const { isCompatibilityModeEnabled, stopAudioBuffer } = useAudioPlayer.getState();
 
-            setTimeout(() => {
-                downloadAudio(options);
-            }, 1);
+        if (!currentSound) return;
+
+        if (isCompatibilityModeEnabled) {
+            await reloadAnimation();
+            stopAudioBuffer();
         }
+
+        setTimeout(() => {
+            downloadAudio(options);
+        }, 1);
     };
 
-    return (
-        <SoundboxContext.Provider value={{
-            setup, currentSound, allSounds,
-            setSoundByName, playSound,
-            loadedAudioCount, totalAudioCount,
-            loadingImages, loadingAudio,
-            loadingError, loadingConfig,
-            loadingConfigError, retryLoadingApp,
-            closeErrorLoading, loadingOneImage,
-            soundboxConfig, toggleAudioEdit,
-            editingSound, downloadSound,
-            errorPlayingAudio, soundboxLinks,
-            initialLoadingFinished, soundboxName,
-            animationRef, loadingState,
-            currentSoundIndex, setSoundByIndex
-        }}>
-            {children}
-        </SoundboxContext.Provider>
-    );
-};
+    return {
+        ...initialState,
+        setup,
+        loadApp,
+        retryLoadingApp,
+        closeErrorLoading,
+        setSoundByName,
+        setSoundByIndex,
+        playSound,
+        toggleAudioEdit,
+        downloadSound,
+    };
+});

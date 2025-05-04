@@ -7,8 +7,8 @@
             "colorThemeLight": "Light theme",
             "colorThemeDark": "Dark theme",
             "language": "Language:",
-            "compatibilityMode": "Compatibility mode",
-            "compatibilityModeInfos": "This mode is automatically enabled when a compatibility issue is detected. Enable it if the application is not producing any sound."
+            "compatibilityMode": "Live edit mode",
+            "compatibilityModeInfos": "This mode allows you to modify the settings in real time. It can also be automatically enabled if a compatibility issue is detected, for example if the application produces no sound."
         },
         "audioPlayer": {
             "save": "Save audio"

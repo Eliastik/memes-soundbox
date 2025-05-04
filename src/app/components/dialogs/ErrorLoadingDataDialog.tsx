@@ -3,8 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const ErrorLoadingDataDialog = () => {
-    const { loadingError, retryLoadingApp, closeErrorLoading, initialLoadingFinished } = useSoundbox();
     const { t } = useTranslation();
+
+    const loadingError = useSoundbox(state => state.loadingError);
+    const retryLoadingApp = useSoundbox(state => state.retryLoadingApp);
+    const closeErrorLoading = useSoundbox(state => state.closeErrorLoading);
+    const initialLoadingFinished = useSoundbox(state => state.initialLoadingFinished);
 
     const loadingErrorCheckbox = useMemo(() => {
         if (loadingError) {

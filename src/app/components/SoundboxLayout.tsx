@@ -12,7 +12,8 @@ const SoundboxLayout = ({
     children,
     soundboxConfig
 }: { children: React.ReactNode, soundboxConfig?: SoundboxConfig }) => {
-    const { currentTheme, currentLanguageValue } = useApplicationConfig();
+    const currentTheme = useApplicationConfig(state => state.currentTheme);
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
 
     // Configure colors based on configuration
     useEffect(() => {

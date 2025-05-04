@@ -1,10 +1,10 @@
 "use client";
 
-import { create } from "zustand";
-import { EventEmitter, EventType } from "@eliastik/simple-sound-studio-lib";
-import { SoundStudioApplicationFactory } from "@eliastik/simple-sound-studio-components";
+import { create } from "zustand/react";
 import i18n from "@eliastik/simple-sound-studio-components/lib/i18n";
 import i18next from "i18next";
+import { EventEmitter, EventType } from "@eliastik/simple-sound-studio-lib";
+import { SoundStudioApplicationFactory } from "@eliastik/simple-sound-studio-components";
 import ApplicationConfigService from "../services/ApplicationConfigService";
 import ApplicationConfigSingleton from "./ApplicationConfigSingleton";
 import ApplicationConfigContextProps from "../model/contextProps/ApplicationConfigContextProps";

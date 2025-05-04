@@ -1,12 +1,27 @@
 import { useEffect, useMemo, useState } from "react";
+import { useShallow } from "zustand/shallow";
 import { useAudioEditor } from "@eliastik/simple-sound-studio-components";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
 
 const LoadingAppDialog = () => {
     const { t } = useTranslation();
-    const { downloadingInitialData } = useAudioEditor();
-    const { loadedAudioCount, totalAudioCount, loadingAudio, loadingImages, loadingConfig } = useSoundbox();
+
+    const downloadingInitialData = useAudioEditor(state => state.downloadingInitialData);
+    
+    const [
+        loadedAudioCount,
+        totalAudioCount,
+        loadingAudio,
+        loadingImages,
+        loadingConfig
+    ] = useSoundbox(useShallow(state => [
+        state.loadedAudioCount,
+        state.totalAudioCount,
+        state.loadingAudio,
+        state.loadingImages,
+        state.loadingConfig
+    ]));
 
     const [displayed, setDisplayed] = useState(true);
     const [progressValue, setProgessValue] = useState(0);

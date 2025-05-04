@@ -4,7 +4,7 @@ import { useAudioEditor } from "@eliastik/simple-sound-studio-components";
 
 const LoadingAudioFileDialog = () => {
     const { t } = useTranslation();
-    const { loadingPrincipalBuffer } = useAudioEditor();
+    const loadingPrincipalBuffer = useAudioEditor(state => state.loadingPrincipalBuffer);
         
     const loadingBufferModalCheckbox = useMemo(() => {
         if (loadingPrincipalBuffer) {

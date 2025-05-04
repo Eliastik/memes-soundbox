@@ -7,9 +7,14 @@ import { useTranslation } from "react-i18next";
 import Constants from "@/app/model/Constants";
 
 const SoundboxAudioEditor = () => {
-    const { currentSound, playSound, downloadSound } = useSoundbox();
-    const { isCompatibilityModeEnabled, toggleCompatibilityMode } = useApplicationConfig();
     const { t } = useTranslation();
+
+    const isCompatibilityModeEnabled = useApplicationConfig(state => state.isCompatibilityModeEnabled);
+    const toggleCompatibilityMode = useApplicationConfig(state => state.toggleCompatibilityMode);
+
+    const currentSound = useSoundbox(state => state.currentSound);
+    const playSound = useSoundbox(state => state.playSound);
+    const downloadSound = useSoundbox(state => state.downloadSound);
 
     const removeOpenAttribute = () => {
         document.querySelector("#dropdownDownloadAudio")?.removeAttribute("open");

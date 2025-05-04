@@ -3,8 +3,12 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 const AppConfigDialog = () => {
-    const { currentThemeValue, setTheme, currentLanguageValue, setLanguage } = useApplicationConfig();
     const { t } = useTranslation();
+    
+    const currentThemeValue = useApplicationConfig(state => state.currentThemeValue);
+    const setTheme = useApplicationConfig(state => state.setTheme);
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
+    const setLanguage = useApplicationConfig(state => state.setLanguage);
 
     return (
         <dialog id="modalSettings" className="modal">

@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const ErrorLoadingConfigDialog = () => {
-    const { loadingConfigError, retryLoadingApp } = useSoundbox();
     const { t } = useTranslation();
+
+    const loadingConfigError = useSoundbox(state => state.loadingConfigError);
+    const retryLoadingApp = useSoundbox(state => state.retryLoadingApp);
                                             
     const loadingConfigErrorCheckbox = useMemo(() => {
         if (loadingConfigError) {

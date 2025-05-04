@@ -4,7 +4,9 @@ import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const LoadingImageDialog = () => {
     const { t } = useTranslation();
-    const { loadingOneImage, loadingState } = useSoundbox();
+
+    const loadingOneImage = useSoundbox(state => state.loadingOneImage);
+    const loadingState = useSoundbox(state => state.loadingState);
             
     const loadingImageDataModalCheckbox = useMemo(() => {
         if (loadingOneImage) {

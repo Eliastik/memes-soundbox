@@ -5,8 +5,10 @@ import { useSoundbox } from "@/app/context/SoundboxContext";
 
 const AppInfoDialog = () => {
     const { t } = useTranslation();
-    const { soundboxConfig } = useSoundbox();
-    const { currentLanguageValue, updateData } = useApplicationConfig();
+    
+    const soundboxConfig = useSoundbox(state => state.soundboxConfig);
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
+    const updateData = useApplicationConfig(state => state.updateData);
 
     return (
         <dialog id="modalInfos" className="modal">

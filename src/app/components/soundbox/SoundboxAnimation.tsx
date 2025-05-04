@@ -1,14 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
+import { useShallow } from "zustand/shallow";
 import { useApplicationConfig } from "@/app/context/ApplicationConfigContext";
 import { useSoundbox } from "@/app/context/SoundboxContext";
 import { useTranslation } from "react-i18next";
 
 const SoundboxAnimation = () => {
-    const { currentLanguageValue } = useApplicationConfig();
-    const { currentSound, currentSoundIndex, playSound, errorPlayingAudio, animationRef, editingSound, setSoundByIndex } = useSoundbox();
     const { t } = useTranslation();
     const [imageHeight, setImageHeight] = useState(-1);
+
+    const currentLanguageValue = useApplicationConfig(state => state.currentLanguageValue);
+    
+    const [
+        currentSound,
+        currentSoundIndex,
+        playSound,
+        errorPlayingAudio,
+        animationRef,
+        editingSound,
+        setSoundByIndex
+    ] = useSoundbox(useShallow(state => [
+        state.currentSound,
+        state.currentSoundIndex,
+        state.playSound,
+        state.errorPlayingAudio,
+        state.animationRef,
+        state.editingSound,
+        state.setSoundByIndex
+    ]));
 
     useEffect(() => {
         const handleScroll = () => {

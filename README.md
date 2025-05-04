@@ -9,7 +9,7 @@ Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes I
 
 * Versions en ligne : [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Repository Github : [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version : 1.1.3 (13/04/2025)
+* Version : 1.1.4 (04/05/2025)
 
 ### Technologies
 
@@ -120,6 +120,13 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 
 ## Journal des versions
 
+* Version 1.1.4 (04/05/2025) :
+   - Mise à jour vers la version 2.3.1 de simple-sound-studio-lib et simple-sound-studio-components : cela corrige un bug avec la lecture multiple du son lors de l'utilisation de la fonctionnalité Modifier la voix ;
+   - Le mode de compatibilité de la fonctionnalité Modifier la voix a été renommé Mode édition en direct ;
+   - Améliorations techniques :
+    - Migration vers la librairie Zustand pour la gestion de l'état (au lieu de React Context), cela améliore les performances de l'application ;
+    - Mise à jour des autres dépendances.
+
 * Version 1.1.3 (13/04/2025) :
    - Mise à jour vers la version 2.3.0 de simple-sound-studio-lib et simple-sound-studio-components ;
    - Suite à la mise à jour des dépendances de l'application, le thème graphique général de l'application a dû être adapté :
@@ -160,7 +167,7 @@ Memes Soundbox is a base for creating fully customizable soundboxes of Internet 
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version: 1.1.3 (4/13/2025)
+* Version: 1.1.4 (5/4/2025)
 
 ### Technologies
 
@@ -270,6 +277,13 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 ```
 
 ## Changelog
+
+* Version 1.1.4 (04/05/2025):
+   - Update to version 2.3.1 of simple-sound-studio-lib and simple-sound-studio-components: this fixes a bug with multiple sound playback when using the Edit voice feature ;
+   - The compatibility mode of the Edit Voice feature has been renamed Live Edit Mode ;
+   - Technical improvements:
+    - Migration to the Zustand library for state management (instead of React Context), which improves application performance;
+    - Other dependencies updated.
 
 * Version 1.1.3 (4/13/2025):
   - Updated to version 2.3.0 of simple-sound-studio-lib and simple-sound-studio-components.

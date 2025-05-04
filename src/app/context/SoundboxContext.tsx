@@ -45,7 +45,7 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         const element = animationRef.current as HTMLImageElement | null;
 
         if (element) {
-            element.src = "#";
+            element.removeAttribute("src");
             element.src = url || "";
         }
     };

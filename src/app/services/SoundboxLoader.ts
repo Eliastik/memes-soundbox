@@ -136,10 +136,10 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
             await this.sendCurrentLoadingState(currentTime, size);
         }, 1000);
 
-        const audio = await fetch(url);
-        const audioBlob = await audio.blob();
+        const imageResponse = await fetch(url);
+        const imageBlob = await imageResponse.blob();
         const image = new Image();
-        image.src = URL.createObjectURL(audioBlob);
+        image.src = URL.createObjectURL(imageBlob);
 
         const endTime = performance.now();
         const loadTime = endTime - startTime;

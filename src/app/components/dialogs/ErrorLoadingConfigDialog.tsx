@@ -19,7 +19,7 @@ const ErrorLoadingConfigDialog = () => {
     return (
         <>
             {loadingConfigErrorCheckbox}
-            <div className="modal">
+            <dialog className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.configLoadingError.title")}</h3>
                     <div className="flex flex-col">
@@ -38,7 +38,7 @@ const ErrorLoadingConfigDialog = () => {
                         </form>
                     </div>
                 </div>
-            </div>
+            </dialog>
         </>
     );
 };

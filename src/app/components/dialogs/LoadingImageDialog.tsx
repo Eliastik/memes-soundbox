@@ -19,7 +19,7 @@ const LoadingImageDialog = () => {
     return (
         <>
             {loadingImageDataModalCheckbox}
-            <div className="modal">
+            <dialog className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingOneImage.title")}</h3>
                     <p className="py-4 flex items-center"><span className="loading loading-spinner loading-lg mr-4 text-primary"></span> {t("dialogs.pleaseWait")}</p>
@@ -39,7 +39,7 @@ const LoadingImageDialog = () => {
                         </p>
                     )}
                 </div>
-            </div>
+            </dialog>
         </>
     );
 };

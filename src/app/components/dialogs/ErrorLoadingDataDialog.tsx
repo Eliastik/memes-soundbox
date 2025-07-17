@@ -21,7 +21,7 @@ const ErrorLoadingDataDialog = () => {
     return (
         <>
             {loadingErrorCheckbox}
-            <div className="modal">
+            <dialog className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingError.title")}</h3>
                     <form method="dialog">
@@ -45,7 +45,7 @@ const ErrorLoadingDataDialog = () => {
                         </form>
                     </div>
                 </div>
-            </div>
+            </dialog>
         </>
     );
 };

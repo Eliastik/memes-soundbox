@@ -42,7 +42,7 @@ const LoadingAppDialog = () => {
     return (
         <>
             {loadingDataModalCheckbox}
-            <div className="modal">
+            <dialog className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">{t("dialogs.loadingApp.title")}</h3>
                     <div className="py-4 flex flex-row items-center gap-x-4">
@@ -61,7 +61,7 @@ const LoadingAppDialog = () => {
                         </p>
                     )}
                 </div>
-            </div>
+            </dialog>
         </>
     );
 };

@@ -22,7 +22,7 @@ const SoundboxChoice = () => {
                         <span className="font-semibold ml-2 select-none">{t("soundbox.sound")}</span>
                     </label>
                     <select
-                        className="select select-bordered sm:w-96 w-64 h-10 min-h-10 md:h-12 md:min-h-12 text-xs md:text-sm bg-base-200"
+                        className="select select-bordered sm:w-96 w-64 h-10 min-h-10 md:h-12 md:min-h-12 text-xs md:text-sm opacity-80 backdrop-blur-md"
                         onChange={e => {
                             setSoundByName(e.target.value);
                             e.target.blur();

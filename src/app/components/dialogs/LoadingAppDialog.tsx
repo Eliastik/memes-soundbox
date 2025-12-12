@@ -35,7 +35,7 @@ const LoadingAppDialog = () => {
         if (displayed) {
             return <input type="checkbox" id="loadingDataModal" className="modal-toggle" defaultChecked={true} />;
         } else {
-            return <></>
+            return <></>;
         }
     }, [displayed]);
 

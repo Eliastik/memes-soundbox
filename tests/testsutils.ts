@@ -3,11 +3,11 @@ import test, { Page } from "@playwright/test";
 export async function openMemePage(page: Page, memeName: string) {
     await page.goto(`http://localhost:3000/${memeName}`);
 
-    const loadingModal = page.locator("#loadingDataModal +div");
+    const loadingModal = page.locator("#loadingDataModal +dialog");
 
-    await loadingModal.waitFor({ state: "attached", timeout: 5000 });
+    await loadingModal.waitFor({ state: "visible", timeout: 5000 });
 
-    await loadingModal.waitFor({ state: "detached", timeout: 15000 });
+    await loadingModal.waitFor({ state: "hidden", timeout: 20000 });
 }
 
 export async function getAnimationURL(page: Page) {
@@ -21,10 +21,10 @@ export async function switchSound(page: Page, index: number) {
     const soundSelect = page.locator("#selectSound");
 
     await soundSelect.waitFor({ state: "visible", timeout: 2000 });
+    
+    const loadingModal = page.locator("#loadingImageDataModal");
 
     soundSelect.selectOption({ index });
-    
-    const loadingModal = page.locator("#loadingImageDataModal +div");
 
     await loadingModal.waitFor({ state: "attached", timeout: 5000 });
 
@@ -38,9 +38,9 @@ export async function editVoice(page: Page) {
 
     const loadingPopup = page.locator("#loadingAudioProcessing");
 
-    await loadingPopup.waitFor({ state: "attached", timeout: 5000 });
+    await loadingPopup.waitFor({ state: "visible", timeout: 5000 });
 
-    await loadingPopup.waitFor({ state: "detached", timeout: 5000 });
+    await loadingPopup.waitFor({ state: "hidden", timeout: 5000 });
 }
 
 export function muteAudio() {

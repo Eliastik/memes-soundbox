@@ -26,6 +26,7 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         loadingConfig: false,
         loadingOneImage: false,
         loadingAudio: false,
+        loadingOneAudio: false,
         loadedAudioCount: 0,
         totalAudioCount: 0,
         loadingError: false,
@@ -120,17 +121,18 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         set({
             soundboxConfig: config,
             allSounds: sounds,
-            totalAudioCount: sounds.length,
+            totalAudioCount: 1,
             loadingAudio: true,
         });
 
         try {
-            await loaderService.loadSounds(sounds);
+            await loaderService.loadSounds(sounds.length ? [sounds[0]] : []);
             set({ loadingAudio: false, loadingImages: true });
             await loaderService.loadImages(sounds.length ? [sounds[0]] : []);
             set({ loadingImages: false, initialLoadingFinished: true });
         } catch (e) {
             console.error(e);
+        } finally {
             set({ loadingAudio: false, loadingImages: false });
         }
 
@@ -188,7 +190,11 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
         try {
             await loaderService.loadImages([sound]);
 
-            set({ loadingOneImage: false });
+            set({ loadingOneImage: false, loadingOneAudio: true });
+            
+            await loaderService.loadSounds([sound]);
+
+            set({ loadingOneAudio: false });
 
             if (editingSound) await setupAudioEditor(sound);
 
@@ -200,7 +206,8 @@ export const useSoundbox = create<SoundboxContextProps>((set, get) => {
             await playSound(sound);
         } catch (e) {
             console.error(e);
-            set({ loadingOneImage: false });
+        } finally {
+            set({ loadingOneAudio: false, loadingOneImage: false })
         }
     };
 

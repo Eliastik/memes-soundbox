@@ -21,7 +21,7 @@
                 "title": "Chargement de l'application"
             },
             "loadingAudioFile": {
-                "title": "Chargement du fichier audio"
+                "title": "Chargement du fichier audio en cours"
             },
             "loadingOneImage": {
                 "title": "Chargement de données",

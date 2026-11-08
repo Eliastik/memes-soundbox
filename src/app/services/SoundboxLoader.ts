@@ -72,16 +72,18 @@ export default class SoundboxLoaderService implements SoundboxLoaderInterface {
         let loadedSounds = 0;
 
         for (const sound of sounds) {
-            if (sound.soundURL && !this.mapAudio.has(sound.soundURL)) {
-                try {
-                    const audio = await this.loadAudio(sound.soundURL);
-                    loadedSounds++;
-                    this.mapAudio.set(sound.soundURL, audio);
-                    this.eventEmitter.emit(EventTypes.LOADED_AUDIO, { loaded: loadedSounds, total: totalSounds, url: sound.soundURL });
-                } catch (error) {
-                    this.eventEmitter.emit(EventTypes.ERROR_LOADING_AUDIO, { url: sound.soundURL });
-                    throw new Error(`Error loading audio at ${sound.soundURL}: ${error}`);
-                }
+            if (!sound.soundURL || this.mapAudio.has(sound.soundURL)) {
+                continue;
+            }
+
+            try {
+                const audio = await this.loadAudio(sound.soundURL);
+                loadedSounds++;
+                this.mapAudio.set(sound.soundURL, audio);
+                this.eventEmitter.emit(EventTypes.LOADED_AUDIO, { loaded: loadedSounds, total: totalSounds, url: sound.soundURL });
+            } catch (error) {
+                this.eventEmitter.emit(EventTypes.ERROR_LOADING_AUDIO, { url: sound.soundURL });
+                throw new Error(`Error loading audio at ${sound.soundURL}: ${error}`);
             }
         }
 

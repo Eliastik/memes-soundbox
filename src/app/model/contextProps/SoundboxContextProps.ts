@@ -22,6 +22,7 @@ export default interface SoundboxContextProps {
     totalAudioCount: number,
     loadingImages: boolean,
     loadingAudio: boolean,
+    loadingOneAudio: boolean,
     loadingError: boolean,
     loadingConfig: boolean,
     loadingConfigError: boolean,

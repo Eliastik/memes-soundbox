@@ -9,7 +9,7 @@ Memes Soundbox est une base permettant de créer des boîtes à sons de mèmes I
 
 * Versions en ligne : [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Repository Github : [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version : 1.1.6 (12/12/2025)
+* Version : 1.1.7 (08/11/2026)
 
 ### Technologies
 
@@ -120,6 +120,10 @@ Créez un fichier de configuration pour votre boîte à sons. Voici un exemple d
 
 ## Journal des versions
 
+* Version 1.1.7 (08/11/2026) :
+  - Amélioration du temps de chargement au démarrage de l'application : celle-ci ne charge désormais que le premier fichier audio et la première animation, au lieu de charger tous les fichiers audio de la boîte à sons ;
+  - Mise à jour des dépendances.
+
 * Version 1.1.6 (12/12/2025) :
   - Correction d'un bug avec le menu de sélection du son : la liste n'apparaissait pas correctement avec le thème clair, et la liste était peu lisible avec le thème sombre ;
   - Mise à jour des dépendences.
@@ -175,7 +179,7 @@ Memes Soundbox is a base for creating fully customizable soundboxes of Internet 
 
 * Online versions: [www.eliastiksofts.com/memes](https://www.eliastiksofts.com/memes)
 * Github repository: [https://github.com/Eliastik/memes-soundbox](https://github.com/Eliastik/memes-soundbox)
-* Version: 1.1.6 (12/12/2025)
+* Version: 1.1.7 (8/11/2026)
 
 ### Technologies
 
@@ -286,7 +290,12 @@ Create a configuration file for your soundbox. Here's an example of a JSON confi
 
 ## Changelog
 
-* Version 1.1.6 (12/12/2025) :
+* Version 1.1.7 (11/8/2026):
+  - Improve app start loading time: the app now only load the first audio and animation instead of loading all the audios of the soundbox;
+  - Updated dependencies.
+
+
+* Version 1.1.6 (12/12/2025):
   - Fixed a bug with the sound selection menu: the list did not appear correctly with the light theme, and the list was difficult to read with the dark theme;
   - Updated dependencies.
 
